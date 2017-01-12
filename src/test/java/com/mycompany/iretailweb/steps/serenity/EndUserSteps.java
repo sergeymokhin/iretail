@@ -10,7 +10,6 @@ import com.mycompany.iretailweb.pages.TradePointCreatePage;
 import com.mycompany.iretailweb.utils.CatalogCategory;
 import com.mycompany.iretailweb.utils.TradePoint;
 import com.mycompany.iretailweb.utils.User;
-import net.serenitybdd.core.pages.WebElementFacade;
 import net.thucydides.core.annotations.Step;
 import net.thucydides.core.steps.ScenarioSteps;
 
