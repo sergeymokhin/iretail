@@ -1,13 +1,16 @@
 // Здесь различные шаги к тестам, а также последовательности шагов
 package com.mycompany.iretailweb.steps.serenity;
 
+import com.mycompany.iretailweb.pages.CategoryCreatePage;
 import com.mycompany.iretailweb.pages.LoginPage;
 import com.mycompany.iretailweb.pages.CreateProfilePage;
 import com.mycompany.iretailweb.pages.MainPage;
 import com.mycompany.iretailweb.pages.TradePointPage;
 import com.mycompany.iretailweb.pages.TradePointCreatePage;
+import com.mycompany.iretailweb.utils.CatalogCategory;
 import com.mycompany.iretailweb.utils.TradePoint;
 import com.mycompany.iretailweb.utils.User;
+import net.serenitybdd.core.pages.WebElementFacade;
 import net.thucydides.core.annotations.Step;
 import net.thucydides.core.steps.ScenarioSteps;
 
@@ -20,6 +23,7 @@ public class EndUserSteps extends ScenarioSteps {
     CreateProfilePage createProfilePage;
     TradePointCreatePage createTradePointPage;
     TradePointPage tradePointListPage;
+    CategoryCreatePage createCategoryPage;
 
 // Степы для авторизации
     @Step("Переходим на страницу авторизации")
@@ -144,7 +148,7 @@ public class EndUserSteps extends ScenarioSteps {
         return tradePoint;
     }
 
-    @Step("Нажимаем кнопку Добавить торговую точку")
+    @Step("Добавляем торговую точку и подтверждаем добавление")
     public void clickBtnSaveTradePoint() {
         try {
             createTradePointPage.clickBtnAddTradePoint();
@@ -167,8 +171,42 @@ public class EndUserSteps extends ScenarioSteps {
         TradePoint tradePoint = TradePoint.generateNewTradePoint();
         tradePoint = fillTradePointData(tradePoint);
         clickBtnSaveTradePoint();
-//        System.out.println("Мы создали торговую точку " + trade_point_name);
         return tradePoint;
+    }
+
+    @Step("Нажимаем кнопку Создать категории") //на main странице
+    public void clickBtnOnMainPageAddCategory() {
+        mainPage.clickBtnAddCategory();
+    }
+
+    @Step("Заполняем поля категории")
+    public void fillCategoryData(CatalogCategory catalogCategory) {
+        createCategoryPage.enterCategoryName(catalogCategory);
+    }
+
+    @Step("Добавляем категорию и подтверждаем добавление")
+    public void clickBtnSaveCategory() {
+        try {
+            createCategoryPage.clickBtnSaveCategory();
+            createCategoryPage.clickBtnYes();
+            Thread.sleep(2000);
+            createCategoryPage.clickBtnOk();
+        } catch (Exception e) {
+            Assert.fail("Не удалось подтвердить создание категории " + e.getMessage());
+        }
+    }
+//    @Step("Получаем все категории на странице")
+//    public WebElementFacade createNewCategory() throws InterruptedException {
+//    
+//    }
+
+    @Step("Создание новой категории каталога") //общий степ создания новой категории
+    public CatalogCategory createNewCategory() throws InterruptedException {
+        clickBtnOnMainPageAddCategory();
+        CatalogCategory catalogCategory = CatalogCategory.generateNewCategory();
+        fillCategoryData(catalogCategory);
+        clickBtnSaveCategory();
+        return catalogCategory;
     }
 
 }

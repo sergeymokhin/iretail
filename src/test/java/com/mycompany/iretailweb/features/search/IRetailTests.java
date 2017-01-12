@@ -18,10 +18,12 @@ import org.junit.runner.RunWith;
 import org.openqa.selenium.WebDriver;
 
 import com.mycompany.iretailweb.steps.serenity.EndUserSteps;
+import com.mycompany.iretailweb.utils.CatalogCategory;
 import com.mycompany.iretailweb.utils.Const;
 import com.mycompany.iretailweb.utils.TradePoint;
 import com.mycompany.iretailweb.utils.User;
 import java.util.concurrent.TimeUnit;
+import net.serenitybdd.core.pages.WebElementFacade;
 import net.thucydides.core.annotations.Pending;
 import net.thucydides.core.annotations.Title;
 import org.junit.After;
@@ -29,6 +31,7 @@ import org.junit.Before;
 import static org.junit.Assert.assertTrue;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebElement;
 
 //@DefaultUrl("https://dev2.iretail2.freematiq.com")
         
@@ -88,7 +91,7 @@ public class IRetailTests {
         }
     }
     
-    @Test
+    @Pending @Test
     @Title("Create new tradepoint")
     public void create_new_tradepoint() throws InterruptedException {
         User user = new User();
@@ -100,6 +103,37 @@ public class IRetailTests {
         System.out.println("Это торговая точка, которую мы создали " + tradePoint.name + "\n" + "Это первая торговая точка в списке " + firstTradePoint);
         assertTrue("Созданная торговая точка не появилась в списке", firstTradePoint.equals(tradePoint.name));
         }
+    
+    
+    @Test
+    @Title("Create new category")
+    public void create_new_category() throws InterruptedException {
+        User user = new User();
+        user.phone = Const.userPhone;
+        user.password = Const.userPassword;
+        steps.Authorization(user);
+        CatalogCategory category = steps.createNewCategory();
+        try {
+             webdriver.findElement(By.linkText(category.name));
+             System.out.println("Категория "+ category.name +" успешно создана");
+        } catch (Exception e) {
+            System.err.println("Созданная категория не обнаружена");
+        }
+       
+        //step createnewcategory!!
+        //и потом проверить создание step getcategorylist что-то вроде:
+//        try {
+//            ata.findElement(By.linkText(category.name)).click();
+//        } catch (Exception e) {
+//            vse ploho
+//        }
+//        
+//                webdriver.findElement(By.linkText("{your_name")).
     }
+    
 
- 
+
+
+
+}
+    
