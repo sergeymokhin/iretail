@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<actions>
+        <action>
+            <actionName>CUSTOM-integration-test</actionName>
+            <displayName>integration-test</displayName>
+            <goals>
+                <goal>integration-test</goal>
+            </goals>
+        </action>
+        <action>
+            <actionName>CUSTOM-nightlybuilds</actionName>
+            <displayName>nightlybuilds</displayName>
+            <goals>
+                <goal>clean</goal>
+                <goal>verify</goal>
+                <goal>integration-test</goal>
+                <goal>-U</goal>
+                <goal>-Dwebdriver.base.url=https://nightlybuilds.i-retail.freematiq.com </goal>
+            </goals>
+        </action>
+    </actions>
