@@ -174,4 +174,4 @@ public class EndUserSteps extends ScenarioSteps {
 }
 
 //TODO: Надо убидиться что мы создали торговую точку в конкретной компании
-//gfjhfhgfhf
+// Запулил, изменил эту строку и запушил снова.
