@@ -7,7 +7,7 @@ import com.mycompany.iretailweb.pages.CreateProfilePage;
 import com.mycompany.iretailweb.pages.MainPage;
 import com.mycompany.iretailweb.pages.TradePointPage;
 import com.mycompany.iretailweb.pages.TradePointCreatePage;
-import com.mycompany.iretailweb.utils.CatalogCategory;
+import com.mycompany.iretailweb.utils.Category;
 import com.mycompany.iretailweb.utils.TradePoint;
 import com.mycompany.iretailweb.utils.User;
 import net.thucydides.core.annotations.Step;
@@ -174,13 +174,14 @@ public class EndUserSteps extends ScenarioSteps {
     }
 
     @Step("Нажимаем кнопку Создать категории") //на main странице
-    public void clickBtnOnMainPageAddCategory() {
+    public void clickBtnAddCategoryOnMainPage() {
         mainPage.clickBtnAddCategory();
     }
 
     @Step("Заполняем поля категории")
-    public void fillCategoryData(CatalogCategory catalogCategory) {
-        createCategoryPage.enterCategoryName(catalogCategory);
+    public Category fillCategoryData(Category category) {
+        createCategoryPage.enterCategoryName(category);
+        return category;
     }
 
     @Step("Добавляем категорию и подтверждаем добавление")
@@ -188,24 +189,26 @@ public class EndUserSteps extends ScenarioSteps {
         try {
             createCategoryPage.clickBtnSaveCategory();
             createCategoryPage.clickBtnYes();
-            Thread.sleep(2000); //!!! можно избежать на WaitUntilClickable?
+            Thread.sleep(1000); //!!! можно избежать на WaitUntilClickable? не удалось, не успевает появиться модалка. сделал ожидание поменьше
             createCategoryPage.clickBtnOk();
-        } catch (Exception e) {
+        } catch (InterruptedException e) {
             Assert.fail("Не удалось подтвердить создание категории " + e.getMessage()); 
         }
     }
-//    @Step("Получаем все категории на странице")
-//    public WebElementFacade createNewCategory() throws InterruptedException {
-//    
-//    }
+    @Step("Получаем название категории открытой на странице") 
+    public String getCategoryName() throws InterruptedException {
+        return createCategoryPage.getCategoryName();
+         
+    
+    }
 
     @Step("Создание новой категории каталога") //общий степ создания новой категории
-    public CatalogCategory createNewCategory() throws InterruptedException {
-        clickBtnOnMainPageAddCategory(); //названия строим "что делаем, на чем, где". Проверяем по-русски "нажимаем кнопку на главной странице добавить категорию" или "Нажимаем кнопку Добавить категорию на главной странице ". Что благозвучнее?
-        CatalogCategory catalogCategory = CatalogCategory.generateNewCategory();//!!!тоже переименовать всё на category
-        fillCategoryData(catalogCategory); //!!!давай всегда будем возвращать класс. category = fillCatgoryData
+    public Category createNewCategory() throws InterruptedException {
+        clickBtnAddCategoryOnMainPage(); //названия строим "что делаем, на чем, где".  исправлено
+        Category category = Category.generateNewCategory();//!!!тоже переименовать всё на category исправлено
+        category = fillCategoryData(category); //!!!давай всегда будем возвращать класс. category = fillCatgoryData чтобы методы типа филл всегда возвращали экземпляр класса
         clickBtnSaveCategory();
-    return catalogCategory;
+    return category;
     }
 
 }

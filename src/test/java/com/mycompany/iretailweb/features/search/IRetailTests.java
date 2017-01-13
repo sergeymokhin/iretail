@@ -18,7 +18,7 @@ import org.junit.runner.RunWith;
 import org.openqa.selenium.WebDriver;
 
 import com.mycompany.iretailweb.steps.serenity.EndUserSteps;
-import com.mycompany.iretailweb.utils.CatalogCategory;
+import com.mycompany.iretailweb.utils.Category;
 import com.mycompany.iretailweb.utils.Const;
 import com.mycompany.iretailweb.utils.TradePoint;
 import com.mycompany.iretailweb.utils.User;
@@ -112,7 +112,7 @@ public class IRetailTests {
         user.phone = Const.userPhone;
         user.password = Const.userPassword;
         steps.Authorization(user);
-        CatalogCategory category = steps.createNewCategory();
+        Category category = steps.createNewCategory();
         try {
              webdriver.findElement(By.linkText(category.name));
              System.out.println("Категория "+ category.name +" успешно создана");

@@ -5,7 +5,7 @@
  */
 package com.mycompany.iretailweb.pages;
 
-import com.mycompany.iretailweb.utils.CatalogCategory;
+import com.mycompany.iretailweb.utils.Category;
 import net.serenitybdd.core.annotations.findby.FindBy;
 import net.serenitybdd.core.pages.PageObject;
 import net.serenitybdd.core.pages.WebElementFacade;
@@ -23,12 +23,13 @@ public class CategoryCreatePage extends PageObject {
     @FindBy(xpath = " //input[@ng-model='vm.category.title']")
     private WebElementFacade input_category_name;
 
+    //Заголовок блока в котором отображается название категории
+    @FindBy(xpath = "//h2[contains(@translate,'Категория')]")
+    private WebElementFacade category_header;
+
     // Кнопка "Сохранить"
     @FindBy(xpath = " //*[@translate='catalog.category.save']/parent::button")
     private WebElementFacade btn_save_category;
-
-    @FindBy(xpath = "//ul[@dnd-list='vm.categoriesTree']/li")
-    private WebElementFacade category_list;
 
     // Кнопка "Да" модального окна "Вы уверены, что хотите создать категорию"
     @FindBy(xpath = "//div[contains(@class, 'jBox-Confirm-button-submit')]")
@@ -39,7 +40,7 @@ public class CategoryCreatePage extends PageObject {
     private WebElementFacade btn_ok;
 
     // Вводим название категории в поле "Название"
-    public void enterCategoryName(CatalogCategory category) {
+    public void enterCategoryName(Category category) {
         try {
             input_category_name.type(category.name);
         } catch (Exception e) {
@@ -47,29 +48,44 @@ public class CategoryCreatePage extends PageObject {
         }
     }
 
-    // Жмем кнопку "Сохранить категорию"
-    public void clickBtnSaveCategory() {
-        btn_save_category.click();
+    public String getCategoryName() {
+        try {
+            return category_header.getAttribute("translate"); // беру заголовок блока с названием категории
+        } catch (Exception e) {
+            System.err.println("Не удалось получить название категории " + e.getMessage());
+            return null;
+        }
     }
 
-    public WebElementFacade categoryList() {
-        return category_list;
+    // Жмем кнопку "Сохранить категорию"
+    public void clickBtnSaveCategory() {
+        try {
+            btn_save_category.waitUntilClickable();
+            btn_save_category.click();
+        } catch (Exception e) {
+            System.out.println("Не найдена кнопка сохранения категории");
+        }
+
     }
-    
-    
+
     // * Жмем кнопку "Да" модального окна подтверждения создания категории
     public void clickBtnYes() throws InterruptedException {
-        btn_yes.click();
+        try {
+            btn_yes.waitUntilClickable();
+            btn_yes.click();
+        } catch (Exception e) {
+            System.out.println("Не найдена кнопка Да окна подтверждения создания категории");
+        }
     }
 
 // * Жмем кнопку "Ok" модального окна "Категория успешно создана"
     public void clickBtnOk() throws InterruptedException {
-        Thread.sleep(2000);
         try {
+            btn_ok.waitUntilClickable();
             btn_ok.click();
         } catch (Exception e) {
             System.out.println("Не найдена кнопка Ok модального окна Категория успешно создана");
         }
-        
-    }    
+
+    }
 }

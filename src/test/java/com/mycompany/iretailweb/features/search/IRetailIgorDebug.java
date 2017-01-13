@@ -18,12 +18,12 @@ import org.junit.runner.RunWith;
 import org.openqa.selenium.WebDriver;
 
 import com.mycompany.iretailweb.steps.serenity.EndUserSteps;
-import com.mycompany.iretailweb.utils.CatalogCategory;
+import com.mycompany.iretailweb.utils.Category;
 import com.mycompany.iretailweb.utils.Const;
+import com.mycompany.iretailweb.utils.DataGeneration;
 import com.mycompany.iretailweb.utils.TradePoint;
 import com.mycompany.iretailweb.utils.User;
 import java.util.concurrent.TimeUnit;
-import net.serenitybdd.core.pages.WebElementFacade;
 import net.thucydides.core.annotations.Pending;
 import net.thucydides.core.annotations.Title;
 import org.junit.After;
@@ -31,7 +31,6 @@ import org.junit.Before;
 import static org.junit.Assert.assertTrue;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebElement;
 
 //@DefaultUrl("https://dev2.iretail2.freematiq.com")
         
@@ -99,7 +98,7 @@ public class IRetailIgorDebug {
         user.password = Const.userPassword;
         steps.Authorization(user);
         TradePoint tradePoint = steps.createNewTradePoint();
-        String firstTradePoint= steps.getFirstTradePointName();
+        String firstTradePoint= steps.getFirstTradePointName()+"2";
         System.out.println("Это торговая точка, которую мы создали " + tradePoint.name + "\n" + "Это первая торговая точка в списке " + firstTradePoint);
         assertTrue("Созданная торговая точка не появилась в списке", firstTradePoint.equals(tradePoint.name));
         }
@@ -112,23 +111,12 @@ public class IRetailIgorDebug {
         user.phone = Const.userPhone;
         user.password = Const.userPassword;
         steps.Authorization(user);
-        CatalogCategory category = steps.createNewCategory();//!!!CatalogCategory поменять на Category. 
-        try {
-             webdriver.findElement(By.linkText(category.name+"sd")); //!!!исправить проверку, не падает попробуй ассерт тру в трай кетче. Добавляй комментарии к строкам, что и как у тебя происходит
-             System.out.println("Категория "+ category.name +" успешно создана");
-        } catch (Exception e) {
-            System.err.println("Созданная категория не обнаружена");
-        }
-       
-        //step createnewcategory!!
-        //и потом проверить создание step getcategorylist что-то вроде:
-//        try {
-//            ata.findElement(By.linkText(category.name)).click();
-//        } catch (Exception e) {
-//            vse ploho
-//        }
-//        
-//                webdriver.findElement(By.linkText("{your_name")).
+        Category category = steps.createNewCategory();//создаем новую категорию
+        System.out.println("Создана категория " + category.name);
+        assertTrue("Не открылась страница созданной категории", steps.getCategoryName().contains(category.name)); 
+       //находим на странице название той категории которую создавали
+       //т.к. после создания категория сразу открывается по дефолту - это будет достоверно
+     
     }
     
 

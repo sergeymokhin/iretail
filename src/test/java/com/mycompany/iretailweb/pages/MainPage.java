@@ -35,20 +35,27 @@ public class MainPage extends PageObject {
     private WebElementFacade btn_add_category;
 
 //* Кнопка "Добавить товары" *
+    @FindBy(xpath = "//span[@translate='home.buttonAddOffer']/parent::*")
+    private WebElementFacade btn_add_offer;
 //* Кнопка "Добавить сотрудников" *    
 //*** Methods ***
-// * Жмем кнопку "Добавить торговую точку" *    
+    // * Жмем кнопку "Добавить торговую точку" *    
+
     public void clickBtnAddTradePoint() {
         btn_add_trade_point.waitUntilClickable();
-        // System.out.println("-----------------------------------"+btn_add_trade_point.getAttribute("text")); 
         btn_add_trade_point.click();
     }
 
     // * Жмем кнопку "Создать категории" *    
     public void clickBtnAddCategory() {
         btn_add_category.waitUntilClickable();
-        //System.out.println("-----------------------------------"+btn_add_trade_point.getAttribute("text")); 
         btn_add_category.click();
+    }
+
+    // * Жмем кнопку "Добавить товары" *  
+    public void clickBtnAddOffer() {
+        btn_add_offer.waitUntilClickable();
+        btn_add_offer.click();
     }
 
 }

@@ -9,16 +9,16 @@ package com.mycompany.iretailweb.utils;
  *
  * @author igorg
  */
-public class CatalogCategory {
+public class Category {
 
     public String name = "";
     
 //в дальнейшем добавить родительскую категорию
 
-    public static CatalogCategory generateNewCategory() { //переименовать category
-        CatalogCategory catalogCategory = new CatalogCategory();
-        catalogCategory.name = DataGeneration.generateRandomString(10);
-        return catalogCategory;
+    public static Category generateNewCategory() { //переименовать category
+        Category сategory = new Category();
+        сategory.name = DataGeneration.generateRandomString(10);
+        return сategory;
 
     }
 }

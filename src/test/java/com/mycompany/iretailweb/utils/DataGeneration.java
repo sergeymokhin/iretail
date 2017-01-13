@@ -27,6 +27,10 @@ public class DataGeneration {
         return key;
     }
      
+    public static String generateRandomLink() {
+        String link = "https://" + RandomStringUtils.randomAlphanumeric(10) +"."+RandomStringUtils.randomAlphanumeric(10)+ ".com";
+        return link;
+    }
 // Более не используемые старые методы для генерации  последовательности букв или цифр заданной длины
      
 //    private static final String ENG_SMALL = "abcdefghijklmnopqrstuvwxyz"; //26
