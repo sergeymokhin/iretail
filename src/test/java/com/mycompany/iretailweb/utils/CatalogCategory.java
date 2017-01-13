@@ -15,7 +15,7 @@ public class CatalogCategory {
     
 //в дальнейшем добавить родительскую категорию
 
-    public static CatalogCategory generateNewCategory() {
+    public static CatalogCategory generateNewCategory() { //переименовать category
         CatalogCategory catalogCategory = new CatalogCategory();
         catalogCategory.name = DataGeneration.generateRandomString(10);
         return catalogCategory;

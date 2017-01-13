@@ -36,7 +36,7 @@ import org.openqa.selenium.WebElement;
 //@DefaultUrl("https://dev2.iretail2.freematiq.com")
         
 @RunWith(SerenityRunner.class)
-public class IRetailTests {
+public class IRetailIgorDebug {
 
     @Managed(uniqueSession = true)
     public WebDriver webdriver;
@@ -46,7 +46,7 @@ public class IRetailTests {
     
     @Before   
     public void before_execution() {
-//        webdriver.manage().window().maximize();
+        webdriver.manage().window().maximize();
         webdriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
     }
  
@@ -112,9 +112,9 @@ public class IRetailTests {
         user.phone = Const.userPhone;
         user.password = Const.userPassword;
         steps.Authorization(user);
-        CatalogCategory category = steps.createNewCategory();
+        CatalogCategory category = steps.createNewCategory();//!!!CatalogCategory поменять на Category. 
         try {
-             webdriver.findElement(By.linkText(category.name));
+             webdriver.findElement(By.linkText(category.name+"sd")); //!!!исправить проверку, не падает попробуй ассерт тру в трай кетче. Добавляй комментарии к строкам, что и как у тебя происходит
              System.out.println("Категория "+ category.name +" успешно создана");
         } catch (Exception e) {
             System.err.println("Созданная категория не обнаружена");

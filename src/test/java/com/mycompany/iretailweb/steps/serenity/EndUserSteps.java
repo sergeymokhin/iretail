@@ -188,10 +188,10 @@ public class EndUserSteps extends ScenarioSteps {
         try {
             createCategoryPage.clickBtnSaveCategory();
             createCategoryPage.clickBtnYes();
-            Thread.sleep(2000);
+            Thread.sleep(2000); //!!! можно избежать на WaitUntilClickable?
             createCategoryPage.clickBtnOk();
         } catch (Exception e) {
-            Assert.fail("Не удалось подтвердить создание категории " + e.getMessage());
+            Assert.fail("Не удалось подтвердить создание категории " + e.getMessage()); 
         }
     }
 //    @Step("Получаем все категории на странице")
@@ -201,11 +201,11 @@ public class EndUserSteps extends ScenarioSteps {
 
     @Step("Создание новой категории каталога") //общий степ создания новой категории
     public CatalogCategory createNewCategory() throws InterruptedException {
-        clickBtnOnMainPageAddCategory();
-        CatalogCategory catalogCategory = CatalogCategory.generateNewCategory();
-        fillCategoryData(catalogCategory);
+        clickBtnOnMainPageAddCategory(); //названия строим "что делаем, на чем, где". Проверяем по-русски "нажимаем кнопку на главной странице добавить категорию" или "Нажимаем кнопку Добавить категорию на главной странице ". Что благозвучнее?
+        CatalogCategory catalogCategory = CatalogCategory.generateNewCategory();//!!!тоже переименовать всё на category
+        fillCategoryData(catalogCategory); //!!!давай всегда будем возвращать класс. category = fillCatgoryData
         clickBtnSaveCategory();
-        return catalogCategory;
+    return catalogCategory;
     }
 
 }

@@ -36,7 +36,7 @@ import org.openqa.selenium.WebElement;
 //@DefaultUrl("https://dev2.iretail2.freematiq.com")
         
 @RunWith(SerenityRunner.class)
-public class IRetailTests {
+public class IRetailSergeyDebug {
 
     @Managed(uniqueSession = true)
     public WebDriver webdriver;
@@ -46,7 +46,7 @@ public class IRetailTests {
     
     @Before   
     public void before_execution() {
-//        webdriver.manage().window().maximize();
+        webdriver.manage().window().maximize();
         webdriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
     }
  
