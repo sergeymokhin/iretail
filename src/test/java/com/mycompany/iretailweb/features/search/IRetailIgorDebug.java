@@ -20,13 +20,14 @@ import org.openqa.selenium.WebDriver;
 import com.mycompany.iretailweb.steps.serenity.EndUserSteps;
 import com.mycompany.iretailweb.utils.Category;
 import com.mycompany.iretailweb.utils.Const;
-import com.mycompany.iretailweb.utils.DataGeneration;
+import com.mycompany.iretailweb.utils.Offer;
 import com.mycompany.iretailweb.utils.TradePoint;
 import com.mycompany.iretailweb.utils.User;
 import java.util.concurrent.TimeUnit;
 import net.thucydides.core.annotations.Pending;
 import net.thucydides.core.annotations.Title;
 import org.junit.After;
+import org.junit.Assert;
 import org.junit.Before;
 import static org.junit.Assert.assertTrue;
 import org.openqa.selenium.By;
@@ -53,7 +54,6 @@ public class IRetailIgorDebug {
     public void after_execution(){
      webdriver.quit();
  }
-//    @Issue("#WIKI")
     
     @Pending @Test
     @Title("Authorization")
@@ -65,7 +65,6 @@ public class IRetailIgorDebug {
         Thread.sleep(2000);
         assertTrue("Не перешел на главную страницу после авторизации",
                 webdriver.getCurrentUrl().contains("/main"));
-        
     }
     
     @Pending @Test
@@ -98,13 +97,13 @@ public class IRetailIgorDebug {
         user.password = Const.userPassword;
         steps.Authorization(user);
         TradePoint tradePoint = steps.createNewTradePoint();
-        String firstTradePoint= steps.getFirstTradePointName()+"2";
+        String firstTradePoint= steps.getFirstTradePointName();
         System.out.println("Это торговая точка, которую мы создали " + tradePoint.name + "\n" + "Это первая торговая точка в списке " + firstTradePoint);
         assertTrue("Созданная торговая точка не появилась в списке", firstTradePoint.equals(tradePoint.name));
         }
     
     
-    @Test
+    @Pending @Test
     @Title("Create new category")
     public void create_new_category() throws InterruptedException {
         User user = new User();
@@ -113,15 +112,27 @@ public class IRetailIgorDebug {
         steps.Authorization(user);
         Category category = steps.createNewCategory();//создаем новую категорию
         System.out.println("Создана категория " + category.name);
-        assertTrue("Не открылась страница созданной категории", steps.getCategoryName().contains(category.name)); 
-       //находим на странице название той категории которую создавали
-       //т.к. после создания категория сразу открывается по дефолту - это будет достоверно
-     
+        assertTrue("Не открылась страница созданной категории", steps.getCategoryName().contains(category.name)); //проверили открылась ли созданная категория
     }
     
-
-
-
-
-}
+    
+    @Test
+    @Title("Create new offer")
+    public void create_new_offer() throws InterruptedException {
+        User user = new User();
+        user.phone = Const.userPhone;
+        user.password = Const.userPassword;
+        steps.Authorization(user);
+        Offer offer = steps.createNewOffer();//создаем новый товар
+        System.out.println("Создан товар " + offer.name);
+        steps.searchOfferForName(offer);//поискали товар по названию
+        try {
+             webdriver.findElement(By.linkText(offer.name)).click(); //пытаемся кликнуть на ссылку название товара
+        } catch (Exception e) {
+           Assert.fail("Созданный товар не отобразился в результатах поиска "+e.getMessage());
+        }
+        assertTrue("Не открылась карточка созданного товара ", webdriver.getCurrentUrl().contains("/catalog/offers/update/"));
+        }
+        
+    }
     

@@ -23,12 +23,12 @@ public class TradePointPage extends PageObject{
       
      @FindBy (xpath = "(//div[@class='required ng-scope']//*[@translate])[1]")
      //(//div[@class='required ng-scope']//*[@translate])[1]/text()    не получилось вытащить текст напрямую (null)
-      private WebElementFacade firstTradePointLink; //решил взять весь элемент
+      private WebElementFacade first_trade_point_link; //решил взять весь элемент
      
      
        public String getFirstTradePointName() throws InterruptedException {
         try {
-            return  firstTradePointLink.getAttribute("translate");
+            return  first_trade_point_link.getAttribute("translate");
         } catch (Exception e) {
             System.out.println("Не удалось найти первую компанию в списке" + e.getMessage());
                 return null;    

@@ -5,15 +5,19 @@ import com.mycompany.iretailweb.pages.CategoryCreatePage;
 import com.mycompany.iretailweb.pages.LoginPage;
 import com.mycompany.iretailweb.pages.CreateProfilePage;
 import com.mycompany.iretailweb.pages.MainPage;
+import com.mycompany.iretailweb.pages.OfferCreatePage;
+import com.mycompany.iretailweb.pages.OffersPage;
 import com.mycompany.iretailweb.pages.TradePointPage;
 import com.mycompany.iretailweb.pages.TradePointCreatePage;
 import com.mycompany.iretailweb.utils.Category;
+import com.mycompany.iretailweb.utils.Offer;
 import com.mycompany.iretailweb.utils.TradePoint;
 import com.mycompany.iretailweb.utils.User;
 import net.thucydides.core.annotations.Step;
 import net.thucydides.core.steps.ScenarioSteps;
 
 import org.junit.Assert;
+import org.openqa.selenium.WebDriver;
 
 public class EndUserSteps extends ScenarioSteps {
 
@@ -23,6 +27,8 @@ public class EndUserSteps extends ScenarioSteps {
     TradePointCreatePage createTradePointPage;
     TradePointPage tradePointListPage;
     CategoryCreatePage createCategoryPage;
+    OfferCreatePage createOfferPage;
+    OffersPage offerListPage;
 
 // Степы для авторизации
     @Step("Переходим на страницу авторизации")
@@ -192,14 +198,14 @@ public class EndUserSteps extends ScenarioSteps {
             Thread.sleep(1000); //!!! можно избежать на WaitUntilClickable? не удалось, не успевает появиться модалка. сделал ожидание поменьше
             createCategoryPage.clickBtnOk();
         } catch (InterruptedException e) {
-            Assert.fail("Не удалось подтвердить создание категории " + e.getMessage()); 
+            Assert.fail("Не удалось подтвердить создание категории " + e.getMessage());
         }
     }
-    @Step("Получаем название категории открытой на странице") 
+
+    @Step("Получаем название категории открытой на странице")
     public String getCategoryName() throws InterruptedException {
         return createCategoryPage.getCategoryName();
-         
-    
+
     }
 
     @Step("Создание новой категории каталога") //общий степ создания новой категории
@@ -208,10 +214,46 @@ public class EndUserSteps extends ScenarioSteps {
         Category category = Category.generateNewCategory();//!!!тоже переименовать всё на category исправлено
         category = fillCategoryData(category); //!!!давай всегда будем возвращать класс. category = fillCatgoryData чтобы методы типа филл всегда возвращали экземпляр класса
         clickBtnSaveCategory();
-    return category;
+        return category;
+    }
+
+    @Step("Нажимаем кнопку Создать категории") //на main странице
+    public void clickBtnAddOfferOnMainPage() {
+        mainPage.clickBtnAddOffer();
+    }
+
+    @Step("Заполняем поля товара")
+    public Offer fillOfferData(Offer offer) {
+        createOfferPage.enterOfferName(offer);
+        createOfferPage.enterOfferArtikul(offer);
+        createOfferPage.enterOfferBasePrice(offer);
+        return offer;
+    }
+
+    @Step("Сохраняем товар и нажимаем ок")
+    public void clickBtnSaveOffer() {
+        try {
+            createOfferPage.clickBtnSaveOffer();
+            createOfferPage.clickBtnOk();
+        } catch (InterruptedException e) {
+            Assert.fail("Не удалось сохранить товар " + e.getMessage());
+        }
+    }
+    @Step("Поиск товара по названию")
+    public void searchOfferForName(Offer offer) {
+        offerListPage.enterOfferName(offer);
+        offerListPage.clickBtnSearch();
+    }
+
+    @Step("Создание нового товара") //общий степ создания товара
+    public Offer createNewOffer() throws InterruptedException {
+        clickBtnAddOfferOnMainPage();
+        Offer offer = Offer.generateNewOffer();
+        offer = fillOfferData(offer);
+        clickBtnSaveOffer();
+        return offer;
     }
 
 }
 
-//TODO: Надо убидиться что мы создали торговую точку в конкретной компании
-// Запулил, изменил эту строку и запушил снова.
+
