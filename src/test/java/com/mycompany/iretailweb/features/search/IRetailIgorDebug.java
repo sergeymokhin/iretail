@@ -58,9 +58,9 @@ public class IRetailIgorDebug {
     @Pending @Test
     @Title("Authorization")
     public void authorization() throws InterruptedException {
-        User user = new User();
-        user.phone = Const.userPhone;
-        user.password = Const.userPassword;
+        User user = new User();//Заменить на User.createNewUser() когда будут новые клиенты
+         user.setName(Const.userPhone);
+        user.setPassword(Const.userPassword);
         steps.Authorization(user);
         Thread.sleep(2000);
         assertTrue("Не перешел на главную страницу после авторизации",
@@ -70,9 +70,9 @@ public class IRetailIgorDebug {
     @Pending @Test
     @Title("Create new company")
     public void create_new_company() throws InterruptedException {
-        User user = new User();
-        user.phone = Const.userPhone;
-        user.password = Const.userPassword;
+        User user = new User();//Заменить на User.createNewUser() когда будут новые клиенты
+        user.setName(Const.userPhone);
+        user.setPassword(Const.userPassword);
         steps.Authorization(user);
         String company_name = steps.createNewCompany();
         String script = "a=document.getElementsByClassName('txt');"
@@ -92,46 +92,47 @@ public class IRetailIgorDebug {
     @Pending @Test
     @Title("Create new tradepoint")
     public void create_new_tradepoint() throws InterruptedException {
-        User user = new User();
-        user.phone = Const.userPhone;
-        user.password = Const.userPassword;
+        User user = new User();//Заменить на User.createNewUser() когда будут новые клиенты
+         user.setName(Const.userPhone);
+        user.setPassword(Const.userPassword);
         steps.Authorization(user);
         TradePoint tradePoint = steps.createNewTradePoint();
         String firstTradePoint= steps.getFirstTradePointName();
-        System.out.println("Это торговая точка, которую мы создали " + tradePoint.name + "\n" + "Это первая торговая точка в списке " + firstTradePoint);
-        assertTrue("Созданная торговая точка не появилась в списке", firstTradePoint.equals(tradePoint.name));
+        System.out.println("Это торговая точка, которую мы создали " + tradePoint.getName() + "\n" + "Это первая торговая точка в списке " + firstTradePoint);
+        assertTrue("Созданная торговая точка не появилась в списке", firstTradePoint.equals(tradePoint.getName()));
         }
     
     
     @Pending @Test
     @Title("Create new category")
     public void create_new_category() throws InterruptedException {
-        User user = new User();
-        user.phone = Const.userPhone;
-        user.password = Const.userPassword;
+        User user = new User();//Заменить на User.createNewUser() когда будут новые клиенты
+        user.setName(Const.userPhone);
+        user.setPassword(Const.userPassword);
         steps.Authorization(user);
         Category category = steps.createNewCategory();//создаем новую категорию
-        System.out.println("Создана категория " + category.name);
-        assertTrue("Не открылась страница созданной категории", steps.getCategoryName().contains(category.name)); //проверили открылась ли созданная категория
+        System.out.println("Создана категория " + category.getName());//!!!а создана ли категория? по логам в консоли будет надпись "создана", даже если она не создана. Возможо лишний шаг
+        assertTrue("Не открылась страница созданной категории ", steps.getCategoryName().contains(category.getName()));//!!! нет, не достоверно. Создаешь Продукты, а отобразится как ..Продуктырщв и она будет содержать "Продукты", хотя это не правильно //проверили открылась ли созданная категория
     }
     
     
     @Test
     @Title("Create new offer")
     public void create_new_offer() throws InterruptedException {
-        User user = new User();
-        user.phone = Const.userPhone;
-        user.password = Const.userPassword;
+        User user = new User();//Заменить на User.createNewUser() когда будут новые клиенты
+        System.out.println(Const.userPhone);
+        user.setName(Const.userPhone);
+        user.setPassword(Const.userPassword);
         steps.Authorization(user);
         Offer offer = steps.createNewOffer();//создаем новый товар
-        System.out.println("Создан товар " + offer.name);
-        steps.searchOfferForName(offer);//поискали товар по названию
+        System.out.println("Создан товар " + offer.getName());//!!! опять не понятно создан он реально или нет
+        steps.searchOfferForName(offer);//!!!ByName //поискали товар по названию
         try {
-             webdriver.findElement(By.linkText(offer.name)).click(); //пытаемся кликнуть на ссылку название товара
+             webdriver.findElement(By.linkText(offer.getName())).click(); //пытаемся кликнуть на ссылку название товара
         } catch (Exception e) {
            Assert.fail("Созданный товар не отобразился в результатах поиска "+e.getMessage());
         }
-        assertTrue("Не открылась карточка созданного товара ", webdriver.getCurrentUrl().contains("/catalog/offers/update/"));
+        assertTrue("Не открылась карточка созданного товара ", webdriver.getCurrentUrl().contains("/catalog/offers/update/")); //!!! может перенесем в try? Если по эксепшену свалится, то и эта проверка не нужна
         }
         
     }

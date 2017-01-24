@@ -10,14 +10,14 @@ package com.mycompany.iretailweb.utils;
  * @author igorg
  */
 public class Offer {
-   public String name;
-   public Category category;
-   public String artikul;
-   public String barcode;
-   public String link;
-   public Double baseprice;
-   public Float price;
-   public String description;
+   private String name;
+   private Category category;
+   private String artikul; //!!! названия не транслитом. инглиш онли
+   private String barcode;
+   private String link;
+   private Double baseprice;
+   private Float price;
+   private String description;
     
     public static Offer generateNewOffer(){
         Offer offer = new Offer();
@@ -28,6 +28,70 @@ public class Offer {
         offer.baseprice = DataGeneration.generateRandomDouble();
         return offer;
        
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public String getArtikul() {
+        return artikul;
+    }
+
+    public String getBarcode() {
+        return barcode;
+    }
+
+    public String getLink() {
+        return link;
+    }
+
+    public Double getBaseprice() {
+        return baseprice;
+    }
+
+    public Float getPrice() {
+        return price;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
+    }
+
+    public void setArtikul(String artikul) {
+        this.artikul = artikul;
+    }
+
+    public void setBarcode(String barcode) {
+        this.barcode = barcode;
+    }
+
+    public void setLink(String link) {
+        this.link = link;
+    }
+
+    public void setBaseprice(Double baseprice) {
+        this.baseprice = baseprice;
+    }
+
+    public void setPrice(Float price) {
+        this.price = price;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
     
    

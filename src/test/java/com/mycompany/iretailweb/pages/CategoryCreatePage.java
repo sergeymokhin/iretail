@@ -42,7 +42,7 @@ public class CategoryCreatePage extends PageObject {
     // Вводим название категории в поле "Название"
     public void enterCategoryName(Category category) {
         try {
-            input_category_name.type(category.name);
+            input_category_name.type(category.getName());
         } catch (Exception e) {
             System.err.println("Не удалось ввести название категории " + e.getMessage());
         }

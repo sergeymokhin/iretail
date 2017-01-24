@@ -11,14 +11,23 @@ package com.mycompany.iretailweb.utils;
  */
 public class Category {
 
-    public String name = "";
+    private String name = "";
     
 //в дальнейшем добавить родительскую категорию
 
-    public static Category generateNewCategory() { //переименовать category
+    public static Category generateNewCategory() { 
         Category сategory = new Category();
         сategory.name = DataGeneration.generateRandomString(10);
         return сategory;
 
     }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+    
 }

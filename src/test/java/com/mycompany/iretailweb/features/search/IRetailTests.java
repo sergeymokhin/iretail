@@ -56,12 +56,12 @@ public class IRetailTests {
  }
 //    @Issue("#WIKI")
     
-    @Pending @Test
+    @Test
     @Title("Authorization")
     public void authorization() throws InterruptedException {
-        User user = new User();
-        user.phone = Const.userPhone;
-        user.password = Const.userPassword;
+        User user = new User(); //Заменить на User.createNewUser() когда будут новые клиенты
+        user.setName(Const.userPhone);
+        user.setPassword(Const.userPassword);
         steps.Authorization(user);
         Thread.sleep(2000);
         assertTrue("Не перешел на главную страницу после авторизации",
@@ -72,9 +72,9 @@ public class IRetailTests {
     @Pending @Test
     @Title("Create new company")
     public void create_new_company() throws InterruptedException {
-        User user = new User();
-        user.phone = Const.userPhone;
-        user.password = Const.userPassword;
+        User user = new User();//Заменить на User.createNewUser() когда будут новые клиенты
+        user.setName(Const.userPhone);
+        user.setPassword(Const.userPassword);
         steps.Authorization(user);
         String company_name = steps.createNewCompany();
         String script = "a=document.getElementsByClassName('txt');"
@@ -94,28 +94,28 @@ public class IRetailTests {
     @Pending @Test
     @Title("Create new tradepoint")
     public void create_new_tradepoint() throws InterruptedException {
-        User user = new User();
-        user.phone = Const.userPhone;
-        user.password = Const.userPassword;
+        User user = new User();//Заменить на User.createNewUser() когда будут новые клиенты
+        user.setName(Const.userPhone);
+        user.setPassword(Const.userPassword);
         steps.Authorization(user);
         TradePoint tradePoint = steps.createNewTradePoint();
         String firstTradePoint= steps.getFirstTradePointName();
-        System.out.println("Это торговая точка, которую мы создали " + tradePoint.name + "\n" + "Это первая торговая точка в списке " + firstTradePoint);
-        assertTrue("Созданная торговая точка не появилась в списке", firstTradePoint.equals(tradePoint.name));
+        System.out.println("Это торговая точка, которую мы создали " + tradePoint.getName() + "\n" + "Это первая торговая точка в списке " + firstTradePoint);
+        assertTrue("Созданная торговая точка не появилась в списке", firstTradePoint.equals(tradePoint.getName()));
         }
     
     
-    @Test
+    @Pending @Test
     @Title("Create new category")
     public void create_new_category() throws InterruptedException {
-        User user = new User();
-        user.phone = Const.userPhone;
-        user.password = Const.userPassword;
+        User user = new User();//Заменить на User.createNewUser() когда будут новые клиенты
+         user.setName(Const.userPhone);
+        user.setPassword(Const.userPassword);
         steps.Authorization(user);
         Category category = steps.createNewCategory();
         try {
-             webdriver.findElement(By.linkText(category.name));
-             System.out.println("Категория "+ category.name +" успешно создана");
+             webdriver.findElement(By.linkText(category.getName()));
+             System.out.println("Категория "+ category.getName() +" успешно создана");
         } catch (Exception e) {
             System.err.println("Созданная категория не обнаружена");
         }
@@ -123,7 +123,7 @@ public class IRetailTests {
         //step createnewcategory!!
         //и потом проверить создание step getcategorylist что-то вроде:
 //        try {
-//            ata.findElement(By.linkText(category.name)).click();
+//            ata.findElement(By.linkText(category.getName())).click();
 //        } catch (Exception e) {
 //            vse ploho
 //        }

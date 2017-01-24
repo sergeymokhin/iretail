@@ -31,7 +31,7 @@ public class OffersPage extends PageObject {
     public void enterOfferName(Offer offer) {
         try {
             input_offer_name.waitUntilVisible();
-            input_offer_name.type(offer.name);
+            input_offer_name.type(offer.getName());
         } catch (Exception e) {
             System.err.println("Не удалось ввести название товара " + e.getMessage());
         }

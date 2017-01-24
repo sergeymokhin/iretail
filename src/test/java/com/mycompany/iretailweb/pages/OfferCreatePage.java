@@ -50,7 +50,7 @@ public class OfferCreatePage extends PageObject {
 
     public void enterOfferBasePrice(Offer offer) {
         try {
-            input_offer_base_price.type(offer.baseprice.toString());
+            input_offer_base_price.type(offer.getBaseprice().toString());//желательно избавиться от toString() в таком виде. BigDecimal.valueOf(d).setScale(2,BigDecimal.ROUND_HALF_DOWN).doubleValue()
         } catch (Exception e) {
             System.err.println("Не удалось ввести базовую цену товара " + e.getMessage());
         }
@@ -59,7 +59,7 @@ public class OfferCreatePage extends PageObject {
 
     public void enterOfferName(Offer offer) {
         try {
-            input_offer_name.type(offer.name);
+            input_offer_name.type(offer.getName());
         } catch (Exception e) {
             System.err.println("Не удалось ввести название товара " + e.getMessage());
         }
@@ -68,7 +68,7 @@ public class OfferCreatePage extends PageObject {
 
     public void enterOfferArtikul(Offer offer) {
         try {
-            input_offer_artikul.type(offer.artikul);
+            input_offer_artikul.type(offer.getArtikul());
         } catch (Exception e) {
             System.err.println("Не удалось ввести артикул товара " + e.getMessage());
         }
@@ -77,7 +77,7 @@ public class OfferCreatePage extends PageObject {
 
     public void enterOfferBarcode(Offer offer) {
         try {
-            input_offer_barcode.type(offer.barcode);
+            input_offer_barcode.type(offer.getBarcode());
         } catch (Exception e) {
             System.err.println("Не удалось ввести штрих код товара " + e.getMessage());
         }

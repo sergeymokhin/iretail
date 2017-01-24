@@ -73,7 +73,7 @@ public class TradePointCreatePage extends PageObject{
 // Вводим название торговой точки в поле "Название"
     public void enterTradePointName(TradePoint tradePoint) {
         try {  
-            input_trade_point_name.type(tradePoint.name);
+            input_trade_point_name.type(tradePoint.getName());
         } catch (Exception e) {
             System.err.println("Не удалось ввести название торговой точки " +e.getMessage());
         }
@@ -86,7 +86,7 @@ public class TradePointCreatePage extends PageObject{
         Random randomno = new Random();
         droplist.selectByValue(String.valueOf(randomno.nextInt(250)));
         try {
-           tradePoint.country = droplist.getFirstSelectedOption().getText();
+           tradePoint.setName(droplist.getFirstSelectedOption().getText());
         } catch (Exception e) {
             System.err.println("Не удалось получить выбранную страну " +e.getMessage() );
         }
@@ -98,7 +98,7 @@ public class TradePointCreatePage extends PageObject{
 // Вводим город торговой точки в поле "Город"
     public void enterTradePointCity(TradePoint tradePoint) {
          try {  
-            input_trade_point_city.type(tradePoint.city);
+            input_trade_point_city.type(tradePoint.getCity());
         } catch (Exception e) {
             System.err.println("Не удалось ввести город " +e.getMessage());
         }
@@ -107,7 +107,7 @@ public class TradePointCreatePage extends PageObject{
 // Вводим улицу торговой точки в поле "Улица"
     public void enterTradePointStreet(TradePoint tradePoint) {
          try { 
-               input_trade_point_street.type(tradePoint.street);
+               input_trade_point_street.type(tradePoint.getStreet());
         } catch (Exception e) {
             System.err.println("Не удалось ввести улицу " +e.getMessage());
         }
@@ -116,7 +116,7 @@ public class TradePointCreatePage extends PageObject{
 // Вводим номер дома торговой точки в поле "Номер дома"
     public void enterTradePointBuilding(TradePoint tradePoint) {
          try { 
-             input_trade_point_building.type(tradePoint.building);
+             input_trade_point_building.type(tradePoint.getBuilding());
         } catch (Exception e) {
             System.err.println("Не удалось ввести номер дома " +e.getMessage());
         }

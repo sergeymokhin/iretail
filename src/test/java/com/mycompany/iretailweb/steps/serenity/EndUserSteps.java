@@ -186,19 +186,19 @@ public class EndUserSteps extends ScenarioSteps {
 
     @Step("Заполняем поля категории")
     public Category fillCategoryData(Category category) {
-        createCategoryPage.enterCategoryName(category);
-        return category;
+       createCategoryPage.enterCategoryName(category);
+    return category;
     }
 
-    @Step("Добавляем категорию и подтверждаем добавление")
+    @Step("Нажимаем на кнопку сохранить и все окна подтверждения")
     public void clickBtnSaveCategory() {
         try {
             createCategoryPage.clickBtnSaveCategory();
             createCategoryPage.clickBtnYes();
-            Thread.sleep(1000); //!!! можно избежать на WaitUntilClickable? не удалось, не успевает появиться модалка. сделал ожидание поменьше
+            Thread.sleep(2000); //!!! можно избежать на WaitUntilClickable? не удалось, не успевает появиться модалка. сделал ожидание поменьше
             createCategoryPage.clickBtnOk();
         } catch (InterruptedException e) {
-            Assert.fail("Не удалось подтвердить создание категории " + e.getMessage());
+            Assert.fail("Не удалось сохранить категорию " + e.getMessage());
         }
     }
 
@@ -210,11 +210,11 @@ public class EndUserSteps extends ScenarioSteps {
 
     @Step("Создание новой категории каталога") //общий степ создания новой категории
     public Category createNewCategory() throws InterruptedException {
-        clickBtnAddCategoryOnMainPage(); //названия строим "что делаем, на чем, где".  исправлено
-        Category category = Category.generateNewCategory();//!!!тоже переименовать всё на category исправлено
-        category = fillCategoryData(category); //!!!давай всегда будем возвращать класс. category = fillCatgoryData чтобы методы типа филл всегда возвращали экземпляр класса
+        clickBtnAddCategoryOnMainPage();
+        Category category = Category.generateNewCategory(); 
+        category = fillCategoryData(category); 
         clickBtnSaveCategory();
-        return category;
+    return category;
     }
 
     @Step("Нажимаем кнопку Создать категории") //на main странице
@@ -248,7 +248,7 @@ public class EndUserSteps extends ScenarioSteps {
     @Step("Создание нового товара") //общий степ создания товара
     public Offer createNewOffer() throws InterruptedException {
         clickBtnAddOfferOnMainPage();
-        Offer offer = Offer.generateNewOffer();
+        Offer offer = Offer.generateNewOffer(); //!!! надо может переделать  на = new Offer().generateNewOffer() ? т.е. создать прям экземпляр класса. Надо узнать как правильно и везде поменять если что
         offer = fillOfferData(offer);
         clickBtnSaveOffer();
         return offer;

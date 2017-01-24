@@ -54,7 +54,7 @@ public class MainPage extends PageObject {
 
     // * Жмем кнопку "Добавить товары" *  
     public void clickBtnAddOffer() {
-        btn_add_offer.waitUntilVisible();
+        btn_add_offer.waitUntilVisible();//насколько знаю кликабл работает и как визибл. Может лишнее?
         btn_add_offer.waitUntilClickable();
         btn_add_offer.click();
     }

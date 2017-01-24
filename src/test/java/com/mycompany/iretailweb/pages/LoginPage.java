@@ -40,12 +40,12 @@ public class LoginPage extends PageObject {
     
 // * Вводим телефон пользователя в поле Ваш логин (e-mail или телефон) *  
     public void enterPhone(User user) {
-        input_login.type(user.phone);
+        input_login.type(user.getPhone());
     }
 
 // * Вводим пароль пользователя в поле Пароль     
     public void enterPassword(User user) {
-        input_password.type(user.password);
+        input_password.type(user.getPassword());
     }
 
 // * Жмем кнопку Войти *    
