@@ -20,6 +20,7 @@ import org.openqa.selenium.WebDriver;
 import com.mycompany.iretailweb.steps.serenity.EndUserSteps;
 import com.mycompany.iretailweb.utils.Category;
 import com.mycompany.iretailweb.utils.Const;
+import com.mycompany.iretailweb.utils.Device;
 import com.mycompany.iretailweb.utils.Offer;
 import com.mycompany.iretailweb.utils.TradePoint;
 import com.mycompany.iretailweb.utils.User;
@@ -111,29 +112,48 @@ public class IRetailIgorDebug {
         user.setPassword(Const.userPassword);
         steps.Authorization(user);
         Category category = steps.createNewCategory();//создаем новую категорию
-        System.out.println("Создана категория " + category.getName());//!!!а создана ли категория? по логам в консоли будет надпись "создана", даже если она не создана. Возможо лишний шаг
-        assertTrue("Не открылась страница созданной категории ", steps.getCategoryName().contains(category.getName()));//!!! нет, не достоверно. Создаешь Продукты, а отобразится как ..Продуктырщв и она будет содержать "Продукты", хотя это не правильно //проверили открылась ли созданная категория
+        assertTrue("Не открылась страница созданной категории ", steps.getCategoryName().equals(category.getName()) & webdriver.getCurrentUrl().contains("category/update"));
+        //сошлись на том что нужно проверить название в поле название и одновременно с этим update в адр.строке 
     }
     
     
-    @Test
+    @Pending @Test
     @Title("Create new offer")
     public void create_new_offer() throws InterruptedException {
         User user = new User();//Заменить на User.createNewUser() когда будут новые клиенты
-        System.out.println(Const.userPhone);
         user.setName(Const.userPhone);
         user.setPassword(Const.userPassword);
         steps.Authorization(user);
         Offer offer = steps.createNewOffer();//создаем новый товар
-        System.out.println("Создан товар " + offer.getName());//!!! опять не понятно создан он реально или нет
-        steps.searchOfferForName(offer);//!!!ByName //поискали товар по названию
         try {
-             webdriver.findElement(By.linkText(offer.getName())).click(); //пытаемся кликнуть на ссылку название товара
+            steps.searchOfferByName(offer);
+            webdriver.findElement(By.linkText(offer.getName())).click(); //пытаемся кликнуть на ссылку название товара
+            assertTrue("Не открылась карточка созданного товара ", webdriver.getCurrentUrl().contains("/catalog/offers/update/"));
         } catch (Exception e) {
            Assert.fail("Созданный товар не отобразился в результатах поиска "+e.getMessage());
         }
-        assertTrue("Не открылась карточка созданного товара ", webdriver.getCurrentUrl().contains("/catalog/offers/update/")); //!!! может перенесем в try? Если по эксепшену свалится, то и эта проверка не нужна
         }
-        
+    
+    @Test
+    @Title("Create new device")
+    public void create_new_device() throws InterruptedException {
+        User user = new User();
+        user.setName(Const.userPhone);
+        user.setPassword(Const.userPassword);
+        steps.Authorization(user);
+        steps.openTradePointPage();
+        webdriver.findElement(By.linkText(steps.getFirstTradePointName())).click();//пока что в первую попавшуюся
+        steps.clickTabDeviceOnTradePoint();
+        steps.clickBtnOnTradePointAddDevice();
+        Device device = steps.createNewDevice();
+        try {
+            steps.clickTabDeviceOnTradePoint();//перешли на вкладку касс
+            webdriver.findElement(By.linkText(device.getName())).click();//пытаемся кликнуть на ссылку названия кассы
+            assertTrue("Не открылась карточка созданной кассы ", webdriver.getCurrentUrl().contains("edit-device"));
+        } catch (Exception e) {
+            Assert.fail("Созданная касса не обнаружена в списке касс выбранной торговой точки");
+        }
+    //проверка создания кассы пока сырая, не срабатывает из-за пагинации, возможно нужно сверить кассу по поиску
+    }    
     }
     

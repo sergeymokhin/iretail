@@ -12,7 +12,7 @@ package com.mycompany.iretailweb.utils;
 public class Offer {
    private String name;
    private Category category;
-   private String artikul; //!!! названия не транслитом. инглиш онли
+   private String article;
    private String barcode;
    private String link;
    private Double baseprice;
@@ -22,7 +22,7 @@ public class Offer {
     public static Offer generateNewOffer(){
         Offer offer = new Offer();
         offer.name = DataGeneration.generateRandomString(10);
-        offer.artikul = DataGeneration.generateRandomString(6);
+        offer.article = DataGeneration.generateRandomString(6);
         offer.barcode = DataGeneration.generateRandomNumber(13);
         offer.link = DataGeneration.generateRandomLink();
         offer.baseprice = DataGeneration.generateRandomDouble();
@@ -38,8 +38,8 @@ public class Offer {
         return category;
     }
 
-    public String getArtikul() {
-        return artikul;
+    public String getArticle() {
+        return article;
     }
 
     public String getBarcode() {
@@ -70,8 +70,8 @@ public class Offer {
         this.category = category;
     }
 
-    public void setArtikul(String artikul) {
-        this.artikul = artikul;
+    public void setArticle(String article) {
+        this.article = article;
     }
 
     public void setBarcode(String barcode) {

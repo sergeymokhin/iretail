@@ -4,12 +4,15 @@ package com.mycompany.iretailweb.steps.serenity;
 import com.mycompany.iretailweb.pages.CategoryCreatePage;
 import com.mycompany.iretailweb.pages.LoginPage;
 import com.mycompany.iretailweb.pages.CreateProfilePage;
+import com.mycompany.iretailweb.pages.DeviceCreatePage;
 import com.mycompany.iretailweb.pages.MainPage;
 import com.mycompany.iretailweb.pages.OfferCreatePage;
 import com.mycompany.iretailweb.pages.OffersPage;
 import com.mycompany.iretailweb.pages.TradePointPage;
 import com.mycompany.iretailweb.pages.TradePointCreatePage;
+import com.mycompany.iretailweb.pages.TradePointUpdatePage;
 import com.mycompany.iretailweb.utils.Category;
+import com.mycompany.iretailweb.utils.Device;
 import com.mycompany.iretailweb.utils.Offer;
 import com.mycompany.iretailweb.utils.TradePoint;
 import com.mycompany.iretailweb.utils.User;
@@ -29,6 +32,8 @@ public class EndUserSteps extends ScenarioSteps {
     CategoryCreatePage createCategoryPage;
     OfferCreatePage createOfferPage;
     OffersPage offerListPage;
+    TradePointUpdatePage tradePointUpdatePage;
+    DeviceCreatePage createDevicePage;
 
 // Степы для авторизации
     @Step("Переходим на страницу авторизации")
@@ -45,7 +50,11 @@ public class EndUserSteps extends ScenarioSteps {
     public void openMainPage() {
         mainPage.open();
     }
-
+    @Step("Переходим на страницу торговых точек")
+    public void openTradePointPage() {
+    tradePointListPage.open();
+     }
+    
     @Step("Вводим номер телефона пользователя в поле Ваш логин (e-mail или телефон)")
     private void enterPhone(User user) {
         loginPage.enterPhone(user);
@@ -142,6 +151,16 @@ public class EndUserSteps extends ScenarioSteps {
     public void clickBtnOnMainPageAddTradePoint() {
         mainPage.clickBtnAddTradePoint();
     }
+    
+    @Step("Выбираем таб Кассы") //в торговой точке
+    public void clickTabDeviceOnTradePoint() throws InterruptedException {
+        tradePointUpdatePage.clickDeviceTab();
+    }
+    
+    @Step("Нажимаем кнопку Добавить кассу") //в торговой точке
+    public void clickBtnOnTradePointAddDevice() throws InterruptedException {
+        tradePointUpdatePage.clickBtnAddDevice();
+    }
 
     @Step("Заполняем поля торговой точки")
     public TradePoint fillTradePointData(TradePoint tradePoint) {
@@ -225,7 +244,7 @@ public class EndUserSteps extends ScenarioSteps {
     @Step("Заполняем поля товара")
     public Offer fillOfferData(Offer offer) {
         createOfferPage.enterOfferName(offer);
-        createOfferPage.enterOfferArtikul(offer);
+        createOfferPage.enterOfferArticle(offer);
         createOfferPage.enterOfferBasePrice(offer);
         return offer;
     }
@@ -240,7 +259,7 @@ public class EndUserSteps extends ScenarioSteps {
         }
     }
     @Step("Поиск товара по названию")
-    public void searchOfferForName(Offer offer) {
+    public void searchOfferByName(Offer offer) {
         offerListPage.enterOfferName(offer);
         offerListPage.clickBtnSearch();
     }
@@ -248,12 +267,28 @@ public class EndUserSteps extends ScenarioSteps {
     @Step("Создание нового товара") //общий степ создания товара
     public Offer createNewOffer() throws InterruptedException {
         clickBtnAddOfferOnMainPage();
-        Offer offer = Offer.generateNewOffer(); //!!! надо может переделать  на = new Offer().generateNewOffer() ? т.е. создать прям экземпляр класса. Надо узнать как правильно и везде поменять если что
+        Offer offer = Offer.generateNewOffer(); //парни говорят что если статический метод возвращает экземпляр класса с заполненными значениями это нормас
         offer = fillOfferData(offer);
         clickBtnSaveOffer();
         return offer;
     }
-
+    
+    @Step("Создание новой кассы")
+    public Device createNewDevice() throws InterruptedException {
+        //переходим на страницу торговых точек
+       //выбираем торговую точку у которой создаем кассу пусть пока первая в списке
+    Device device = Device.generateNewDevice();
+    createDevicePage.enterDeviceName(device);
+    createDevicePage.clickBtnSaveDevice();
+    createDevicePage.clickBtnOk();
+    return device;
+    
+    //клик действия кассы или переходим в торговую точку открываем таб кассы
+    //клик добавить кассу
+    //заполнить поля кассы
+    //сохранить кассу и нажать ок
+    
+    }
 }
 
 

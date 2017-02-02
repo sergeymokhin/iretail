@@ -30,7 +30,7 @@ public class OfferCreatePage extends PageObject {
 
     //Находим поле Артикул
     @FindBy(xpath = "//input[@ng-model='vm.offer.id_yml']")
-    private WebElementFacade input_offer_artikul;
+    private WebElementFacade input_offer_article;
 
     //Находим поле Штрих-код
     @FindBy(xpath = "//input[@ng-model='vm.newTag']")
@@ -66,9 +66,9 @@ public class OfferCreatePage extends PageObject {
 
     }
 
-    public void enterOfferArtikul(Offer offer) {
+    public void enterOfferArticle(Offer offer) {
         try {
-            input_offer_artikul.type(offer.getArtikul());
+            input_offer_article.type(offer.getArticle());
         } catch (Exception e) {
             System.err.println("Не удалось ввести артикул товара " + e.getMessage());
         }

@@ -5,7 +5,6 @@
  */
 package com.mycompany.iretailweb.pages;
 
-import com.mycompany.iretailweb.utils.DataGeneration;
 import com.mycompany.iretailweb.utils.TradePoint;
 import java.util.Random;
 import net.serenitybdd.core.annotations.findby.FindBy;

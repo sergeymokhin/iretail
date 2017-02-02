@@ -1,0 +1,82 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package com.mycompany.iretailweb.pages;
+
+import com.mycompany.iretailweb.utils.Device;
+import net.serenitybdd.core.annotations.findby.FindBy;
+import net.serenitybdd.core.pages.PageObject;
+import net.serenitybdd.core.pages.WebElementFacade;
+import net.thucydides.core.annotations.DefaultUrl;
+
+/**
+ *
+ * @author igorg
+ */
+//*** Methods ***
+@DefaultUrl("/main/catalog/offers/create")
+
+public class DeviceCreatePage extends PageObject {
+
+    //Находим поле Название
+    @FindBy(xpath = "//input[@ng-model='vm.data.name']")
+    private WebElementFacade input_device_name;
+
+    //Находим селект Торговая точка
+    @FindBy(xpath = "//select[@ng-model='vm.data.channelId']")
+    private WebElementFacade select_device_tradepoint;
+
+    //Находим селект Сценарий работы
+    @FindBy(xpath = "//select[@ng-model='vm.data.currentType']")
+    private WebElementFacade select_device_scenario;
+
+    // Находим чекбокс "Отображать заказы только этой кассы" 
+    @FindBy(xpath = "//input[@ng-model='vm.data.own_orders']")
+    private WebElementFacade checkbox_device_ownorders;
+    
+    // Находим чекбокс "Фискальный режим кассы" 
+    @FindBy(xpath = "//input[@ng-model='vm.data.fiscal_mode']")
+    private WebElementFacade checkbox_device_fiscalmode;
+
+    // Находим поле "Номер смены"
+    @FindBy(xpath = "//input[@ng-model='vm.data.shiftNumber']")
+    private WebElementFacade input_device_shiftnumber;
+
+    // Находим кнопку "Добавить"
+    @FindBy(xpath = "//button[@type='submit']")
+    private WebElementFacade btn_add_device;
+    
+    // Кнопка "Да" модального окна подтверждения создания кассы
+    @FindBy(xpath = "//div[@class='jBox-Confirm-button jBox-Confirm-button-submit']")
+    private WebElementFacade btn_ok;
+     
+    @FindBy(xpath = "//div[@ng-if='vm.showLoader()']")// пытаемся отловить лоадер 
+    private WebElementFacade loader;
+
+    public void enterDeviceName(Device device) {
+        try {
+            loader.waitUntilNotVisible();
+            input_device_name.type(device.getName());
+        } catch (Exception e) {
+            System.err.println("Не удалось ввести название кассы " + e.getMessage());
+        }
+
+    }
+
+    public void clickBtnSaveDevice() {
+        loader.waitUntilNotVisible();
+        //btn_add_device.waitUntilVisible();
+        btn_add_device.click();
+
+    }
+
+    // * Жмем кнопку "Ок" в оповещении о создании товара.
+    public void clickBtnOk() throws InterruptedException {
+        btn_ok.waitUntilVisible();
+        btn_ok.waitUntilClickable();
+        btn_ok.click();
+    }
+
+}

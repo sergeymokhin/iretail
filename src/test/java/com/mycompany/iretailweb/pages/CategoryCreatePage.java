@@ -50,7 +50,7 @@ public class CategoryCreatePage extends PageObject {
 
     public String getCategoryName() {
         try {
-            return category_header.getAttribute("translate"); // беру заголовок блока с названием категории
+          return  input_category_name.getTextValue() ; // беру заголовок блока с названием категории
         } catch (Exception e) {
             System.err.println("Не удалось получить название категории " + e.getMessage());
             return null;
