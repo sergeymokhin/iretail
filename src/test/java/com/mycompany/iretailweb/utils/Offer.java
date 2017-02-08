@@ -5,6 +5,8 @@
  */
 package com.mycompany.iretailweb.utils;
 
+import java.math.BigDecimal;
+
 /**
  *
  * @author igorg
@@ -15,8 +17,8 @@ public class Offer {
    private String article;
    private String barcode;
    private String link;
-   private Double baseprice;
-   private Float price;
+   private BigDecimal baseprice;
+   private BigDecimal price;
    private String description;
     
     public static Offer generateNewOffer(){
@@ -25,7 +27,7 @@ public class Offer {
         offer.article = DataGeneration.generateRandomString(6);
         offer.barcode = DataGeneration.generateRandomNumber(13);
         offer.link = DataGeneration.generateRandomLink();
-        offer.baseprice = DataGeneration.generateRandomDouble();
+        offer.baseprice = DataGeneration.generateRandomPrice();
         return offer;
        
     }
@@ -50,11 +52,11 @@ public class Offer {
         return link;
     }
 
-    public Double getBaseprice() {
+    public BigDecimal getBaseprice() {
         return baseprice;
     }
 
-    public Float getPrice() {
+    public BigDecimal getPrice() {
         return price;
     }
 
@@ -82,11 +84,11 @@ public class Offer {
         this.link = link;
     }
 
-    public void setBaseprice(Double baseprice) {
+    public void setBaseprice(BigDecimal baseprice) {
         this.baseprice = baseprice;
     }
 
-    public void setPrice(Float price) {
+    public void setPrice(BigDecimal price) {
         this.price = price;
     }
 

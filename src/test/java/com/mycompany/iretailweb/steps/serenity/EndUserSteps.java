@@ -252,11 +252,11 @@ public class EndUserSteps extends ScenarioSteps {
     @Step("Сохраняем товар и нажимаем ок")
     public void clickBtnSaveOffer() {
         try {
-            createOfferPage.clickBtnSaveOffer();
-            createOfferPage.clickBtnOk();
+        createOfferPage.clickBtnSaveOffer();
+        createOfferPage.clickBtnOk();
         } catch (InterruptedException e) {
             Assert.fail("Не удалось сохранить товар " + e.getMessage());
-        }
+    }
     }
     @Step("Поиск товара по названию")
     public void searchOfferByName(Offer offer) {
@@ -264,6 +264,13 @@ public class EndUserSteps extends ScenarioSteps {
         offerListPage.clickBtnSearch();
     }
 
+    @Step("Поиск товара по названию")
+    public void searchDeviceByName(Device device) {
+        tradePointUpdatePage.enterDeviceNameOnFilter(device);
+        tradePointUpdatePage.clickBtnSearch();
+    }
+    
+    
     @Step("Создание нового товара") //общий степ создания товара
     public Offer createNewOffer() throws InterruptedException {
         clickBtnAddOfferOnMainPage();
@@ -280,7 +287,6 @@ public class EndUserSteps extends ScenarioSteps {
     Device device = Device.generateNewDevice();
     createDevicePage.enterDeviceName(device);
     createDevicePage.clickBtnSaveDevice();
-    createDevicePage.clickBtnOk();
     return device;
     
     //клик действия кассы или переходим в торговую точку открываем таб кассы

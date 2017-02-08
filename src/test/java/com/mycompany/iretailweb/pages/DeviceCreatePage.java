@@ -67,7 +67,7 @@ public class DeviceCreatePage extends PageObject {
 
     public void clickBtnSaveDevice() {
         loader.waitUntilNotVisible();
-        //btn_add_device.waitUntilVisible();
+        btn_add_device.waitUntilVisible();
         btn_add_device.click();
 
     }

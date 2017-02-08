@@ -5,6 +5,7 @@
  */
 package com.mycompany.iretailweb.pages;
 
+import com.mycompany.iretailweb.utils.Device;
 import net.serenitybdd.core.annotations.findby.FindBy;
 import net.serenitybdd.core.pages.PageObject;
 import net.serenitybdd.core.pages.WebElementFacade;
@@ -25,12 +26,17 @@ public class TradePointUpdatePage extends PageObject {
     
     @FindBy(xpath = "//div[@ng-if='vm.showLoader()']")// пытаемся отловить лоадер 
     private WebElementFacade loader;
+    
+    @FindBy(xpath = "//input[@ng-model='vm.filter.name']")// поле название в фильтре касс
+    private WebElementFacade input_device_name;
+  
+    @FindBy(xpath = "//span[@translate='common.search']") //кнопка найти
+    private WebElementFacade btn_search;
 
     public void clickDeviceTab() throws InterruptedException {
-        
+        loader.waitUntilNotVisible();
         try {
             loader.waitUntilNotVisible(); //экспериментального ожидание, если проканает добавим везде ВРОДЕ РАБОТАЕТ КРУТАЯ ТЕМА
-            //device_tab.waitUntilClickable();
             device_tab.click();
         } catch (Exception e) {
             System.err.println("Не удалось перейти на вкладку касс"+e.getMessage());
@@ -38,9 +44,23 @@ public class TradePointUpdatePage extends PageObject {
 
     }
 
+    public void enterDeviceNameOnFilter(Device device) {
+        try {
+            loader.waitUntilNotVisible();
+            input_device_name.type(device.getName());
+        } catch (Exception e) {
+            System.err.println("Не удалось ввести название кассы в фильтр " + e.getMessage());
+        }
+    }
+     public void clickBtnSearch() {
+        loader.waitUntilNotVisible();
+        btn_search.click();
+    }
+    
+    
+    
     public void clickBtnAddDevice() throws InterruptedException {
         loader.waitUntilNotVisible();
-       // btn_add_device.waitUntilClickable();
         btn_add_device.click();
     }
 }

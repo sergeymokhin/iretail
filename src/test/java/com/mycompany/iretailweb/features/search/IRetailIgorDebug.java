@@ -48,7 +48,7 @@ public class IRetailIgorDebug {
     @Before   
     public void before_execution() {
         webdriver.manage().window().maximize();
-        webdriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        webdriver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
     }
  
     @After
@@ -147,13 +147,13 @@ public class IRetailIgorDebug {
         steps.clickBtnOnTradePointAddDevice();
         Device device = steps.createNewDevice();
         try {
-            steps.clickTabDeviceOnTradePoint();//перешли на вкладку касс
-            webdriver.findElement(By.linkText(device.getName())).click();//пытаемся кликнуть на ссылку названия кассы
-            assertTrue("Не открылась карточка созданной кассы ", webdriver.getCurrentUrl().contains("edit-device"));
+        steps.clickTabDeviceOnTradePoint();//перешли на вкладку касс
+        steps.searchDeviceByName(device); //нашли кассу по названию
+        webdriver.findElement(By.linkText(device.getName())).click();//пытаемся кликнуть на ссылку названия кассы
+        assertTrue("Не открылась карточка созданной кассы ", webdriver.getCurrentUrl().contains("edit-device")); //проверили что зашли в кассу
         } catch (Exception e) {
             Assert.fail("Созданная касса не обнаружена в списке касс выбранной торговой точки");
-        }
-    //проверка создания кассы пока сырая, не срабатывает из-за пагинации, возможно нужно сверить кассу по поиску
-    }    
     }
+    }
+}    
     

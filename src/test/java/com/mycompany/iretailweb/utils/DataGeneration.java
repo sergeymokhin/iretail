@@ -5,6 +5,9 @@
  */
 package com.mycompany.iretailweb.utils;
 
+import java.math.BigDecimal;
+import java.math.MathContext;
+import java.math.RoundingMode;
 import java.util.Random;
 import org.apache.commons.lang3.RandomStringUtils;
 
@@ -32,9 +35,10 @@ public class DataGeneration {
         return link;
     }
     
-    public static Double generateRandomDouble(){
+    public static BigDecimal generateRandomPrice(){
     Random random = new Random();
-    Double doublevalue = Math.abs(Double.valueOf(Math.round(random.nextFloat()*10000)/100)); //пока что дичайший генератор
-    return doublevalue;
+    BigDecimal bdvalue = new BigDecimal(random.nextDouble()*1000);
+    bdvalue = bdvalue.setScale(2,BigDecimal.ROUND_HALF_UP);
+    return bdvalue;
     }
 }
