@@ -47,9 +47,13 @@ public class OfferCreatePage extends PageObject {
     //* Кнопка "Ok" модального окна "Товар успешно создан"
     @FindBy(xpath = "//div[@class='jBox-Confirm-button jBox-Confirm-button-submit']")
     private WebElementFacade btn_ok;
+      
+    @FindBy(xpath = "//div[@ng-if='vm.showLoader()']")// пытаемся отловить лоадер 
+    private WebElementFacade loader;
 
     public void enterOfferBasePrice(Offer offer) {
         try {
+            loader.waitUntilNotVisible();
             input_offer_base_price.type(offer.getBaseprice().toString());//желательно избавиться от toString() в таком виде. BigDecimal.valueOf(d).setScale(2,BigDecimal.ROUND_HALF_DOWN).doubleValue()
         } catch (Exception e) {
             System.err.println("Не удалось ввести базовую цену товара " + e.getMessage());
@@ -59,6 +63,7 @@ public class OfferCreatePage extends PageObject {
 
     public void enterOfferName(Offer offer) {
         try {
+            loader.waitUntilNotVisible();
             input_offer_name.type(offer.getName());
         } catch (Exception e) {
             System.err.println("Не удалось ввести название товара " + e.getMessage());
@@ -68,6 +73,7 @@ public class OfferCreatePage extends PageObject {
 
     public void enterOfferArticle(Offer offer) {
         try {
+            loader.waitUntilNotVisible();
             input_offer_article.type(offer.getArticle());
         } catch (Exception e) {
             System.err.println("Не удалось ввести артикул товара " + e.getMessage());
@@ -77,6 +83,7 @@ public class OfferCreatePage extends PageObject {
 
     public void enterOfferBarcode(Offer offer) {
         try {
+            loader.waitUntilNotVisible();
             input_offer_barcode.type(offer.getBarcode());
         } catch (Exception e) {
             System.err.println("Не удалось ввести штрих код товара " + e.getMessage());
@@ -85,14 +92,14 @@ public class OfferCreatePage extends PageObject {
     }
 
     public void clickBtnSaveOffer() {
-        btn_save_offer.waitUntilVisible();
+        loader.waitUntilNotVisible();
         btn_save_offer.click();
 
     }
 
     // * Жмем кнопку "Ок" в оповещении о создании товара.
     public void clickBtnOk() throws InterruptedException {
-        btn_ok.waitUntilVisible();
+        loader.waitUntilNotVisible();
         btn_ok.waitUntilClickable();
         btn_ok.click();
     }

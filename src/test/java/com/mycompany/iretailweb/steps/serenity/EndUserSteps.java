@@ -214,7 +214,6 @@ public class EndUserSteps extends ScenarioSteps {
         try {
             createCategoryPage.clickBtnSaveCategory();
             createCategoryPage.clickBtnYes();
-            Thread.sleep(2000); //!!! можно избежать на WaitUntilClickable? не удалось, не успевает появиться модалка. сделал ожидание поменьше
             createCategoryPage.clickBtnOk();
         } catch (InterruptedException e) {
             Assert.fail("Не удалось сохранить категорию " + e.getMessage());
@@ -236,7 +235,7 @@ public class EndUserSteps extends ScenarioSteps {
     return category;
     }
 
-    @Step("Нажимаем кнопку Создать категории") //на main странице
+    @Step("Нажимаем кнопку Добавить товары") //на main странице
     public void clickBtnAddOfferOnMainPage() {
         mainPage.clickBtnAddOffer();
     }

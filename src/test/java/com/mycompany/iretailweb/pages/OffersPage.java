@@ -27,19 +27,21 @@ public class OffersPage extends PageObject {
     // Кнопка "Найти" 
     @FindBy(xpath = "//span[@translate='common.search']")
     private WebElementFacade btn_search;
+    
+    @FindBy(xpath = "//div[@ng-if='vm.showLoader()']")// пытаемся отловить лоадер 
+    private WebElementFacade loader;
 
     public void enterOfferName(Offer offer) {
         try {
-            input_offer_name.waitUntilVisible();
+            loader.waitUntilNotVisible();
             input_offer_name.type(offer.getName());
         } catch (Exception e) {
             System.err.println("Не удалось ввести название товара " + e.getMessage());
         }
-
     }
 
     public void clickBtnSearch() {
-        btn_search.waitUntilClickable();
+        loader.waitUntilNotVisible();
         btn_search.click();
     }
 

@@ -25,6 +25,8 @@ public class MainPage extends PageObject {
 // 2. Если это не первая компания пользователя, то кнопка спрятана в выпадающем списке
 // Поэтому переход на страницу создания компании реализован по прямому переходу
 // по ссылке на /main/create-profile без нажатия на кнопку
+    @FindBy(xpath = "//div[@ng-if='vm.showLoader()']")// пытаемся отловить лоадер 
+    private WebElementFacade loader;
 //* Кнопка "Добавить торговую точку" *
     @FindBy(xpath = "//span[@translate='home.addTradePoint']/parent::*")
     private WebElementFacade btn_add_trade_point;
@@ -42,19 +44,21 @@ public class MainPage extends PageObject {
     // * Жмем кнопку "Добавить торговую точку" *    
 
     public void clickBtnAddTradePoint() {
+        loader.waitUntilNotVisible();
         btn_add_trade_point.waitUntilClickable();
         btn_add_trade_point.click();
     }
 
     // * Жмем кнопку "Создать категории" *    
     public void clickBtnAddCategory() {
+        loader.waitUntilNotVisible();
         btn_add_category.waitUntilClickable();
         btn_add_category.click();
     }
 
     // * Жмем кнопку "Добавить товары" *  
     public void clickBtnAddOffer() {
-        btn_add_offer.waitUntilVisible();//насколько знаю кликабл работает и как визибл. Может лишнее?
+        loader.waitUntilNotVisible();
         btn_add_offer.waitUntilClickable();
         btn_add_offer.click();
     }

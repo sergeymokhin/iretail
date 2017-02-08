@@ -104,7 +104,7 @@ public class IRetailIgorDebug {
         }
     
     
-    @Pending @Test
+    @Test
     @Title("Create new category")
     public void create_new_category() throws InterruptedException {
         User user = new User();//Заменить на User.createNewUser() когда будут новые клиенты
@@ -134,7 +134,7 @@ public class IRetailIgorDebug {
         }
         }
     
-    @Test
+    @Pending @Test
     @Title("Create new device")
     public void create_new_device() throws InterruptedException {
         User user = new User();
