@@ -34,12 +34,12 @@ public class TradePointUpdatePage extends PageObject {
     private WebElementFacade btn_search;
 
     public void clickDeviceTab() throws InterruptedException {
-        loader.waitUntilNotVisible();
+        loader.waitUntilNotVisible();//!!! науя
         try {
-            loader.waitUntilNotVisible(); //экспериментального ожидание, если проканает добавим везде ВРОДЕ РАБОТАЕТ КРУТАЯ ТЕМА
+            loader.waitUntilNotVisible(); //экспериментального ожидание, если проканает добавим везде ВРОДЕ РАБОТАЕТ КРУТАЯ ТЕМА !!! а науя 2 раза ожидание одно и то же?
             device_tab.click();
         } catch (Exception e) {
-            System.err.println("Не удалось перейти на вкладку касс"+e.getMessage());
+            System.err.println("Не удалось перейти на вкладку касс "+e.getMessage());
         }
 
     }
@@ -53,14 +53,14 @@ public class TradePointUpdatePage extends PageObject {
         }
     }
      public void clickBtnSearch() {
-        loader.waitUntilNotVisible();
+        loader.waitUntilNotVisible(); //!!! ты то оборачиваешь трай кетчем, то нет. Надо оернуть, может некорректно повалить весь тест
         btn_search.click();
     }
     
     
     
     public void clickBtnAddDevice() throws InterruptedException {
-        loader.waitUntilNotVisible();
+        loader.waitUntilNotVisible(); //!!! ты то оборачиваешь трай кетчем, то нет. Надо оернуть, может некорректно повалить весь тест
         btn_add_device.click();
     }
 }

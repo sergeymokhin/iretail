@@ -67,7 +67,7 @@ public class Device {
     
     public static Device generateNewDevice() { 
         Device device = new Device();
-        device.name = DataGeneration.generateRandomString(10);
+        device.name = DataGeneration.generateRandomString(10); //!!! а геттеры сеттеры зачем тогда?
         return device;
     }
     

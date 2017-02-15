@@ -14,5 +14,5 @@ public class Yura_TestDeviceInfo {
    String trade_point_id="";
    String device_id="";
    String token="";
-   String sotrdudnik_id="";
+   String sotrudnik_id="";
 }

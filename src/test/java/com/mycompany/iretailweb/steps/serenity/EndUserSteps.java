@@ -265,7 +265,7 @@ public class EndUserSteps extends ScenarioSteps {
 
     @Step("Поиск товара по названию")
     public void searchDeviceByName(Device device) {
-        tradePointUpdatePage.enterDeviceNameOnFilter(device);
+        tradePointUpdatePage.enterDeviceNameOnFilter(device); //On используем для кликов и т.п. Если что-то вводишь замени на In
         tradePointUpdatePage.clickBtnSearch();
     }
     
