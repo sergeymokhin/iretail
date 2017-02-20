@@ -34,6 +34,7 @@ import org.junit.Before;
 import static org.junit.Assert.assertTrue;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.firefox.FirefoxDriver;
 
 //@DefaultUrl("https://dev2.iretail2.freematiq.com")
         
@@ -48,6 +49,8 @@ public class IRetailIgorDebug {
     
     @Before   
     public void before_execution() {
+        System.setProperty("webdriver.gecko.driver", "C:");
+        webdriver = new FirefoxDriver();
         webdriver.manage().window().maximize();
         webdriver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
     }
