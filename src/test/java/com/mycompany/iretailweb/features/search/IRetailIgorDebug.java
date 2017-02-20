@@ -49,8 +49,7 @@ public class IRetailIgorDebug {
     
     @Before   
     public void before_execution() {
-        System.setProperty("webdriver.gecko.driver", "C:");
-        webdriver = new FirefoxDriver();
+      
         webdriver.manage().window().maximize();
         webdriver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
     }
