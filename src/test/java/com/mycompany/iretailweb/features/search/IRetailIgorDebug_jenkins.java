@@ -61,6 +61,7 @@ public class IRetailIgorDebug_jenkins {
 // RemoteWebDriver webdriver2 = new RemoteWebDriver("http://localhost:4444/wd/hub", DesiredCapabilities.chrome());
         DesiredCapabilities capabilities = new DesiredCapabilities();
         capabilities.setCapability("firefox_binary", "c:\\Program Files(x86)\\Mozilla Firefox\\Firefox.exe");
+        capabilities.setCapability("browser_version", "51.0.1");
         System.setProperty("webdriver.gecko.driver","c:\\geckodriver.exe");
         webdriver = new RemoteWebDriver(new URL("http://localhost:4444/wd/hub"),DesiredCapabilities.firefox());
 //        webdriver = new ChromeDriver();
