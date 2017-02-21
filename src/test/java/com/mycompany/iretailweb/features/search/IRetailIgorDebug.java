@@ -148,7 +148,7 @@ public class IRetailIgorDebug {
         //API создание ТТ
 //        token = Yura_ApiMethods.getToken();
 //        Yura_ApiMethods.CreateNewTradePoint(null);
-        webdriver.findElement(By.linkText(steps.getFirstTradePointName())).click();//пока что в первую попавшуюся торговую точку !!! нельзы явнести в отдельный метод\степ? наверняка понадобится еще не раз
+        webdriver.findElement(By.linkText(steps.getFirstTradePointName())).click();//пока что в первую попавшуюся торговую точку !!! нельзя вынести в отдельный метод\степ? наверняка понадобится еще не раз
         steps.clickTabDeviceOnTradePoint();
         steps.clickBtnOnTradePointAddDevice(); //!!! нажимаем кнопку на торговой точке добавить кассу...как-то опять коряво. вроде принимали другой формат (см. строку выше)
         Device device = steps.createNewDevice();
