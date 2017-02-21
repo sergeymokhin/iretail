@@ -24,10 +24,7 @@ import com.mycompany.iretailweb.utils.Device;
 import com.mycompany.iretailweb.utils.Offer;
 import com.mycompany.iretailweb.utils.TradePoint;
 import com.mycompany.iretailweb.utils.User;
-import com.mycompany.iretailweb.utils.Yura_ApiMethods;
-import com.sun.jndi.toolkit.url.Uri;
 import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.concurrent.TimeUnit;
 import net.thucydides.core.annotations.Pending;
 import net.thucydides.core.annotations.Title;
@@ -92,13 +89,12 @@ public class IRetailIgorDebug_jenkins {
         User user = new User();//Заменить на User.createNewUser() когда будут новые клиенты
         user.setName(Const.userPhone);
         user.setPassword(Const.userPassword);
-        user.setPassword("123");
         steps.Authorization(user);
         String company_name = steps.createNewCompany();
         String script = "a=document.getElementsByClassName('txt');"
                 + "return (a[a.length-1].getElementsByTagName('div')[0].innerHTML);"; 
         try {
-            String getLastCompanyInList = (String)((JavascriptExecutor)webdriver).executeScript(script, webdriver.findElement(By.tagName("html")));
+            String getLastCompanyInList = (String)((JavascriptExecutor)webdriver).executeScript(script, webdriver.findElement(By.tagName("html354")));
             System.out.println("Это компания которую мы создали " + company_name + "\n" + "Это последняя компания в списке " + getLastCompanyInList);
 
             assertTrue("Новая компания не появилась в списке",
