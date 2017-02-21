@@ -16,7 +16,7 @@
                 <goal>integration-test</goal>
                 <goal>-U</goal>
                 <goal>-Dwebdriver.base.url=https://nightlybuilds.i-retail.freematiq.com </goal>
-                <goal>-Dwebdriver.chrome.driver=C:\chromedriver.exe</goal>
+                <goal>-Dwebdriver.firefox.driver=C:\geckodriver.exe</goal>
             </goals>
         </action>
     </actions>

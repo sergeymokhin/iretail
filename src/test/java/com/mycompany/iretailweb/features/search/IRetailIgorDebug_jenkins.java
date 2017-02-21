@@ -59,6 +59,8 @@ public class IRetailIgorDebug_jenkins {
 //        webdriver = new RemoteWebDriver("http://localhost:4444",DesiredCapabilities.chrome());
 //        System.setProperty("webdriver.chrome.driver","Drive:"+"C:\\chromedriver.exe");
 // RemoteWebDriver webdriver2 = new RemoteWebDriver("http://localhost:4444/wd/hub", DesiredCapabilities.chrome());
+        DesiredCapabilities capabilities = new DesiredCapabilities();
+        capabilities.setCapability("firefox_binary", "c:\\Program Files(x86)\\Mozilla Firefox\\Firefox.exe");
         webdriver = new RemoteWebDriver(new URL("http://localhost:4444/wd/hub"),DesiredCapabilities.firefox());
 //        webdriver = new ChromeDriver();
         webdriver.manage().window().maximize();
