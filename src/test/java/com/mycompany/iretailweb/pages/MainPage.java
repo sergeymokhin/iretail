@@ -42,7 +42,7 @@ public class MainPage extends PageObject {
 //* Кнопка "Добавить сотрудников" *    
 //*** Methods ***
     // * Жмем кнопку "Добавить торговую точку" *    
-
+    
     public void clickBtnAddTradePoint() {
         loader.waitUntilNotVisible();
         btn_add_trade_point.waitUntilClickable();
@@ -62,5 +62,5 @@ public class MainPage extends PageObject {
         btn_add_offer.waitUntilClickable();
         btn_add_offer.click();
     }
-
-}
+    
+        }

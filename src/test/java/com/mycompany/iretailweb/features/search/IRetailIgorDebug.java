@@ -63,12 +63,10 @@ public class IRetailIgorDebug {
     @Title("Authorization")
     public void authorization() throws InterruptedException {
         User user = new User();//Заменить на User.createNewUser() когда будут новые клиенты
-         user.setName(Const.userPhone);
+        user.setName(Const.userPhone);
         user.setPassword(Const.userPassword);
         steps.Authorization(user);
-        Thread.sleep(2000);
-        assertTrue("Не перешел на главную страницу после авторизации",
-                webdriver.getCurrentUrl().contains("/main"));
+        assertTrue("Не перешел на главную страницу после авторизации", webdriver.getCurrentUrl().contains("/main"));
     }
     
     @Test

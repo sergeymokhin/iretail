@@ -31,6 +31,8 @@ public class LoginPage extends PageObject {
     @FindBy(xpath = "//*[@type='submit']")
     private WebElementFacade btn_login;
    
+    @FindBy(xpath = "//div[@ng-if='vm.showLoader()']")// пытаемся отловить лоадер 
+    private WebElementFacade loader;
     
 //* Переключатель "Запомнить меня" *
 //* Ссылка "Забыли пароль" *   
@@ -40,17 +42,21 @@ public class LoginPage extends PageObject {
     
 // * Вводим телефон пользователя в поле Ваш логин (e-mail или телефон) *  
     public void enterPhone(User user) {
+        loader.waitUntilNotVisible();
         input_login.type(user.getPhone());
     }
 
 // * Вводим пароль пользователя в поле Пароль     
     public void enterPassword(User user) {
+        loader.waitUntilNotVisible();
         input_password.type(user.getPassword());
     }
 
 // * Жмем кнопку Войти *    
     public void ClickBtnLogin() {
+        loader.waitUntilNotVisible();
         btn_login.click();
+        loader.waitUntilNotVisible();
     }
     
     

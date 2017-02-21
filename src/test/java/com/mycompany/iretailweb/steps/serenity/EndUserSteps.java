@@ -93,7 +93,6 @@ public class EndUserSteps extends ScenarioSteps {
             Assert.fail("Проблемы с полем ввода пароля " + e.getMessage());
         }
         clickBtnLogin();
-        Thread.sleep(3000);
 // то, что мы авторизовались, мы проверяем в тесте IRetailTests - ("Authorization")
     }
 
