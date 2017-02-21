@@ -93,6 +93,7 @@ public class EndUserSteps extends ScenarioSteps {
             Assert.fail("Проблемы с полем ввода пароля " + e.getMessage());
         }
         clickBtnLogin();
+        mainPage.waitForLoad();
 // то, что мы авторизовались, мы проверяем в тесте IRetailTests - ("Authorization")
     }
 
@@ -133,7 +134,6 @@ public class EndUserSteps extends ScenarioSteps {
         Thread.sleep(5000);
         String company_name = enterCompanyName();
         clickBtnAddCompany();
-//        isModalAddNewCompanyPresent(); // можно и не подтверждать появление модалки
         clickBtnYes();
         clickBtnYesYes();
         return company_name;
@@ -157,8 +157,15 @@ public class EndUserSteps extends ScenarioSteps {
     }
     
     @Step("Нажимаем кнопку Добавить кассу") //в торговой точке
-    public void clickBtnOnTradePointAddDevice() throws InterruptedException {
+    public void clickBtnAddDeviceOnTradePoint() throws InterruptedException {
         tradePointUpdatePage.clickBtnAddDevice();
+    }
+    
+    @Step("Нажимаем кнопку на вкладке касс торговой точки") //в торговой точке
+    public void clickBtnAddDeviceOnTradePointTab() throws InterruptedException {
+        tradePointUpdatePage.clickDeviceTab();
+        tradePointUpdatePage.clickBtnAddDevice();
+      
     }
 
     @Step("Заполняем поля торговой точки")
@@ -263,12 +270,18 @@ public class EndUserSteps extends ScenarioSteps {
     }
 
     @Step("Поиск товара по названию")
-    public void searchDeviceByName(Device device) {
-        tradePointUpdatePage.enterDeviceNameOnFilter(device); //On используем для кликов и т.п. Если что-то вводишь замени на In
+    public void searchDeviceByNameOnTradePointTab(Device device) throws InterruptedException {
+        tradePointUpdatePage.clickDeviceTab();
+        tradePointUpdatePage.enterDeviceNameInFilter(device); //On используем для кликов и т.п. Если что-то вводишь замени на In
         tradePointUpdatePage.clickBtnSearch();
     }
-    
-    
+
+    @Step("Переход в первую торговую точку в списке")
+    public void clickFirstTradePointOnList() throws InterruptedException {
+        tradePointListPage.open();
+        tradePointListPage.clickFirstTradePointName();
+    }
+
     @Step("Создание нового товара") //общий степ создания товара
     public Offer createNewOffer() throws InterruptedException {
         clickBtnAddOfferOnMainPage();
@@ -280,8 +293,6 @@ public class EndUserSteps extends ScenarioSteps {
     
     @Step("Создание новой кассы")
     public Device createNewDevice() throws InterruptedException {
-        //переходим на страницу торговых точек
-       //выбираем торговую точку у которой создаем кассу пусть пока первая в списке
     Device device = Device.generateNewDevice();
     createDevicePage.enterDeviceName(device);
     createDevicePage.clickBtnSaveDevice();

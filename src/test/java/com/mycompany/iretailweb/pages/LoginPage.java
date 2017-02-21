@@ -56,7 +56,6 @@ public class LoginPage extends PageObject {
     public void ClickBtnLogin() {
         loader.waitUntilNotVisible();
         btn_login.click();
-        loader.waitUntilNotVisible();
     }
     
     

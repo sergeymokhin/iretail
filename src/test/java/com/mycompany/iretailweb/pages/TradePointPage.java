@@ -30,11 +30,17 @@ public class TradePointPage extends PageObject{
         try {
             return  first_trade_point_link.getAttribute("translate");
         } catch (Exception e) {
-            System.out.println("Не удалось найти первую компанию в списке" + e.getMessage());
+            System.out.println("Не удалось найти первую торговую точку в списке" + e.getMessage());
                 return null;    
         }
+       }
+        
+    public void clickFirstTradePointName() throws InterruptedException{
+        try {
+            first_trade_point_link.click();
+        } catch (Exception e) {
+            System.out.println("Не удалось перейти в первую торговую точку  в списке" + e.getMessage());
+        }
     }
-    
+    }
 
-    
-}

@@ -34,7 +34,6 @@ public class TradePointUpdatePage extends PageObject {
     private WebElementFacade btn_search;
 
     public void clickDeviceTab() throws InterruptedException {
-        loader.waitUntilNotVisible();//!!! науя
         try {
             loader.waitUntilNotVisible(); //экспериментального ожидание, если проканает добавим везде ВРОДЕ РАБОТАЕТ КРУТАЯ ТЕМА !!! а науя 2 раза ожидание одно и то же?
             device_tab.click();
@@ -44,7 +43,7 @@ public class TradePointUpdatePage extends PageObject {
 
     }
 
-    public void enterDeviceNameOnFilter(Device device) {
+    public void enterDeviceNameInFilter(Device device) {
         try {
             loader.waitUntilNotVisible();
             input_device_name.type(device.getName());
@@ -52,15 +51,24 @@ public class TradePointUpdatePage extends PageObject {
             System.err.println("Не удалось ввести название кассы в фильтр " + e.getMessage());
         }
     }
-     public void clickBtnSearch() {
-        loader.waitUntilNotVisible(); //!!! ты то оборачиваешь трай кетчем, то нет. Надо оернуть, может некорректно повалить весь тест
-        btn_search.click();
+
+    public void clickBtnSearch() {
+        try {
+            loader.waitUntilNotVisible(); 
+            btn_search.click();
+        } catch (Exception e) {
+            System.err.println("Не удалось нажать кнопку Найти" + e.getMessage());
+        }
+
     }
-    
-    
-    
+
     public void clickBtnAddDevice() throws InterruptedException {
-        loader.waitUntilNotVisible(); //!!! ты то оборачиваешь трай кетчем, то нет. Надо оернуть, может некорректно повалить весь тест
-        btn_add_device.click();
+        try {
+            loader.waitUntilNotVisible(); 
+            btn_add_device.click();
+        } catch (Exception e) {
+            System.err.println("Не удалось нажать кнопку Добавить кассу");
+        }
+
     }
 }

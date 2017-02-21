@@ -63,4 +63,7 @@ public class MainPage extends PageObject {
         btn_add_offer.click();
     }
     
+    public void waitForLoad() {
+    loader.waitUntilNotVisible();
+    }
         }
