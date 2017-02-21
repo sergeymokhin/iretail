@@ -98,7 +98,7 @@ public class IRetailIgorDebug_jenkins {
             System.out.println("Это компания которую мы создали " + company_name + "\n" + "Это последняя компания в списке " + getLastCompanyInList);
 
             assertTrue("Новая компания не появилась в списке",
-                    getLastCompanyInList.equals(company_name+"sf"));
+                    getLastCompanyInList.equals(company_name));
         } 
         catch (Exception e) {
                 System.err.println("Список компаний пуст");
