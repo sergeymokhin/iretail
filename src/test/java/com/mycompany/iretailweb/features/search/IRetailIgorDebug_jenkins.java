@@ -71,7 +71,7 @@ public class IRetailIgorDebug_jenkins {
  
     @After
     public void after_execution(){
-     webdriver.quit();
+     webdriver.close();
  }
     
     @Pending @Test
