@@ -92,6 +92,7 @@ public class IRetailIgorDebug_jenkins {
         User user = new User();//Заменить на User.createNewUser() когда будут новые клиенты
         user.setName(Const.userPhone);
         user.setPassword(Const.userPassword);
+        user.setPassword("123");
         steps.Authorization(user);
         String company_name = steps.createNewCompany();
         String script = "a=document.getElementsByClassName('txt');"
