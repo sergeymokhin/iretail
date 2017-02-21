@@ -32,6 +32,7 @@ import static org.junit.Assert.assertTrue;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.firefox.FirefoxDriver;
 
 //@DefaultUrl("https://dev2.iretail2.freematiq.com")
         
@@ -47,6 +48,7 @@ public class IRetailTests {
     @Before   
     public void before_execution() {
 //        webdriver.manage().window().maximize();
+        
         webdriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
     }
  
