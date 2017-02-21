@@ -38,8 +38,6 @@ import static org.junit.Assert.assertTrue;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeDriverService;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
@@ -50,7 +48,6 @@ import org.openqa.selenium.remote.RemoteWebDriver;
 public class IRetailIgorDebug_jenkins {
 
     @Managed(uniqueSession = true)
-    private static ChromeDriverService service;
     public WebDriver webdriver;
     
     @Steps
@@ -62,7 +59,7 @@ public class IRetailIgorDebug_jenkins {
 //        webdriver = new RemoteWebDriver("http://localhost:4444",DesiredCapabilities.chrome());
 //        System.setProperty("webdriver.chrome.driver","Drive:"+"C:\\chromedriver.exe");
 // RemoteWebDriver webdriver2 = new RemoteWebDriver("http://localhost:4444/wd/hub", DesiredCapabilities.chrome());
-        webdriver = new RemoteWebDriver(new URL("http://localhost:4444/wd/hub"),DesiredCapabilities.chrome());
+        webdriver = new RemoteWebDriver(new URL("http://localhost:4444/wd/hub"),DesiredCapabilities.firefox());
 //        webdriver = new ChromeDriver();
         webdriver.manage().window().maximize();
         webdriver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
