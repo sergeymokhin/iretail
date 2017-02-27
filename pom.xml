@@ -117,8 +117,8 @@
                 <executions>
                     <execution>
                         <goals>
-                            <!--<goal>integration-test</goal>-->
-                            <!--<goal>verify</goal>-->
+                            <goal>integration-test</goal>
+                            <goal>verify</goal>
                         </goals>
                     </execution>
                 </executions>
@@ -130,7 +130,7 @@
                 <executions>
                     <execution>
                         <id>serenity-reports</id>
-                        <phase>integration-test</phase>
+                        <!--<phase>integration-test</phase>-->
                         <goals>
                             <goal>aggregate</goal>
                         </goals>
