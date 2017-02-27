@@ -42,7 +42,7 @@ import org.openqa.selenium.remote.RemoteWebDriver;
 //@DefaultUrl("https://dev2.iretail2.freematiq.com")
         
 @RunWith(SerenityRunner.class)
-public class IRetailIgorDebug_jenkins {
+public class IRetail_jenkins {
 
     @Managed(uniqueSession = true)
     public WebDriver webdriver;
