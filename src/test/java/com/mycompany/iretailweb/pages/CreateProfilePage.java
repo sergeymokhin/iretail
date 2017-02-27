@@ -42,7 +42,7 @@ public class CreateProfilePage extends PageObject{
 //    private WebElementFacade modal_inform_about_new_company_creation;
 
 //* Кнопка "Да" модального окна "Профиль успешно создан"
-    @FindBy (xpath = "//div[@class='jBox-Confirm-button jBox-Confirm-button-submit']")
+    @FindBy (xpath = "//div[contains(@style,'display: block')]//div[contains(@class,'jBox-Confirm-button-submit')]")
     private WebElementFacade btn_yes_yes;
     
 //*** Methods ***

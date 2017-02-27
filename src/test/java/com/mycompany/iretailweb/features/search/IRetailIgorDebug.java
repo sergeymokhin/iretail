@@ -24,7 +24,6 @@ import com.mycompany.iretailweb.utils.Device;
 import com.mycompany.iretailweb.utils.Offer;
 import com.mycompany.iretailweb.utils.TradePoint;
 import com.mycompany.iretailweb.utils.User;
-import com.mycompany.iretailweb.utils.Yura_ApiMethods;
 import java.util.concurrent.TimeUnit;
 import net.thucydides.core.annotations.Pending;
 import net.thucydides.core.annotations.Title;
@@ -34,7 +33,6 @@ import org.junit.Before;
 import static org.junit.Assert.assertTrue;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.firefox.FirefoxDriver;
 
 //@DefaultUrl("https://dev2.iretail2.freematiq.com")
         
@@ -63,15 +61,13 @@ public class IRetailIgorDebug {
     @Title("Authorization")
     public void authorization() throws InterruptedException {
         User user = new User();//Заменить на User.createNewUser() когда будут новые клиенты
-         user.setName(Const.userPhone);
+        user.setName(Const.userPhone);
         user.setPassword(Const.userPassword);
         steps.Authorization(user);
-        Thread.sleep(2000);
-        assertTrue("Не перешел на главную страницу после авторизации",
-                webdriver.getCurrentUrl().contains("/main"));
+        assertTrue("Не перешел на главную страницу после авторизации", webdriver.getCurrentUrl().contains("/main"));
     }
     
-    @Test
+    @Pending @Test
     @Title("Create new company")
     public void create_new_company() throws InterruptedException {
         User user = new User();//Заменить на User.createNewUser() когда будут новые клиенты
@@ -137,26 +133,20 @@ public class IRetailIgorDebug {
         }
         }
     
-    @Pending @Test
+    @Test
     @Title("Create new device")
     public void create_new_device() throws InterruptedException {
         User user = new User();
         user.setName(Const.userPhone);
         user.setPassword(Const.userPassword);
         steps.Authorization(user);
-        steps.openTradePointPage();
-        //API создание ТТ
-//        token = Yura_ApiMethods.getToken();
-//        Yura_ApiMethods.CreateNewTradePoint(null);
-        webdriver.findElement(By.linkText(steps.getFirstTradePointName())).click();//пока что в первую попавшуюся торговую точку !!! нельзя вынести в отдельный метод\степ? наверняка понадобится еще не раз
-        steps.clickTabDeviceOnTradePoint();
-        steps.clickBtnOnTradePointAddDevice(); //!!! нажимаем кнопку на торговой точке добавить кассу...как-то опять коряво. вроде принимали другой формат (см. строку выше)
+        steps.clickFirstTradePointOnList(); //нажимаем на первую торговую точку в списке
+        steps.clickBtnAddDeviceOnTradePointTab(); //нажимаем кнопку добавить кассу на вкладке в торговой точке
         Device device = steps.createNewDevice();
-        try { //думаю степы и всё лищнее вынести из этого трайкетча, тк. у них внутри есть он. Т.к. если у тебя свалится на клике на табу - у тебя будет сообщение ошибки из кетча "созд. касса не обнаружена", а это не так. ты ее даже не искал еще
-          steps.clickTabDeviceOnTradePoint();//перешли на вкладку касс
-          steps.searchDeviceByName(device); //нашли кассу по названию
-          webdriver.findElement(By.linkText(device.getName())).click();//пытаемся кликнуть на ссылку названия кассы !!! это тоже может повалить у тебя всё. где трайкетч? нельзя вынести в степ\пейдж?
-          assertTrue("Не открылась карточка созданной кассы ", webdriver.getCurrentUrl().contains("edit-device")); //проверили что зашли в кассу
+        steps.searchDeviceByNameOnTradePointTab(device);
+        try {
+            webdriver.findElement(By.linkText(device.getName())).click();
+          assertTrue("Не открылась карточка созданной кассы ", webdriver.getCurrentUrl().contains("edit-device"));
         } catch (Exception e) {
             Assert.fail("Созданная касса не обнаружена в списке касс выбранной торговой точки");
     }
