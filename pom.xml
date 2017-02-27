@@ -100,15 +100,15 @@
                 <configuration>
                     <includes>
 <!--                        <include>**/*Test*.java</include>  Общий тест (не трогать), д.б. закомментирован-->
-                        <include>**/IRetail_jenkins.java</include>
-                        <!--<include>**/IRetailIgorDebug.java</include>  Раскомментить для Игоря остальное дб закоменчено!!!-->
+                        <!--<include>**/IRetail_jenkins.java</include>-->
+                        <include>**/IRetailIgorDebug.java</include> 
                        <!-- <include>**/IRetailSergeyDebug.java</include>--> <!--Раскомментить для Сергея остальное дб закоменчено!!!-->
                        <!-- <include>**/Test*.java</include>
                         <include>**/When*.java</include>
                         <include>**/*Story.java</include>-->
                     </includes>
                     <argLine>-Xmx512m</argLine>
-                    <argLine>-javaagent:serenity/serenity.jar -Xms512m -Xmx1024m ${included.packages} ${included.adapters}</argLine>
+                    <!--<argLine>-javaagent:serenity/serenity.jar -Xms512m -Xmx1024m ${included.packages} ${included.adapters}</argLine>-->
                     <systemPropertyVariables>
                         <webdriver.driver>${webdriver.driver}</webdriver.driver>
                           <webdriver.gecko.driver>c:\geckodriver.exe</webdriver.gecko.driver> 
@@ -117,8 +117,8 @@
                 <executions>
                     <execution>
                         <goals>
-                            <goal>integration-test</goal>
-                            <goal>verify</goal>
+                            <!--<goal>integration-test</goal>-->
+                            <!--<goal>verify</goal>-->
                         </goals>
                     </execution>
                 </executions>
