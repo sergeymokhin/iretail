@@ -64,6 +64,7 @@ public class MainPage extends PageObject {
     }
     
     public void waitForLoad() {
+    loader.waitUntilVisible();
     loader.waitUntilNotVisible();
     }
         }

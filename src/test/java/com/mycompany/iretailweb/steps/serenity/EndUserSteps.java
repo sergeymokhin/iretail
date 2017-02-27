@@ -78,9 +78,9 @@ Assert.fail("Нет кнопки Войти " + e.getMessage());
 // каждый метод желательно обернуть в трай кетч - DONE
 public void Authorization(User user) throws InterruptedException {
 try {
-openLoginPage();
+    openLoginPage();
 } catch (Exception e) {
-Assert.fail("Не перешел на страницу авторизации " + e.getMessage());
+    Assert.fail("Не перешел на страницу авторизации " + e.getMessage());
 }
 LoginAs(user.getPhone(), user.getPassword());
 clickBtnLogin();
@@ -91,9 +91,9 @@ mainPage.waitForLoad();
 @Step("Авторизуюсь под {0}/{1}") // Общий метод на авторизацию
 private void LoginAs(String phone,String password) {
 try {
-enterPhone(phone);
+    enterPhone(phone);
 } catch (Exception e) {
-Assert.fail("Проблемы с полем ввода номера телефона " + e.getMessage());
+    Assert.fail("Проблемы с полем ввода номера телефона " + e.getMessage());
 }
 try {
 enterPassword(password);
