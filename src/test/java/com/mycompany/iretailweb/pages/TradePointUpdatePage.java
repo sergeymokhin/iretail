@@ -56,6 +56,7 @@ public class TradePointUpdatePage extends PageObject {
         try {
             loader.waitUntilNotVisible(); 
             btn_search.click();
+            loader.waitUntilNotVisible();
         } catch (Exception e) {
             System.err.println("Не удалось нажать кнопку Найти" + e.getMessage());
         }
