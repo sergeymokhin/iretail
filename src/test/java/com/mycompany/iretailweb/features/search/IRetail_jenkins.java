@@ -156,19 +156,13 @@ public class IRetail_jenkins {
         user.setName(Const.userPhone);
         user.setPassword(Const.userPassword);
         steps.Authorization(user);
-        steps.openTradePointPage();
-        //API создание ТТ
-//        token = Yura_ApiMethods.getToken();
-//        Yura_ApiMethods.CreateNewTradePoint(null);
-        webdriver.findElement(By.linkText(steps.getFirstTradePointName())).click();//пока что в первую попавшуюся торговую точку !!! нельзы явнести в отдельный метод\степ? наверняка понадобится еще не раз
-        steps.clickTabDeviceOnTradePoint();
-        steps.clickBtnOnTradePointAddDevice(); //!!! нажимаем кнопку на торговой точке добавить кассу...как-то опять коряво. вроде принимали другой формат (см. строку выше)
+        steps.clickFirstTradePointOnList(); //нажимаем на первую торговую точку в списке
+        steps.clickBtnAddDeviceOnTradePointTab(); //нажимаем кнопку добавить кассу на вкладке в торговой точке
         Device device = steps.createNewDevice();
-        try { //думаю степы и всё лищнее вынести из этого трайкетча, тк. у них внутри есть он. Т.к. если у тебя свалится на клике на табу - у тебя будет сообщение ошибки из кетча "созд. касса не обнаружена", а это не так. ты ее даже не искал еще
-          steps.clickTabDeviceOnTradePoint();//перешли на вкладку касс
-          steps.searchDeviceByName(device); //нашли кассу по названию
-          webdriver.findElement(By.linkText(device.getName())).click();//пытаемся кликнуть на ссылку названия кассы !!! это тоже может повалить у тебя всё. где трайкетч? нельзя вынести в степ\пейдж?
-          assertTrue("Не открылась карточка созданной кассы ", webdriver.getCurrentUrl().contains("edit-device")); //проверили что зашли в кассу
+        steps.searchDeviceByNameOnTradePointTab(device);
+        try {
+            webdriver.findElement(By.linkText(device.getName())).click();
+          assertTrue("Не открылась карточка созданной кассы ", webdriver.getCurrentUrl().contains("edit-device"));
         } catch (Exception e) {
             Assert.fail("Созданная касса не обнаружена в списке касс выбранной торговой точки");
     }

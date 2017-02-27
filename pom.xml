@@ -100,8 +100,8 @@
                 <configuration>
                     <includes>
 <!--                        <include>**/*Test*.java</include>  Общий тест (не трогать), д.б. закомментирован-->
-                        <include>**/IRetail_jenkins.java</include>  <!--Раскомментить для Игоря остальное дб закоменчено!!!-->
-                        <include>**/IRetailIgorDebug.java</include>  Раскомментить для Игоря остальное дб закоменчено!!!
+                        <include>**/IRetail_jenkins.java</include>
+                        <!--<include>**/IRetailIgorDebug.java</include>  Раскомментить для Игоря остальное дб закоменчено!!!-->
                        <!-- <include>**/IRetailSergeyDebug.java</include>--> <!--Раскомментить для Сергея остальное дб закоменчено!!!-->
                        <!-- <include>**/Test*.java</include>
                         <include>**/When*.java</include>
