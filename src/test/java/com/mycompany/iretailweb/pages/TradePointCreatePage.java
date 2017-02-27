@@ -85,7 +85,7 @@ public class TradePointCreatePage extends PageObject{
         Random randomno = new Random();
         droplist.selectByValue(String.valueOf(randomno.nextInt(250)));
         try {
-           tradePoint.setName(droplist.getFirstSelectedOption().getText());
+           tradePoint.setCountry(droplist.getFirstSelectedOption().getText());
         } catch (Exception e) {
             System.err.println("Не удалось получить выбранную страну " +e.getMessage() );
         }

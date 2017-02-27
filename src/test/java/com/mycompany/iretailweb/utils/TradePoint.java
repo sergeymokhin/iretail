@@ -26,7 +26,7 @@ public class TradePoint {
     }
 
     public String getName() {
-        return name;
+        return this.name;
     }
 
     public String getCountry() {

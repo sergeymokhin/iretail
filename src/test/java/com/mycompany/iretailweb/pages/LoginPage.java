@@ -41,15 +41,15 @@ public class LoginPage extends PageObject {
 //*** Methods ***
     
 // * Вводим телефон пользователя в поле Ваш логин (e-mail или телефон) *  
-    public void enterPhone(User user) {
+    public void enterPhone(String phone) {
         loader.waitUntilNotVisible();
-        input_login.type(user.getPhone());
+        input_login.type(phone);
     }
 
 // * Вводим пароль пользователя в поле Пароль     
-    public void enterPassword(User user) {
+    public void enterPassword(String password) {
         loader.waitUntilNotVisible();
-        input_password.type(user.getPassword());
+        input_password.type(password);
     }
 
 // * Жмем кнопку Войти *    
