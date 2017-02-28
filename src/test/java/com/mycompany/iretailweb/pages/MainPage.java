@@ -58,9 +58,12 @@ public class MainPage extends PageObject {
 
     // * Жмем кнопку "Добавить товары" *  
     public void clickBtnAddOffer() {
-        loader.waitUntilNotVisible();
-        btn_add_offer.waitUntilClickable();
-        btn_add_offer.click();
+        try {
+            loader.waitUntilNotVisible();
+            btn_add_offer.waitUntilClickable();
+            btn_add_offer.click();
+        } catch (Exception e) {
+        }
     }
     
     public void waitForLoad() {

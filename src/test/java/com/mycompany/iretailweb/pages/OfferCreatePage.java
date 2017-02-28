@@ -99,9 +99,12 @@ public class OfferCreatePage extends PageObject {
 
     // * Жмем кнопку "Ок" в оповещении о создании товара.
     public void clickBtnOk() throws InterruptedException {
-        loader.waitUntilNotVisible();
-        btn_ok.waitUntilClickable();
-        btn_ok.click();
+        try {
+            loader.waitUntilNotVisible();
+            btn_ok.waitUntilClickable();
+            btn_ok.click();
+        } catch (Exception e) {
+        }
     }
 
 }
