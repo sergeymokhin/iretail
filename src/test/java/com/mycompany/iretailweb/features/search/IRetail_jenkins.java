@@ -82,7 +82,7 @@ public class IRetail_jenkins {
     
     @Test
     @Title("Authorization")
-    public void authorization() throws InterruptedException {
+    public void authorization() throws InterruptedException, IOException {
         User user = new User();//Заменить на User.createNewUser() когда будут новые клиенты
          user.setName(Const.userPhone);
         user.setPassword(Const.userPassword);
@@ -93,13 +93,13 @@ public class IRetail_jenkins {
                     webdriver.getCurrentUrl().contains("/main"));
             DataGeneration.TakeScreen(webdriver, "Авторизация "+System.currentTimeMillis());
         } catch (Exception e) {
-            
+            DataGeneration.TakeScreen(webdriver, "Авторизация "+System.currentTimeMillis());
         }
     }
     
     @Test
     @Title("Create new company")
-    public void create_new_company() throws InterruptedException {
+    public void create_new_company() throws InterruptedException, IOException {
         User user = new User();//Заменить на User.createNewUser() когда будут новые клиенты
         user.setName(Const.userPhone);
         user.setPassword(Const.userPassword);
@@ -117,12 +117,13 @@ public class IRetail_jenkins {
         } 
         catch (Exception e) {
                 System.err.println("Список компаний пуст");
+                DataGeneration.TakeScreen(webdriver, "Новая_компания "+System.currentTimeMillis());
         }
     }
     
     @Test
     @Title("Create new tradepoint")
-    public void create_new_tradepoint() throws InterruptedException {
+    public void create_new_tradepoint() throws InterruptedException, IOException {
         User user = new User();//Заменить на User.createNewUser() когда будут новые клиенты
          user.setName(Const.userPhone);
         user.setPassword(Const.userPassword);
@@ -134,6 +135,7 @@ public class IRetail_jenkins {
             assertTrue("Созданная торговая точка не появилась в списке", firstTradePoint.equals(tradePoint.getName()));
             DataGeneration.TakeScreen(webdriver, "ТТ "+System.currentTimeMillis());
         } catch (Exception e) {
+            DataGeneration.TakeScreen(webdriver, "ТТ "+System.currentTimeMillis());
         }
         }
     
@@ -149,7 +151,8 @@ public class IRetail_jenkins {
         try {
             assertTrue("Не открылась страница созданной категории ", steps.getCategoryName().equals(category.getName()) & webdriver.getCurrentUrl().contains("category/update"));
             DataGeneration.TakeScreen(webdriver, "Категория "+System.currentTimeMillis());
-        } catch (InterruptedException interruptedException) {          
+        } catch (InterruptedException interruptedException) { 
+            DataGeneration.TakeScreen(webdriver, "Категория "+System.currentTimeMillis());
         }
         //сошлись на том что нужно проверить название в поле название и одновременно с этим update в адр.строке 
     }
@@ -157,7 +160,7 @@ public class IRetail_jenkins {
     
     @Test
     @Title("Create new offer")
-    public void create_new_offer() throws InterruptedException {
+    public void create_new_offer() throws InterruptedException, IOException {
         User user = new User();//Заменить на User.createNewUser() когда будут новые клиенты
         user.setName(Const.userPhone);
         user.setPassword(Const.userPassword);
@@ -169,13 +172,14 @@ public class IRetail_jenkins {
             assertTrue("Не открылась карточка созданного товара ", webdriver.getCurrentUrl().contains("/catalog/offers/update/"));
             DataGeneration.TakeScreen(webdriver, "Товар "+System.currentTimeMillis());
         } catch (Exception e) {
+            DataGeneration.TakeScreen(webdriver, "Товар "+System.currentTimeMillis());
            Assert.fail("Созданный товар не отобразился в результатах поиска "+e.getMessage());
         }
         }
     
     @Test
     @Title("Create new device")
-    public void create_new_device() throws InterruptedException {
+    public void create_new_device() throws InterruptedException, IOException {
         User user = new User();
         user.setName(Const.userPhone);
         user.setPassword(Const.userPassword);
@@ -189,6 +193,7 @@ public class IRetail_jenkins {
           assertTrue("Не открылась карточка созданной кассы ", webdriver.getCurrentUrl().contains("edit-device"));
           DataGeneration.TakeScreen(webdriver, "Касса "+System.currentTimeMillis());
         } catch (Exception e) {
+            DataGeneration.TakeScreen(webdriver, "Товар "+System.currentTimeMillis());
             Assert.fail("Созданная касса не обнаружена в списке касс выбранной торговой точки");
             
     }
