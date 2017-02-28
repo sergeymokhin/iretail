@@ -56,17 +56,17 @@ tradePointListPage.open();
 }
 
 @Step("Вводим номер телефона пользователя в поле Ваш логин (e-mail или телефон)")
-private void enterPhone(String phone) {
+public void enterPhone(String phone) {
 loginPage.enterPhone(phone);
 }
 
 @Step("Вводим пароль пользователя в поле Пароль")
-private void enterPassword(String password) {
+public void enterPassword(String password) {
 loginPage.enterPassword(password);
 }
 
 @Step("Нажимаем кнопку Войти")
-private void clickBtnLogin() {
+public void clickBtnLogin() {
 try {
 loginPage.ClickBtnLogin();
 } catch (Exception e) {
@@ -77,6 +77,7 @@ Assert.fail("Нет кнопки Войти " + e.getMessage());
 @Step("Авторизация") // Общий метод на авторизацию
 // каждый метод желательно обернуть в трай кетч - DONE
 public void Authorization(User user) throws InterruptedException {
+    
 try {
     openLoginPage();
 } catch (Exception e) {
@@ -89,7 +90,7 @@ mainPage.waitForLoad();
 }
 
 @Step("Авторизуюсь под {0}/{1}") // Общий метод на авторизацию
-private void LoginAs(String phone,String password) {
+public void LoginAs(String phone,String password) {
 try {
     enterPhone(phone);
 } catch (Exception e) {
@@ -104,17 +105,17 @@ Assert.fail("Проблемы с полем ввода пароля " + e.getMes
 
 // Степы для создания новой компании
 @Step("Вводим имя новой компании")
-private String enterCompanyName() {
+public String enterCompanyName() {
 return createProfilePage.enterCompanyName();
 }
 
 @Step("Жмем кнопку Добавить компанию")
-private void clickBtnAddCompany() {
+public void clickBtnAddCompany() {
 createProfilePage.clickBtnAddCompany();
 }
 
 @Step("Подтверждаем что появилось модальное окно подтверждения создания компании")
-private boolean isModalAddNewCompanyPresent() {
+public boolean isModalAddNewCompanyPresent() {
 try {
 return createProfilePage.isModalAddNewCompanyPresent();
 } catch (Exception e) {
@@ -124,12 +125,12 @@ return false;
 }
 
 @Step("Жмем кнопку Да модального окна подтверждения создания компании")
-private void clickBtnYes() throws InterruptedException {
+public void clickBtnYes() throws InterruptedException {
 createProfilePage.clickBtnYes();
 }
 
 @Step("Жмем кнопку Да модального окна Профиль успешно создан")
-private void clickBtnYesYes() throws InterruptedException {
+public void clickBtnYesYes() throws InterruptedException {
 createProfilePage.clickBtnYesYes();
 }
 
