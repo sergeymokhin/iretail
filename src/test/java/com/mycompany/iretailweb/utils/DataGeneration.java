@@ -5,11 +5,17 @@
  */
 package com.mycompany.iretailweb.utils;
 
+import java.io.File;
+import java.io.IOException;
 import java.math.BigDecimal;
 import java.math.MathContext;
 import java.math.RoundingMode;
 import java.util.Random;
+import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.RandomStringUtils;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
+import org.openqa.selenium.WebDriver;
 
 /**
  *
@@ -40,5 +46,10 @@ public class DataGeneration {
     BigDecimal bdvalue = new BigDecimal(random.nextDouble()*1000);
     bdvalue = bdvalue.setScale(2,BigDecimal.ROUND_HALF_UP);
     return bdvalue;
+    }
+    
+    public static void TakeScreen(WebDriver webdriver, String data) throws IOException {
+        File scrFile = ((TakesScreenshot)webdriver).getScreenshotAs(OutputType.FILE);
+FileUtils.copyFile(scrFile, new File("c:\\tmp\\screenshot"+data+".png"));
     }
 }

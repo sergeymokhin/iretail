@@ -20,10 +20,12 @@ import org.openqa.selenium.WebDriver;
 import com.mycompany.iretailweb.steps.serenity.EndUserSteps;
 import com.mycompany.iretailweb.utils.Category;
 import com.mycompany.iretailweb.utils.Const;
+import com.mycompany.iretailweb.utils.DataGeneration;
 import com.mycompany.iretailweb.utils.Device;
 import com.mycompany.iretailweb.utils.Offer;
 import com.mycompany.iretailweb.utils.TradePoint;
 import com.mycompany.iretailweb.utils.User;
+import java.io.IOException;
 import java.net.MalformedURLException;
 import java.util.concurrent.TimeUnit;
 import net.thucydides.core.annotations.Pending;
@@ -35,9 +37,12 @@ import static org.junit.Assert.assertTrue;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 //@DefaultUrl("https://dev2.iretail2.freematiq.com")
         
@@ -64,6 +69,10 @@ public class IRetail_jenkins {
 //        webdriver = new ChromeDriver();
         webdriver.manage().window().maximize();
         webdriver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
+        webdriver.manage().timeouts().pageLoadTimeout(15, TimeUnit.SECONDS);
+        webdriver.manage().timeouts().setScriptTimeout(15, TimeUnit.SECONDS);
+        WebDriverWait wait = new WebDriverWait(webdriver, 13);
+        
     }
  
     @After
@@ -79,8 +88,13 @@ public class IRetail_jenkins {
         user.setPassword(Const.userPassword);
         steps.Authorization(user);
         Thread.sleep(2000);
-        assertTrue("Не перешел на главную страницу после авторизации",
-                webdriver.getCurrentUrl().contains("/main"));
+        try {
+            assertTrue("Не перешел на главную страницу после авторизации",
+                    webdriver.getCurrentUrl().contains("/main"));
+            DataGeneration.TakeScreen(webdriver, "Авторизация "+System.currentTimeMillis());
+        } catch (Exception e) {
+            
+        }
     }
     
     @Test
@@ -99,6 +113,7 @@ public class IRetail_jenkins {
 
             assertTrue("Новая компания не появилась в списке",
                     getLastCompanyInList.equals(company_name));
+            DataGeneration.TakeScreen(webdriver, "Новая_компания "+System.currentTimeMillis());
         } 
         catch (Exception e) {
                 System.err.println("Список компаний пуст");
@@ -115,13 +130,17 @@ public class IRetail_jenkins {
         TradePoint tradePoint = steps.createNewTradePoint();
         String firstTradePoint= steps.getFirstTradePointName();
         System.out.println("Это торговая точка, которую мы создали " + tradePoint.getName() + "\n" + "Это первая торговая точка в списке " + firstTradePoint);
-        assertTrue("Созданная торговая точка не появилась в списке", firstTradePoint.equals(tradePoint.getName()));
+        try {
+            assertTrue("Созданная торговая точка не появилась в списке", firstTradePoint.equals(tradePoint.getName()));
+            DataGeneration.TakeScreen(webdriver, "ТТ "+System.currentTimeMillis());
+        } catch (Exception e) {
+        }
         }
     
     
     @Test 
     @Title("Create new category")
-    public void create_new_category() throws InterruptedException {
+    public void create_new_category() throws InterruptedException, IOException {
         User user = new User();//Заменить на User.createNewUser() когда будут новые клиенты
         user.setName(Const.userPhone);
         user.setPassword(Const.userPassword);
@@ -129,8 +148,8 @@ public class IRetail_jenkins {
         Category category = steps.createNewCategory();//создаем новую категорию
         try {
             assertTrue("Не открылась страница созданной категории ", steps.getCategoryName().equals(category.getName()) & webdriver.getCurrentUrl().contains("category/update"));
-        } catch (InterruptedException interruptedException) {
-             assertTrue("Не открылась страница созданной категории ", steps.getCategoryName().equals(category.getName()) & webdriver.getCurrentUrl().contains("category/update")); //костыль. Надо нормально дождаться загрузки
+            DataGeneration.TakeScreen(webdriver, "Категория "+System.currentTimeMillis());
+        } catch (InterruptedException interruptedException) {          
         }
         //сошлись на том что нужно проверить название в поле название и одновременно с этим update в адр.строке 
     }
@@ -148,6 +167,7 @@ public class IRetail_jenkins {
             steps.searchOfferByName(offer);
             webdriver.findElement(By.linkText(offer.getName())).click(); //пытаемся кликнуть на ссылку название товара
             assertTrue("Не открылась карточка созданного товара ", webdriver.getCurrentUrl().contains("/catalog/offers/update/"));
+            DataGeneration.TakeScreen(webdriver, "Товар "+System.currentTimeMillis());
         } catch (Exception e) {
            Assert.fail("Созданный товар не отобразился в результатах поиска "+e.getMessage());
         }
@@ -167,8 +187,10 @@ public class IRetail_jenkins {
         try {
             webdriver.findElement(By.linkText(device.getName())).click();
           assertTrue("Не открылась карточка созданной кассы ", webdriver.getCurrentUrl().contains("edit-device"));
+          DataGeneration.TakeScreen(webdriver, "Касса "+System.currentTimeMillis());
         } catch (Exception e) {
             Assert.fail("Созданная касса не обнаружена в списке касс выбранной торговой точки");
+            
     }
     }
 }    

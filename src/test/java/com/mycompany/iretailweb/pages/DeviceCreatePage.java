@@ -66,17 +66,23 @@ public class DeviceCreatePage extends PageObject {
     }
 
     public void clickBtnSaveDevice() {
-        loader.waitUntilNotVisible();
-        btn_add_device.waitUntilVisible();
-        btn_add_device.click();
+        try {
+            loader.waitUntilNotVisible();
+            btn_add_device.waitUntilVisible();
+            btn_add_device.click();
+        } catch (Exception e) {
+        }
 
     }
 
     // * Жмем кнопку "Ок" в оповещении о создании товара.
     public void clickBtnOk() throws InterruptedException {
-        btn_ok.waitUntilVisible();
-        btn_ok.waitUntilClickable();
-        btn_ok.click();
+        try {
+            btn_ok.waitUntilVisible();
+            btn_ok.waitUntilClickable();
+            btn_ok.click();
+        } catch (Exception e) {
+        }
     }
 
 }
