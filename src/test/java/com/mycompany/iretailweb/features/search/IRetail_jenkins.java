@@ -89,9 +89,10 @@ public class IRetail_jenkins {
         steps.Authorization(user);
         Thread.sleep(2000);
         try {
+            DataGeneration.TakeScreen(webdriver, "Авторизация "+System.currentTimeMillis());
             assertTrue("Не перешел на главную страницу после авторизации",
                     webdriver.getCurrentUrl().contains("/main"));
-            DataGeneration.TakeScreen(webdriver, "Авторизация "+System.currentTimeMillis());
+            
         } catch (Exception e) {
             DataGeneration.TakeScreen(webdriver, "Авторизация "+System.currentTimeMillis());
         }
@@ -110,10 +111,10 @@ public class IRetail_jenkins {
         try {
             String getLastCompanyInList = (String)((JavascriptExecutor)webdriver).executeScript(script, webdriver.findElement(By.tagName("html")));
             System.out.println("Это компания которую мы создали " + company_name + "\n" + "Это последняя компания в списке " + getLastCompanyInList);
-
+            DataGeneration.TakeScreen(webdriver, "Новая_компания "+System.currentTimeMillis()); 
             assertTrue("Новая компания не появилась в списке",
                     getLastCompanyInList.equals(company_name));
-            DataGeneration.TakeScreen(webdriver, "Новая_компания "+System.currentTimeMillis());
+            
         } 
         catch (Exception e) {
                 System.err.println("Список компаний пуст");
@@ -132,8 +133,9 @@ public class IRetail_jenkins {
         String firstTradePoint= steps.getFirstTradePointName();
         System.out.println("Это торговая точка, которую мы создали " + tradePoint.getName() + "\n" + "Это первая торговая точка в списке " + firstTradePoint);
         try {
-            assertTrue("Созданная торговая точка не появилась в списке", firstTradePoint.equals(tradePoint.getName()));
             DataGeneration.TakeScreen(webdriver, "ТТ "+System.currentTimeMillis());
+            assertTrue("Созданная торговая точка не появилась в списке", firstTradePoint.equals(tradePoint.getName()));
+            
         } catch (Exception e) {
             DataGeneration.TakeScreen(webdriver, "ТТ "+System.currentTimeMillis());
         }
@@ -149,8 +151,9 @@ public class IRetail_jenkins {
         steps.Authorization(user);
         Category category = steps.createNewCategory();//создаем новую категорию
         try {
+             DataGeneration.TakeScreen(webdriver, "Категория "+System.currentTimeMillis());
             assertTrue("Не открылась страница созданной категории ", steps.getCategoryName().equals(category.getName()) & webdriver.getCurrentUrl().contains("category/update"));
-            DataGeneration.TakeScreen(webdriver, "Категория "+System.currentTimeMillis());
+           
         } catch (InterruptedException interruptedException) { 
             DataGeneration.TakeScreen(webdriver, "Категория "+System.currentTimeMillis());
         }
@@ -169,8 +172,9 @@ public class IRetail_jenkins {
         try {
             steps.searchOfferByName(offer);
             webdriver.findElement(By.linkText(offer.getName())).click(); //пытаемся кликнуть на ссылку название товара
-            assertTrue("Не открылась карточка созданного товара ", webdriver.getCurrentUrl().contains("/catalog/offers/update/"));
             DataGeneration.TakeScreen(webdriver, "Товар "+System.currentTimeMillis());
+            assertTrue("Не открылась карточка созданного товара ", webdriver.getCurrentUrl().contains("/catalog/offers/update/"));
+            
         } catch (Exception e) {
             DataGeneration.TakeScreen(webdriver, "Товар "+System.currentTimeMillis());
            Assert.fail("Созданный товар не отобразился в результатах поиска "+e.getMessage());
@@ -190,8 +194,9 @@ public class IRetail_jenkins {
         steps.searchDeviceByNameOnTradePointTab(device);
         try {
             webdriver.findElement(By.linkText(device.getName())).click();
+            DataGeneration.TakeScreen(webdriver, "Касса "+System.currentTimeMillis());
           assertTrue("Не открылась карточка созданной кассы ", webdriver.getCurrentUrl().contains("edit-device"));
-          DataGeneration.TakeScreen(webdriver, "Касса "+System.currentTimeMillis());
+          
         } catch (Exception e) {
             DataGeneration.TakeScreen(webdriver, "Товар "+System.currentTimeMillis());
             Assert.fail("Созданная касса не обнаружена в списке касс выбранной торговой точки");
