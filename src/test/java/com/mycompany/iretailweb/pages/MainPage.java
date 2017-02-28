@@ -64,7 +64,12 @@ public class MainPage extends PageObject {
     }
     
     public void waitForLoad() {
-    loader.waitUntilVisible();
-    loader.waitUntilNotVisible();
+        try {
+            loader.waitUntilVisible();
+        loader.waitUntilNotVisible();
+        } catch (Exception e) {
+            System.err.println("Нету лоадера еще(уже)");
+        }
+        
     }
         }
