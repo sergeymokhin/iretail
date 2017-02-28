@@ -127,7 +127,11 @@ public class IRetail_jenkins {
         user.setPassword(Const.userPassword);
         steps.Authorization(user);
         Category category = steps.createNewCategory();//создаем новую категорию
-        assertTrue("Не открылась страница созданной категории ", steps.getCategoryName().equals(category.getName()) & webdriver.getCurrentUrl().contains("category/update"));
+        try {
+            assertTrue("Не открылась страница созданной категории ", steps.getCategoryName().equals(category.getName()) & webdriver.getCurrentUrl().contains("category/update"));
+        } catch (InterruptedException interruptedException) {
+             assertTrue("Не открылась страница созданной категории ", steps.getCategoryName().equals(category.getName()) & webdriver.getCurrentUrl().contains("category/update")); //костыль. Надо нормально дождаться загрузки
+        }
         //сошлись на том что нужно проверить название в поле название и одновременно с этим update в адр.строке 
     }
     
