@@ -35,7 +35,7 @@ public class TradePointUpdatePage extends PageObject {
 
     public void clickDeviceTab() throws InterruptedException {
         try {
-            loader.waitUntilNotVisible(); //экспериментального ожидание, если проканает добавим везде ВРОДЕ РАБОТАЕТ КРУТАЯ ТЕМА !!! а науя 2 раза ожидание одно и то же?
+            waitForLoad(); //экспериментального ожидание, если проканает добавим везде ВРОДЕ РАБОТАЕТ КРУТАЯ ТЕМА !!! а науя 2 раза ожидание одно и то же?
             device_tab.click();
         } catch (Exception e) {
             System.err.println("Не удалось перейти на вкладку касс "+e.getMessage());
@@ -45,7 +45,7 @@ public class TradePointUpdatePage extends PageObject {
 
     public void enterDeviceNameInFilter(Device device) {
         try {
-            loader.waitUntilNotVisible();
+            waitForLoad();
             input_device_name.type(device.getName());
         } catch (Exception e) {
             System.err.println("Не удалось ввести название кассы в фильтр " + e.getMessage());
@@ -54,9 +54,9 @@ public class TradePointUpdatePage extends PageObject {
 
     public void clickBtnSearch() {
         try {
-            loader.waitUntilNotVisible(); 
+            waitForLoad();
             btn_search.click();
-            loader.waitUntilNotVisible();
+            waitForLoad();
         } catch (Exception e) {
             System.err.println("Не удалось нажать кнопку Найти" + e.getMessage());
         }
@@ -65,11 +65,20 @@ public class TradePointUpdatePage extends PageObject {
 
     public void clickBtnAddDevice() throws InterruptedException {
         try {
-            loader.waitUntilNotVisible(); 
+            waitForLoad();
             btn_add_device.click();
         } catch (Exception e) {
             System.err.println("Не удалось нажать кнопку Добавить кассу");
         }
 
     }
+    
+     public void waitForLoad() {
+        try {
+        loader.waitUntilVisible();
+        loader.waitUntilNotVisible();
+        } catch (Exception e) {
+            System.err.println("Нет отображается лоадер ещё(уже)");
+        }
+}
 }
