@@ -85,6 +85,7 @@ try {
 }
 LoginAs(user.getPhone(), user.getPassword());
 clickBtnLogin();
+mainPage.waitForLoad();
 // то, что мы авторизовались, мы проверяем в тесте IRetailTests - ("Authorization")
 }
 
@@ -135,7 +136,6 @@ createProfilePage.clickBtnYesYes();
 
 @Step("Создание новой компании") // общий степ для создания новой компании
 public String createNewCompany() throws InterruptedException {
-mainPage.waitForLoad();
 openCreateProfilePage();
 String company_name = enterCompanyName();
 clickBtnAddCompany();
