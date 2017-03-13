@@ -80,7 +80,7 @@ public class IRetail_jenkins {
      webdriver.close();
  }
     
-    @Test
+    @Pending @Test
     @Title("Authorization")
     public void authorization() throws InterruptedException, IOException {
         User user = new User();//Заменить на User.createNewUser() когда будут новые клиенты
@@ -98,7 +98,7 @@ public class IRetail_jenkins {
         }
     }
     
-    @Test
+    @Pending @Test
     @Title("Create new company")
     public void create_new_company() throws InterruptedException, IOException {
         User user = new User();//Заменить на User.createNewUser() когда будут новые клиенты
@@ -122,7 +122,7 @@ public class IRetail_jenkins {
         }
     }
     
-     @Test
+    @Pending @Test
     @Title("Create new tradepoint")
     public void create_new_tradepoint() throws InterruptedException, IOException {
         User user = new User();//Заменить на User.createNewUser() когда будут новые клиенты
@@ -142,7 +142,7 @@ public class IRetail_jenkins {
         }
     
     
-    @Test 
+    @Pending @Test 
     @Title("Create new category")
     public void create_new_category() throws InterruptedException, IOException {
         User user = new User();//Заменить на User.createNewUser() когда будут новые клиенты
@@ -161,7 +161,7 @@ public class IRetail_jenkins {
     }
     
     
-   @Test
+   @Pending @Test
     @Title("Create new offer")
     public void create_new_offer() throws InterruptedException, IOException {
         User user = new User();//Заменить на User.createNewUser() когда будут новые клиенты

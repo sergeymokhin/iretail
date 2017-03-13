@@ -36,6 +36,7 @@ public class TradePointUpdatePage extends PageObject {
     public void clickDeviceTab() throws InterruptedException {
         try {
             waitForLoad(); //экспериментального ожидание, если проканает добавим везде ВРОДЕ РАБОТАЕТ КРУТАЯ ТЕМА !!! а науя 2 раза ожидание одно и то же?
+            device_tab.waitUntilPresent();
             device_tab.waitForCondition();
             device_tab.click();
         } catch (Exception e) {
@@ -68,6 +69,7 @@ public class TradePointUpdatePage extends PageObject {
     public void clickBtnAddDevice() throws InterruptedException {
         try {
             waitForLoad();
+            btn_add_device.waitUntilPresent();
             btn_add_device.click();
         } catch (Exception e) {
             System.err.println("Не удалось нажать кнопку Добавить кассу");

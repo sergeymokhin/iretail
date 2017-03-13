@@ -158,18 +158,28 @@ mainPage.clickBtnAddTradePoint();
 
 @Step("Выбираем таб Кассы") //в торговой точке
 public void clickTabDeviceOnTradePoint() throws InterruptedException {
-tradePointUpdatePage.clickDeviceTab();
+    try {
+        tradePointUpdatePage.clickDeviceTab();
+    } catch (Exception e) {
+        Assert.fail("Не перешел в таб кассы торговой точки " + e.getMessage());
+    }
+
 }
 
 @Step("Нажимаем кнопку Добавить кассу") //в торговой точке
 public void clickBtnAddDeviceOnTradePoint() throws InterruptedException {
-tradePointUpdatePage.clickBtnAddDevice();
+    try {
+        tradePointUpdatePage.clickBtnAddDevice();
+    } catch (Exception e) {
+         Assert.fail("Не нажалась кнопка добавить кассу " + e.getMessage());
+    }
+
 }
 
 @Step("Нажимаем кнопку на вкладке касс торговой точки") //в торговой точке
 public void clickBtnAddDeviceOnTradePointTab() throws InterruptedException {
-tradePointUpdatePage.clickDeviceTab();
-tradePointUpdatePage.clickBtnAddDevice();
+clickTabDeviceOnTradePoint();
+clickBtnAddDeviceOnTradePoint();
 
 }
 
