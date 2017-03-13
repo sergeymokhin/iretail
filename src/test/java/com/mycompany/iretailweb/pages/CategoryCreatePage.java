@@ -48,6 +48,7 @@ public class CategoryCreatePage extends PageObject {
         try {
             waitForLoad();
             input_category_name.waitForCondition();
+            input_category_name.waitUntilClickable();
             input_category_name.type(category.getName());
         } catch (Exception e) {
             System.err.println("Не удалось ввести название категории " + e.getMessage());
@@ -69,6 +70,7 @@ public class CategoryCreatePage extends PageObject {
     public void clickBtnSaveCategory() {
         try {
             waitForLoad();
+            btn_save_category.waitUntilVisible();
             btn_save_category.waitUntilClickable();
             btn_save_category.click();
         } catch (Exception e) {
@@ -82,6 +84,7 @@ public class CategoryCreatePage extends PageObject {
         try {
             waitForLoad();
            btn_yes.waitUntilVisible();
+           btn_yes.waitUntilClickable();
             btn_yes.click();
         } catch (Exception e) {
             System.out.println("Не найдена кнопка Да окна подтверждения создания категории");
@@ -92,6 +95,7 @@ public class CategoryCreatePage extends PageObject {
     public void clickBtnOk() throws InterruptedException {
         try {
             waitForLoad();
+            btn_ok.waitUntilVisible();
             btn_ok.waitUntilClickable();
             btn_ok.click();
         } catch (Exception e) {
@@ -104,7 +108,7 @@ public class CategoryCreatePage extends PageObject {
         loader.waitUntilVisible();
         loader.waitUntilNotVisible();
         } catch (Exception e) {
-            System.err.println("Не отображается лоадер ещё(уже)");
+            System.err.println("Ожидание лоадера");
         }
 }
 }
