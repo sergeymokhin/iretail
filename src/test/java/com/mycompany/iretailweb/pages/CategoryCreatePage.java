@@ -28,7 +28,7 @@ public class CategoryCreatePage extends PageObject {
     private WebElementFacade category_header;
 
     // Кнопка "Сохранить"
-    @FindBy(xpath = " //*[@translate='catalog.category.save']/parent::button")
+    @FindBy(xpath = "//button[contains(@class,'btn btn-green btn-lg btn-responsive ng-scope')]")
     private WebElementFacade btn_save_category;
 
     // Кнопка "Да" модального окна "Вы уверены, что хотите создать категорию"
