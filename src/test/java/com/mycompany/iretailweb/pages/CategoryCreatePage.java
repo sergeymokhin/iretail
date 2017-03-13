@@ -32,7 +32,7 @@ public class CategoryCreatePage extends PageObject {
     private WebElementFacade btn_save_category;
 
     // Кнопка "Да" модального окна "Вы уверены, что хотите создать категорию"
-    @FindBy(xpath = "//div[contains(@class, 'jBox-Confirm-button-submit')]")
+    @FindBy(xpath = "//div[@class='jBox-Confirm-button jBox-Confirm-button-submit']")
     private WebElementFacade btn_yes;
 
     // Кнопка "Ok" модального окна "Категория успешно создана"
