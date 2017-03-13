@@ -82,10 +82,11 @@ public class CategoryCreatePage extends PageObject {
     // * Жмем кнопку "Да" модального окна подтверждения создания категории
     public void clickBtnYes() throws InterruptedException {
         try {
-            waitForLoad();
-           btn_yes.waitUntilVisible();
+           waitForLoad();
+          // btn_yes.waitUntilVisible();
+           btn_yes.waitForCondition();
            btn_yes.waitUntilClickable();
-            btn_yes.click();
+           btn_yes.click();
         } catch (Exception e) {
             System.out.println("Не найдена кнопка Да окна подтверждения создания категории");
         }
@@ -95,7 +96,8 @@ public class CategoryCreatePage extends PageObject {
     public void clickBtnOk() throws InterruptedException {
         try {
             waitForLoad();
-            btn_ok.waitUntilVisible();
+           // btn_ok.waitUntilVisible();
+            btn_ok.waitForCondition();
             btn_ok.waitUntilClickable();
             btn_ok.click();
         } catch (Exception e) {

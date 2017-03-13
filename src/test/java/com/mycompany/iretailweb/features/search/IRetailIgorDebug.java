@@ -20,10 +20,12 @@ import org.openqa.selenium.WebDriver;
 import com.mycompany.iretailweb.steps.serenity.EndUserSteps;
 import com.mycompany.iretailweb.utils.Category;
 import com.mycompany.iretailweb.utils.Const;
+import com.mycompany.iretailweb.utils.DataGeneration;
 import com.mycompany.iretailweb.utils.Device;
 import com.mycompany.iretailweb.utils.Offer;
 import com.mycompany.iretailweb.utils.TradePoint;
 import com.mycompany.iretailweb.utils.User;
+import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 import net.thucydides.core.annotations.Pending;
 import net.thucydides.core.annotations.Title;
@@ -59,7 +61,7 @@ public class IRetailIgorDebug {
      webdriver.quit();
  }
     
-   @Test
+   @Pending  @Test
     @Title("Authorization")
     public void authorization() throws InterruptedException {
         User user = new User();//Заменить на User.createNewUser() когда будут новые клиенты
@@ -69,7 +71,7 @@ public class IRetailIgorDebug {
         assertTrue("Не перешел на главную страницу после авторизации", webdriver.getCurrentUrl().contains("/main"));
     }
     
-    @Test
+    @Pending  @Test
     @Title("Create new company")
     public void create_new_company() throws InterruptedException {
         User user = new User();//Заменить на User.createNewUser() когда будут новые клиенты
@@ -91,7 +93,7 @@ public class IRetailIgorDebug {
         }
     }
     
-   @Test
+   @Pending @Test
     @Title("Create new tradepoint")
     public void create_new_tradepoint() throws InterruptedException {
         User user = new User();//Заменить на User.createNewUser() когда будут новые клиенты
@@ -107,18 +109,24 @@ public class IRetailIgorDebug {
     
     @Test 
     @Title("Create new category")
-    public void create_new_category() throws InterruptedException {
+    public void create_new_category() throws InterruptedException, IOException {
         User user = new User();//Заменить на User.createNewUser() когда будут новые клиенты
         user.setName(Const.userPhone);
         user.setPassword(Const.userPassword);
         steps.Authorization(user);
         Category category = steps.createNewCategory();//создаем новую категорию
-        assertTrue("Не открылась страница созданной категории ", steps.getCategoryName().equals(category.getName()) & webdriver.getCurrentUrl().contains("category/update"));
+        try {
+             DataGeneration.TakeScreen(webdriver, "Категория "+System.currentTimeMillis());
+            assertTrue("Не открылась страница созданной категории ", steps.getCategoryName().equals(category.getName()) & webdriver.getCurrentUrl().contains("category/update"));
+           
+        } catch (InterruptedException interruptedException) { 
+            DataGeneration.TakeScreen(webdriver, "Категория "+System.currentTimeMillis());
+        }
         //сошлись на том что нужно проверить название в поле название и одновременно с этим update в адр.строке 
     }
     
     
-    @Test
+    @Pending @Test
     @Title("Create new offer")
     public void create_new_offer() throws InterruptedException {
         User user = new User();//Заменить на User.createNewUser() когда будут новые клиенты
@@ -135,7 +143,7 @@ public class IRetailIgorDebug {
         }
         }
     
-    @Test
+    @Pending @Test
     @Title("Create new device")
     public void create_new_device() throws InterruptedException {
         User user = new User();
