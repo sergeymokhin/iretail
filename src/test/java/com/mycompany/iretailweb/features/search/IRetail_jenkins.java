@@ -69,9 +69,9 @@ public class IRetail_jenkins {
 //        webdriver = new ChromeDriver();
         webdriver.manage().window().maximize();
         webdriver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
-        webdriver.manage().timeouts().pageLoadTimeout(15, TimeUnit.SECONDS);
+        webdriver.manage().timeouts().pageLoadTimeout(20, TimeUnit.SECONDS);
         webdriver.manage().timeouts().setScriptTimeout(15, TimeUnit.SECONDS);
-        WebDriverWait wait = new WebDriverWait(webdriver, 13);
+        WebDriverWait wait = new WebDriverWait(webdriver, 15);
         
     }
  
