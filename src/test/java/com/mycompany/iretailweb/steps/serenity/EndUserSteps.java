@@ -233,6 +233,7 @@ return category;
 public void clickBtnSaveCategory() {
 try {
 createCategoryPage.clickBtnSaveCategory();
+createCategoryPage.waitForLoad();
 createCategoryPage.clickBtnYes();
 createCategoryPage.clickBtnOk();
 } catch (InterruptedException e) {
