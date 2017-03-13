@@ -69,7 +69,7 @@ public class TradePointUpdatePage extends PageObject {
     public void clickBtnAddDevice() throws InterruptedException {
         try {
             waitForLoad();
-            btn_add_device.waitUntilPresent();
+            btn_add_device.waitUntilClickable();
             btn_add_device.click();
         } catch (Exception e) {
             System.err.println("Не удалось нажать кнопку Добавить кассу");

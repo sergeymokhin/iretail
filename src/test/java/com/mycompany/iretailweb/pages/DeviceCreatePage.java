@@ -59,7 +59,8 @@ public class DeviceCreatePage extends PageObject {
     public void enterDeviceName(Device device) {
         try {
             waitForLoad();
-            input_device_name.waitForCondition();
+         //   input_device_name.waitForCondition();
+            input_device_name.waitUntilClickable();
             input_device_name.type(device.getName());
         } catch (Exception e) {
             System.err.println("Не удалось ввести название кассы " + e.getMessage());
