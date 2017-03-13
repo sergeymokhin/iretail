@@ -55,12 +55,12 @@ public void openTradePointPage() {
 tradePointListPage.open();
 }
 
-@Step("Вводим номер телефона пользователя в поле Ваш логин (e-mail или телефон)")
+@Step("Вводим номер телефона {0} в поле Ваш логин (e-mail или телефон)")
 public void enterPhone(String phone) {
 loginPage.enterPhone(phone);
 }
 
-@Step("Вводим пароль пользователя в поле Пароль")
+@Step("Вводим пароль {0} в поле Пароль")
 public void enterPassword(String password) {
 loginPage.enterPassword(password);
 }
@@ -173,8 +173,8 @@ tradePointUpdatePage.clickBtnAddDevice();
 
 }
 
-@Step("Заполняем поля торговой точки")
-public TradePoint fillTradePointData(TradePoint tradePoint) {
+@Step("Заполняем поля торговой точки, название {1}")
+public TradePoint fillTradePointData(TradePoint tradePoint, String reportName) {
 createTradePointPage.enterTradePointName(tradePoint);
 createTradePointPage.selectTradePointCountry(tradePoint);
 createTradePointPage.enterTradePointCity(tradePoint);
@@ -203,7 +203,7 @@ return tradePointListPage.getFirstTradePointName();
 public TradePoint createNewTradePoint() throws InterruptedException {
 clickBtnOnMainPageAddTradePoint();
 TradePoint tradePoint = TradePoint.generateNewTradePoint();
-tradePoint = fillTradePointData(tradePoint);
+tradePoint = fillTradePointData(tradePoint, tradePoint.getName());
 clickBtnSaveTradePoint();
 return tradePoint;
 }
@@ -213,8 +213,8 @@ public void clickBtnAddCategoryOnMainPage() {
 mainPage.clickBtnAddCategory();
 }
 
-@Step("Заполняем поля категории")
-public Category fillCategoryData(Category category) {
+@Step("Заполняем поля категории с названием {1}")
+public Category fillCategoryData(Category category, String reportName) {
 createCategoryPage.enterCategoryName(category);
 return category;
 }
@@ -240,7 +240,7 @@ return createCategoryPage.getCategoryName();
 public Category createNewCategory() throws InterruptedException {
 clickBtnAddCategoryOnMainPage();
 Category category = Category.generateNewCategory(); 
-category = fillCategoryData(category); 
+category = fillCategoryData(category,category.getName()); 
 clickBtnSaveCategory();
 return category;
 }
@@ -255,8 +255,8 @@ public void clickBtnAddOfferOnMainPage() {
 
 }
 
-    @Step("Заполняем поля товара")
-    public Offer fillOfferData(Offer offer) {
+    @Step("Заполняем поля товара с названием {1}")
+    public Offer fillOfferData(Offer offer, String reportName) {
         try {
             createOfferPage.enterOfferName(offer);
             createOfferPage.enterOfferArticle(offer);
@@ -315,19 +315,28 @@ public Offer createNewOffer() throws InterruptedException {
 mainPage.waitForLoad();
 clickBtnAddOfferOnMainPage();
 Offer offer = Offer.generateNewOffer(); //парни говорят что если статический метод возвращает экземпляр класса с заполненными значениями это нормас
-offer = fillOfferData(offer);
+offer = fillOfferData(offer,offer.getName());
 clickBtnSaveOffer();
 return offer;
+}
+@Step("Заполнение полей кассы с названием {1}")
+public Device fillDeviceData(Device device,String reportName) throws InterruptedException {
+    try {
+        createDevicePage.enterDeviceName(device);
+    } catch (Exception e) {
+        Assert.fail("Не удалось заполнить поля кассы " + e.getMessage());
+    }
+    return device;
 }
 
 @Step("Создание новой кассы")
 public Device createNewDevice() throws InterruptedException {
     Device device = Device.generateNewDevice();
     try {
-        createDevicePage.enterDeviceName(device);
+        fillDeviceData(device, device.getName());
         createDevicePage.clickBtnSaveDevice();
     } catch (Exception e) {
-        Assert.fail("Не удалось сохранить кассу " + e.getMessage());
+        Assert.fail("Не удалось сохранить кассу " + device.getName()+" "+ e.getMessage());
     }
 
 return device;
