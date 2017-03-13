@@ -335,10 +335,10 @@ public Device createNewDevice() throws InterruptedException {
     try {
         fillDeviceData(device, device.getName());
         createDevicePage.clickBtnSaveDevice();
+        createDevicePage.waitForLoad();
     } catch (Exception e) {
         Assert.fail("Не удалось сохранить кассу " + device.getName()+" "+ e.getMessage());
     }
-
 return device;
 
 //клик действия кассы или переходим в торговую точку открываем таб кассы
