@@ -58,7 +58,8 @@ public class DeviceCreatePage extends PageObject {
 
     public void enterDeviceName(Device device) {
         try {
-            loader.waitUntilNotVisible();
+            waitForLoad();
+            input_device_name.waitForCondition();
             input_device_name.type(device.getName());
         } catch (Exception e) {
             System.err.println("Не удалось ввести название кассы " + e.getMessage());
@@ -68,8 +69,7 @@ public class DeviceCreatePage extends PageObject {
 
     public void clickBtnSaveDevice() {
         try {
-            loader.waitUntilNotVisible();
-            btn_add_device.waitUntilVisible();
+            btn_add_device.waitUntilClickable();
             btn_add_device.click();
         } catch (Exception e) {
         }
@@ -85,5 +85,14 @@ public class DeviceCreatePage extends PageObject {
         } catch (Exception e) {
         }
     }
+    public void waitForLoad() {
+        try {
+        loader.waitUntilVisible();
+        loader.waitUntilNotVisible();
+        } catch (Exception e) {
+            System.err.println("Нет отображается лоадер ещё(уже)");
+        }
+}
+   
 
 }

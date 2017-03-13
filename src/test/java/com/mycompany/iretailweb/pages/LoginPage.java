@@ -42,22 +42,32 @@ public class LoginPage extends PageObject {
     
 // * Вводим телефон пользователя в поле Ваш логин (e-mail или телефон) *  
     public void enterPhone(String phone) {
-        loader.waitUntilNotVisible();
+        input_login.waitForCondition();
+      //  input_login.waitUntilClickable();
         input_login.type(phone);
     }
 
 // * Вводим пароль пользователя в поле Пароль     
     public void enterPassword(String password) {
-        loader.waitUntilNotVisible();
+        input_password.waitForCondition();
+     //   input_password.waitUntilClickable();
         input_password.type(password);
     }
 
 // * Жмем кнопку Войти *    
     public void ClickBtnLogin() {
-        loader.waitUntilNotVisible();
+        btn_login.waitForCondition();
+     //   btn_login.waitUntilClickable();
         btn_login.click();
     }
-    
+    public void waitForLoad() {
+        try {
+        loader.waitUntilVisible();
+        loader.waitUntilNotVisible();
+        } catch (Exception e) {
+            System.err.println("Нет отображается лоадер ещё(уже)");
+        }
+}
     
     
 }

@@ -63,15 +63,20 @@ public class TradePointCreatePage extends PageObject{
     private WebElementFacade btn_yes;
     
 //* Кнопка "Ok" модального окна "Торговая точка успешно создана"
-    @FindBy (xpath = "//div[@class='jBox-Confirm-button jBox-Confirm-button-submit']")
+    @FindBy (xpath = "//div[contains(@class,'jBox-Confirm-button jBox-Confirm-button-submit')]")
     private WebElementFacade btn_ok;
+    
+    @FindBy(xpath = "//div[@ng-if='vm.showLoader()']")// пытаемся отловить лоадер 
+    private WebElementFacade loader;
     
          
 //*** Methods ***
 
 // Вводим название торговой точки в поле "Название"
     public void enterTradePointName(TradePoint tradePoint) {
-        try {  
+        try { 
+            waitForLoad();
+            input_trade_point_name.waitForCondition();
             input_trade_point_name.type(tradePoint.getName());
         } catch (Exception e) {
             System.err.println("Не удалось ввести название торговой точки " +e.getMessage());
@@ -96,7 +101,8 @@ public class TradePointCreatePage extends PageObject{
 
 // Вводим город торговой точки в поле "Город"
     public void enterTradePointCity(TradePoint tradePoint) {
-         try {  
+         try {
+            input_trade_point_city.waitForCondition();
             input_trade_point_city.type(tradePoint.getCity());
         } catch (Exception e) {
             System.err.println("Не удалось ввести город " +e.getMessage());
@@ -106,6 +112,7 @@ public class TradePointCreatePage extends PageObject{
 // Вводим улицу торговой точки в поле "Улица"
     public void enterTradePointStreet(TradePoint tradePoint) {
          try { 
+             input_trade_point_street.waitForCondition();
                input_trade_point_street.type(tradePoint.getStreet());
         } catch (Exception e) {
             System.err.println("Не удалось ввести улицу " +e.getMessage());
@@ -115,6 +122,7 @@ public class TradePointCreatePage extends PageObject{
 // Вводим номер дома торговой точки в поле "Номер дома"
     public void enterTradePointBuilding(TradePoint tradePoint) {
          try { 
+             input_trade_point_building.waitForCondition();
              input_trade_point_building.type(tradePoint.getBuilding());
         } catch (Exception e) {
             System.err.println("Не удалось ввести номер дома " +e.getMessage());
@@ -123,24 +131,44 @@ public class TradePointCreatePage extends PageObject{
 
 // Жмем кнопку "Добавить торговую точку"
     public void clickBtnAddTradePoint() {
-        btn_add_trade_point.click();
+        try {
+            btn_add_trade_point.waitForCondition();
+            btn_add_trade_point.click();
+        } catch (Exception e) {
+             System.err.println("Не удалось сохранить торговую точку " +e.getMessage());
+        }
+        
     }
     
 // * Жмем кнопку "Да" модального окна подтверждения создания торговой точки
     public void clickBtnYes() throws InterruptedException {
-        btn_yes.click();
+        try {
+            btn_yes.waitUntilClickable();
+            btn_yes.click();
+        } catch (Exception e) {
+            System.err.println("Не удалось подтвердить сохранение торговой точки " +e.getMessage());
+            
+        }
     }
 
 // * Жмем кнопку "Ok" модального окна "Торговая точка успешно создана"
     public void clickBtnOk() throws InterruptedException {
-        Thread.sleep(2000);
         try {
+            btn_ok.waitUntilClickable();
             btn_ok.click();
         } catch (Exception e) {
             System.out.println("Не найдена кнопка Ok модального окна Торговая точка успешно создана");
         }
         
-    }    
+    }
+    public void waitForLoad() {
+        try {
+        loader.waitUntilVisible();
+        loader.waitUntilNotVisible();
+        } catch (Exception e) {
+            System.err.println("Нет отображается лоадер ещё(уже)");
+        }
+}    
 
     
 }

@@ -44,14 +44,14 @@ public class MainPage extends PageObject {
     // * Жмем кнопку "Добавить торговую точку" *    
     
     public void clickBtnAddTradePoint() {
-        loader.waitUntilNotVisible();
+        btn_add_trade_point.waitForCondition();
         btn_add_trade_point.waitUntilClickable();
         btn_add_trade_point.click();
     }
 
     // * Жмем кнопку "Создать категории" *    
     public void clickBtnAddCategory() {
-        loader.waitUntilNotVisible();
+        btn_add_category.waitForCondition();
         btn_add_category.waitUntilClickable();
         btn_add_category.click();
     }
@@ -59,7 +59,7 @@ public class MainPage extends PageObject {
     // * Жмем кнопку "Добавить товары" *  
     public void clickBtnAddOffer() {
         try {
-            loader.waitUntilNotVisible();
+            btn_add_offer.waitForCondition();
             btn_add_offer.waitUntilClickable();
             btn_add_offer.click();
         } catch (Exception e) {

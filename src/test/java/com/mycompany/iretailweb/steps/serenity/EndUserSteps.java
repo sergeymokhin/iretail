@@ -85,7 +85,6 @@ try {
 }
 LoginAs(user.getPhone(), user.getPassword());
 clickBtnLogin();
-mainPage.waitForLoad();
 // то, что мы авторизовались, мы проверяем в тесте IRetailTests - ("Authorization")
 }
 
@@ -136,8 +135,8 @@ createProfilePage.clickBtnYesYes();
 
 @Step("Создание новой компании") // общий степ для создания новой компании
 public String createNewCompany() throws InterruptedException {
+mainPage.waitForLoad();
 openCreateProfilePage();
-Thread.sleep(5000);
 String company_name = enterCompanyName();
 clickBtnAddCompany();
 clickBtnYes();
@@ -189,7 +188,6 @@ public void clickBtnSaveTradePoint() {
 try {
 createTradePointPage.clickBtnAddTradePoint();
 createTradePointPage.clickBtnYes();
-Thread.sleep(2000);
 createTradePointPage.clickBtnOk();
 } catch (Exception e) {
 Assert.fail("Не удалось подтвердить создание торговой точки " + e.getMessage());
@@ -249,16 +247,25 @@ return category;
 
 @Step("Нажимаем кнопку Добавить товары") //на main странице
 public void clickBtnAddOfferOnMainPage() {
-mainPage.clickBtnAddOffer();
+        try {
+            mainPage.clickBtnAddOffer();
+        } catch (Exception e) {
+            Assert.fail("Не удалось нажать кнопку добавить товар на главной странице " + e.getMessage());
+        }
+
 }
 
-@Step("Заполняем поля товара")
-public Offer fillOfferData(Offer offer) {
-createOfferPage.enterOfferName(offer);
-createOfferPage.enterOfferArticle(offer);
-createOfferPage.enterOfferBasePrice(offer);
-return offer;
-}
+    @Step("Заполняем поля товара")
+    public Offer fillOfferData(Offer offer) {
+        try {
+            createOfferPage.enterOfferName(offer);
+            createOfferPage.enterOfferArticle(offer);
+            createOfferPage.enterOfferBasePrice(offer);
+        } catch (Exception e) {
+            Assert.fail("Не удалось заполнить поля товара " + e.getMessage());
+        }
+        return offer;
+    }
 
 @Step("Сохраняем товар и нажимаем ок")
 public void clickBtnSaveOffer() {
@@ -271,25 +278,41 @@ Assert.fail("Не удалось сохранить товар " + e.getMessage(
 }
 @Step("Поиск товара по названию")
 public void searchOfferByName(Offer offer) {
-offerListPage.enterOfferName(offer);
-offerListPage.clickBtnSearch();
+    try {
+     offerListPage.enterOfferName(offer);
+     offerListPage.clickBtnSearch();
+    } catch (Exception e) {
+        Assert.fail("Не удалось воспользоваться поиском товара " + e.getMessage());
+    }
+
 }
 
-@Step("Поиск товара по названию")
-public void searchDeviceByNameOnTradePointTab(Device device) throws InterruptedException {
-tradePointUpdatePage.clickDeviceTab();
-tradePointUpdatePage.enterDeviceNameInFilter(device); //On используем для кликов и т.п. Если что-то вводишь замени на In
-tradePointUpdatePage.clickBtnSearch();
+    @Step("Поиск кассы по названию")
+    public void searchDeviceByNameOnTradePointTab(Device device) throws InterruptedException {
+        try {
+            tradePointUpdatePage.clickDeviceTab();
+            tradePointUpdatePage.enterDeviceNameInFilter(device); //On используем для кликов и т.п. Если что-то вводишь замени на In
+            tradePointUpdatePage.clickBtnSearch();
+        } catch (Exception e) {
+            Assert.fail("Не удалось воспользоваться поиском кассы в торговой точке " + e.getMessage());
+        }
+
 }
 
-@Step("Переход в первую торговую точку в списке")
-public void clickFirstTradePointOnList() throws InterruptedException {
-tradePointListPage.open();
-tradePointListPage.clickFirstTradePointName();
+    @Step("Переход в первую торговую точку в списке")
+    public void clickFirstTradePointOnList() throws InterruptedException {
+        try {
+            tradePointListPage.open();
+            tradePointListPage.clickFirstTradePointName();
+        } catch (Exception e) {
+            Assert.fail("Не удалось перейти в первую торговую точку в списке " + e.getMessage());
+        }
+
 }
 
 @Step("Создание нового товара") //общий степ создания товара
 public Offer createNewOffer() throws InterruptedException {
+mainPage.waitForLoad();
 clickBtnAddOfferOnMainPage();
 Offer offer = Offer.generateNewOffer(); //парни говорят что если статический метод возвращает экземпляр класса с заполненными значениями это нормас
 offer = fillOfferData(offer);
@@ -299,9 +322,14 @@ return offer;
 
 @Step("Создание новой кассы")
 public Device createNewDevice() throws InterruptedException {
-Device device = Device.generateNewDevice();
-createDevicePage.enterDeviceName(device);
-createDevicePage.clickBtnSaveDevice();
+    Device device = Device.generateNewDevice();
+    try {
+        createDevicePage.enterDeviceName(device);
+        createDevicePage.clickBtnSaveDevice();
+    } catch (Exception e) {
+        Assert.fail("Не удалось сохранить кассу " + e.getMessage());
+    }
+
 return device;
 
 //клик действия кассы или переходим в торговую точку открываем таб кассы

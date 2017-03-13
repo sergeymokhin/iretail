@@ -33,7 +33,7 @@ public class OffersPage extends PageObject {
 
     public void enterOfferName(Offer offer) {
         try {
-            loader.waitUntilNotVisible();
+            input_offer_name.waitForCondition();
             input_offer_name.type(offer.getName());
         } catch (Exception e) {
             System.err.println("Не удалось ввести название товара " + e.getMessage());
@@ -41,8 +41,22 @@ public class OffersPage extends PageObject {
     }
 
     public void clickBtnSearch() {
-        loader.waitUntilNotVisible();
-        btn_search.click();
+        try {
+            btn_search.waitForCondition();
+            btn_search.click();
+        } catch (Exception e) {
+            System.err.println("Не удалось восполльзоваться поиском товара " + e.getMessage());
+        }
+        
     }
+    
+     public void waitForLoad() {
+        try {
+        loader.waitUntilVisible();
+        loader.waitUntilNotVisible();
+        } catch (Exception e) {
+            System.err.println("Нет отображается лоадер ещё(уже)");
+        }
+}
 
 }

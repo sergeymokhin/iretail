@@ -36,7 +36,7 @@ public class CategoryCreatePage extends PageObject {
     private WebElementFacade btn_yes;
 
     // Кнопка "Ok" модального окна "Категория успешно создана"
-    @FindBy(xpath = "//div[@class='jBox-Confirm-button jBox-Confirm-button-submit']")
+    @FindBy(xpath = "//div[contains(@class,'jBox-Confirm-button jBox-Confirm-button-submit')]")
     private WebElementFacade btn_ok;
     
     @FindBy(xpath = "//div[@ng-if='vm.showLoader()']")// пытаемся отловить лоадер 
@@ -46,7 +46,8 @@ public class CategoryCreatePage extends PageObject {
     // Вводим название категории в поле "Название"
     public void enterCategoryName(Category category) {
         try {
-            loader.waitUntilNotVisible();
+            waitForLoad();
+            input_category_name.waitForCondition();
             input_category_name.type(category.getName());
         } catch (Exception e) {
             System.err.println("Не удалось ввести название категории " + e.getMessage());
@@ -55,7 +56,7 @@ public class CategoryCreatePage extends PageObject {
 
     public String getCategoryName() {
         try {
-            loader.waitUntilNotVisible();
+            input_category_name.waitForCondition();
           return  input_category_name.getTextValue() ; // беру заголовок блока с названием категории
         } catch (Exception e) {
             System.err.println("Не удалось получить название категории " + e.getMessage());
@@ -66,11 +67,10 @@ public class CategoryCreatePage extends PageObject {
     // Жмем кнопку "Сохранить категорию"
     public void clickBtnSaveCategory() {
         try {
-            loader.waitUntilNotVisible();
-         //   btn_save_category.waitUntilClickable();
+            btn_save_category.waitUntilClickable();
             btn_save_category.click();
         } catch (Exception e) {
-            System.out.println("Не найдена кнопка сохранения категории");
+            System.out.println("Не удалось нажать кнопку сохранения категории");
         }
 
     }
@@ -78,8 +78,7 @@ public class CategoryCreatePage extends PageObject {
     // * Жмем кнопку "Да" модального окна подтверждения создания категории
     public void clickBtnYes() throws InterruptedException {
         try {
-            loader.waitUntilNotVisible();
-          //  btn_yes.waitUntilClickable();
+           btn_yes.waitUntilVisible();
             btn_yes.click();
         } catch (Exception e) {
             System.out.println("Не найдена кнопка Да окна подтверждения создания категории");
@@ -89,12 +88,19 @@ public class CategoryCreatePage extends PageObject {
 // * Жмем кнопку "Ok" модального окна "Категория успешно создана"
     public void clickBtnOk() throws InterruptedException {
         try {
-            loader.waitUntilNotVisible();
-       //     btn_ok.waitUntilClickable();
+            btn_ok.waitUntilClickable();
             btn_ok.click();
         } catch (Exception e) {
             System.out.println("Не найдена кнопка Ok модального окна Категория успешно создана");
         }
 
     }
+     public void waitForLoad() {
+        try {
+        loader.waitUntilVisible();
+        loader.waitUntilNotVisible();
+        } catch (Exception e) {
+            System.err.println("Не отображается лоадер ещё(уже)");
+        }
+}
 }

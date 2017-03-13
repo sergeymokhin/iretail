@@ -53,7 +53,7 @@ public class OfferCreatePage extends PageObject {
 
     public void enterOfferBasePrice(Offer offer) {
         try {
-            loader.waitUntilNotVisible();
+            input_offer_base_price.waitForCondition();
             input_offer_base_price.type(offer.getBaseprice().toString());//желательно избавиться от toString() в таком виде. BigDecimal.valueOf(d).setScale(2,BigDecimal.ROUND_HALF_DOWN).doubleValue()
         } catch (Exception e) {
             System.err.println("Не удалось ввести базовую цену товара " + e.getMessage());
@@ -63,7 +63,8 @@ public class OfferCreatePage extends PageObject {
 
     public void enterOfferName(Offer offer) {
         try {
-            loader.waitUntilNotVisible();
+            waitForLoad();
+            input_offer_name.waitForCondition();
             input_offer_name.type(offer.getName());
         } catch (Exception e) {
             System.err.println("Не удалось ввести название товара " + e.getMessage());
@@ -73,7 +74,7 @@ public class OfferCreatePage extends PageObject {
 
     public void enterOfferArticle(Offer offer) {
         try {
-            loader.waitUntilNotVisible();
+            input_offer_article.waitForCondition();
             input_offer_article.type(offer.getArticle());
         } catch (Exception e) {
             System.err.println("Не удалось ввести артикул товара " + e.getMessage());
@@ -83,7 +84,7 @@ public class OfferCreatePage extends PageObject {
 
     public void enterOfferBarcode(Offer offer) {
         try {
-            loader.waitUntilNotVisible();
+            input_offer_barcode.waitForCondition();
             input_offer_barcode.type(offer.getBarcode());
         } catch (Exception e) {
             System.err.println("Не удалось ввести штрих код товара " + e.getMessage());
@@ -92,19 +93,32 @@ public class OfferCreatePage extends PageObject {
     }
 
     public void clickBtnSaveOffer() {
-        loader.waitUntilNotVisible();
-        btn_save_offer.click();
+        try {
+            btn_save_offer.waitForCondition();
+            btn_save_offer.click();
+
+        } catch (Exception e) {
+             System.err.println("Не удалось сохранить товар " + e.getMessage());
+        }
+       
 
     }
 
     // * Жмем кнопку "Ок" в оповещении о создании товара.
     public void clickBtnOk() throws InterruptedException {
         try {
-            loader.waitUntilNotVisible();
             btn_ok.waitUntilClickable();
             btn_ok.click();
         } catch (Exception e) {
         }
     }
+     public void waitForLoad() {
+        try {
+        loader.waitUntilVisible();
+        loader.waitUntilNotVisible();
+        } catch (Exception e) {
+            System.err.println("Нет отображается лоадер ещё(уже)");
+        }
+}
 
 }
