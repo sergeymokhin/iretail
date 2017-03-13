@@ -43,21 +43,21 @@ public class LoginPage extends PageObject {
 // * Вводим телефон пользователя в поле Ваш логин (e-mail или телефон) *  
     public void enterPhone(String phone) {
         input_login.waitForCondition();
-      //  input_login.waitUntilClickable();
+       input_login.waitUntilClickable();
         input_login.type(phone);
     }
 
 // * Вводим пароль пользователя в поле Пароль     
     public void enterPassword(String password) {
         input_password.waitForCondition();
-     //   input_password.waitUntilClickable();
+       input_password.waitUntilClickable();
         input_password.type(password);
     }
 
 // * Жмем кнопку Войти *    
     public void ClickBtnLogin() {
         btn_login.waitForCondition();
-     //   btn_login.waitUntilClickable();
+        btn_login.waitUntilClickable();
         btn_login.click();
     }
     public void waitForLoad() {

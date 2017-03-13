@@ -33,6 +33,7 @@ public class OffersPage extends PageObject {
 
     public void enterOfferName(Offer offer) {
         try {
+            waitForLoad();
             input_offer_name.waitForCondition();
             input_offer_name.type(offer.getName());
         } catch (Exception e) {
@@ -42,6 +43,7 @@ public class OffersPage extends PageObject {
 
     public void clickBtnSearch() {
         try {
+            waitForLoad();
             btn_search.waitForCondition();
             btn_search.click();
         } catch (Exception e) {

@@ -46,7 +46,7 @@ public class TradePointUpdatePage extends PageObject {
 
     public void enterDeviceNameInFilter(Device device) {
         try {
-            //waitForLoad();
+            waitForLoad();
             input_device_name.waitForCondition();
             input_device_name.type(device.getName());
         } catch (Exception e) {
@@ -57,7 +57,7 @@ public class TradePointUpdatePage extends PageObject {
     public void clickBtnSearch() {
         try {
             btn_search.waitForCondition();
-          //  btn_search.waitUntilClickable();
+            btn_search.waitUntilClickable();
             btn_search.click();
         } catch (Exception e) {
             System.err.println("Не удалось нажать кнопку Найти" + e.getMessage());

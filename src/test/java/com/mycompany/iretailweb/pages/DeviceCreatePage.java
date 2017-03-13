@@ -69,6 +69,7 @@ public class DeviceCreatePage extends PageObject {
 
     public void clickBtnSaveDevice() {
         try {
+            waitForLoad();
             btn_add_device.waitUntilClickable();
             btn_add_device.click();
         } catch (Exception e) {
@@ -79,6 +80,7 @@ public class DeviceCreatePage extends PageObject {
     // * Жмем кнопку "Ок" в оповещении о создании товара.
     public void clickBtnOk() throws InterruptedException {
         try {
+            waitForLoad();
             btn_ok.waitUntilVisible();
             btn_ok.waitUntilClickable();
             btn_ok.click();

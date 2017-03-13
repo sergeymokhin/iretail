@@ -63,7 +63,7 @@ public class TradePointCreatePage extends PageObject{
     private WebElementFacade btn_yes;
     
 //* Кнопка "Ok" модального окна "Торговая точка успешно создана"
-    @FindBy (xpath = "//div[contains(@class,'jBox-Confirm-button jBox-Confirm-button-submit')]")
+    @FindBy (xpath = "//div[@class='jBox-Confirm-button jBox-Confirm-button-submit']")
     private WebElementFacade btn_ok;
     
     @FindBy(xpath = "//div[@ng-if='vm.showLoader()']")// пытаемся отловить лоадер 
@@ -132,6 +132,7 @@ public class TradePointCreatePage extends PageObject{
 // Жмем кнопку "Добавить торговую точку"
     public void clickBtnAddTradePoint() {
         try {
+            waitForLoad();
             btn_add_trade_point.waitForCondition();
             btn_add_trade_point.click();
         } catch (Exception e) {
@@ -143,7 +144,8 @@ public class TradePointCreatePage extends PageObject{
 // * Жмем кнопку "Да" модального окна подтверждения создания торговой точки
     public void clickBtnYes() throws InterruptedException {
         try {
-            btn_yes.waitUntilClickable();
+            waitForLoad();
+            btn_yes.waitForCondition();
             btn_yes.click();
         } catch (Exception e) {
             System.err.println("Не удалось подтвердить сохранение торговой точки " +e.getMessage());
@@ -154,7 +156,8 @@ public class TradePointCreatePage extends PageObject{
 // * Жмем кнопку "Ok" модального окна "Торговая точка успешно создана"
     public void clickBtnOk() throws InterruptedException {
         try {
-            btn_ok.waitUntilClickable();
+            waitForLoad();
+            btn_ok.waitForCondition();
             btn_ok.click();
         } catch (Exception e) {
             System.out.println("Не найдена кнопка Ok модального окна Торговая точка успешно создана");

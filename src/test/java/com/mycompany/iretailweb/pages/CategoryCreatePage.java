@@ -56,6 +56,7 @@ public class CategoryCreatePage extends PageObject {
 
     public String getCategoryName() {
         try {
+            waitForLoad();
             input_category_name.waitForCondition();
           return  input_category_name.getTextValue() ; // беру заголовок блока с названием категории
         } catch (Exception e) {
@@ -67,6 +68,7 @@ public class CategoryCreatePage extends PageObject {
     // Жмем кнопку "Сохранить категорию"
     public void clickBtnSaveCategory() {
         try {
+            waitForLoad();
             btn_save_category.waitUntilClickable();
             btn_save_category.click();
         } catch (Exception e) {
@@ -78,6 +80,7 @@ public class CategoryCreatePage extends PageObject {
     // * Жмем кнопку "Да" модального окна подтверждения создания категории
     public void clickBtnYes() throws InterruptedException {
         try {
+            waitForLoad();
            btn_yes.waitUntilVisible();
             btn_yes.click();
         } catch (Exception e) {
@@ -88,6 +91,7 @@ public class CategoryCreatePage extends PageObject {
 // * Жмем кнопку "Ok" модального окна "Категория успешно создана"
     public void clickBtnOk() throws InterruptedException {
         try {
+            waitForLoad();
             btn_ok.waitUntilClickable();
             btn_ok.click();
         } catch (Exception e) {

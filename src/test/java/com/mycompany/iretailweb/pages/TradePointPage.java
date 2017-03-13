@@ -30,6 +30,7 @@ public class TradePointPage extends PageObject{
      
        public String getFirstTradePointName() throws InterruptedException {
         try {
+            waitForLoad();
             first_trade_point_link.waitForCondition();
           //  first_trade_point_link.waitUntilVisible();
             return  first_trade_point_link.getAttribute("translate");
@@ -41,7 +42,7 @@ public class TradePointPage extends PageObject{
         
     public void clickFirstTradePointName() throws InterruptedException{
         try {
-          //  waitForLoad();
+            waitForLoad();
             //first_trade_point_link.waitUntilClickable();
             first_trade_point_link.waitForCondition();
             first_trade_point_link.click();

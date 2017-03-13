@@ -60,6 +60,7 @@ public class CreateProfilePage extends PageObject {
 // * Жмем кнопку "Добавить компанию" *    
     public void clickBtnAddCompany() {
         try {
+            waitForLoad();
             btn_add_company.waitForCondition();
             btn_add_company.waitUntilClickable();
             btn_add_company.click();
@@ -83,6 +84,7 @@ public class CreateProfilePage extends PageObject {
 // * Жмем кнопку "Да" модального окна подтверждения создания компании
     public void clickBtnYes() throws InterruptedException {
         try {
+            waitForLoad();
             btn_yes.waitUntilClickable();
             btn_yes.click();
         } catch (Exception e) {
@@ -94,6 +96,7 @@ public class CreateProfilePage extends PageObject {
 // * Жмем кнопку "Да" модального окна "Профиль успешно создан"
     public void clickBtnYesYes() throws InterruptedException {
         try {
+            waitForLoad();
             btn_yes_yes.waitUntilClickable();
             btn_yes_yes.click();
         } catch (Exception e) {

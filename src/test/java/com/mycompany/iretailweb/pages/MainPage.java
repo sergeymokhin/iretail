@@ -44,6 +44,7 @@ public class MainPage extends PageObject {
     // * Жмем кнопку "Добавить торговую точку" *    
     
     public void clickBtnAddTradePoint() {
+        waitForLoad();
         btn_add_trade_point.waitForCondition();
         btn_add_trade_point.waitUntilClickable();
         btn_add_trade_point.click();
@@ -51,6 +52,7 @@ public class MainPage extends PageObject {
 
     // * Жмем кнопку "Создать категории" *    
     public void clickBtnAddCategory() {
+        waitForLoad();
         btn_add_category.waitForCondition();
         btn_add_category.waitUntilClickable();
         btn_add_category.click();
@@ -59,6 +61,7 @@ public class MainPage extends PageObject {
     // * Жмем кнопку "Добавить товары" *  
     public void clickBtnAddOffer() {
         try {
+            waitForLoad();
             btn_add_offer.waitForCondition();
             btn_add_offer.waitUntilClickable();
             btn_add_offer.click();

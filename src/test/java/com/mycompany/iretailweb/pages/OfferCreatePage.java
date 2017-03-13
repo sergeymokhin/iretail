@@ -53,6 +53,7 @@ public class OfferCreatePage extends PageObject {
 
     public void enterOfferBasePrice(Offer offer) {
         try {
+            
             input_offer_base_price.waitForCondition();
             input_offer_base_price.type(offer.getBaseprice().toString());//желательно избавиться от toString() в таком виде. BigDecimal.valueOf(d).setScale(2,BigDecimal.ROUND_HALF_DOWN).doubleValue()
         } catch (Exception e) {
@@ -94,6 +95,7 @@ public class OfferCreatePage extends PageObject {
 
     public void clickBtnSaveOffer() {
         try {
+            waitForLoad();
             btn_save_offer.waitForCondition();
             btn_save_offer.click();
 
