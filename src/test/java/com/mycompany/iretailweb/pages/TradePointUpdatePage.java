@@ -57,6 +57,7 @@ public class TradePointUpdatePage extends PageObject {
 
     public void clickBtnSearch() {
         try {
+            waitForLoad();
             btn_search.waitForCondition();
             btn_search.waitUntilClickable();
             btn_search.click();
@@ -82,7 +83,7 @@ public class TradePointUpdatePage extends PageObject {
         loader.waitUntilVisible();
         loader.waitUntilNotVisible();
         } catch (Exception e) {
-            System.err.println("Нет отображается лоадер ещё(уже)");
+            System.err.println("Ожидание полной загрузки страницы");
         }
 }
 }
