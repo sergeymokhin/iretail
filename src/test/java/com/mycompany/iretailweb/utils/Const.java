@@ -12,7 +12,7 @@ package com.mycompany.iretailweb.utils;
 public class Const {
     public static String server = "https://nightlybuilds.i-retail.freematiq.com";
     public static String client_secret = "&client_id=PIPO_WEBAPP&client_secret=DJF22HS%5E%23Khdsfj325ruh)_%23"; // Юра
-    public static String userPhone = "+79050802600";
-    public static String userPassword = "040484";
+    public static String userPhone = "+79039926017";
+    public static String userPassword = "111111";
     public static String beelinePrefix = "905";
 }

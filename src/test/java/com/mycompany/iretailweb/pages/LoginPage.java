@@ -18,7 +18,7 @@ import net.thucydides.core.pages.PageObject;
 public class LoginPage extends PageObject {
     
 //*** Login Page elements ***
-    
+        
 //* Поле для ввода логина *
     @FindBy(id = "phone")
     private WebElementFacade input_login;
