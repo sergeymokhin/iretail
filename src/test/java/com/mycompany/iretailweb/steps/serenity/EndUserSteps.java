@@ -80,6 +80,7 @@ public void Authorization(User user) throws InterruptedException {
     
 try {
     openLoginPage();
+    loginPage.waitForLoad();
 } catch (Exception e) {
     Assert.fail("Не перешел на страницу авторизации " + e.getMessage());
 }
@@ -137,13 +138,12 @@ createProfilePage.clickBtnYesYes();
 @Step("Создание новой компании") // общий степ для создания новой компании
 public String createNewCompany() throws InterruptedException {
 mainPage.waitForLoad();
-
-
 openCreateProfilePage();
 String company_name = enterCompanyName();
 clickBtnAddCompany();
 clickBtnYes();
 clickBtnYesYes();
+createProfilePage.waitForLoad();
 return company_name;
 }
 
