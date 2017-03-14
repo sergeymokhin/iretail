@@ -69,7 +69,7 @@ public class IRetail_jenkins {
 //        webdriver = new ChromeDriver();
         webdriver.manage().window().maximize();
         webdriver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
-        webdriver.manage().timeouts().pageLoadTimeout(20, TimeUnit.SECONDS);
+        webdriver.manage().timeouts().pageLoadTimeout(25, TimeUnit.SECONDS);
         webdriver.manage().timeouts().setScriptTimeout(15, TimeUnit.SECONDS);
         WebDriverWait wait = new WebDriverWait(webdriver, 15);
         
@@ -84,7 +84,7 @@ public class IRetail_jenkins {
     @Title("Authorization")
     public void authorization() throws InterruptedException, IOException {
         User user = new User();//Заменить на User.createNewUser() когда будут новые клиенты
-         user.setName(Const.userPhone);
+        user.setName(Const.userPhone);
         user.setPassword(Const.userPassword);
         steps.Authorization(user);
         Thread.sleep(2000);
@@ -198,7 +198,7 @@ public class IRetail_jenkins {
          // assertTrue("Не открылась карточка созданной кассы ", webdriver.getCurrentUrl().contains("edit-device"));
           
         } catch (Exception e) {
-            DataGeneration.TakeScreen(webdriver, "Товар "+System.currentTimeMillis());
+            DataGeneration.TakeScreen(webdriver, "Касса "+System.currentTimeMillis());
             Assert.fail("Созданная касса не обнаружена в списке касс выбранной торговой точки");
             
     }

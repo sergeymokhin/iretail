@@ -136,6 +136,9 @@ createProfilePage.clickBtnYesYes();
 
 @Step("Создание новой компании") // общий степ для создания новой компании
 public String createNewCompany() throws InterruptedException {
+mainPage.waitForLoad();
+
+
 openCreateProfilePage();
 String company_name = enterCompanyName();
 clickBtnAddCompany();
@@ -313,6 +316,7 @@ public void searchOfferByName(Offer offer) {
     @Step("Переход в первую торговую точку в списке")
     public void clickFirstTradePointOnList() throws InterruptedException {
         try {
+            mainPage.waitForLoad();
             tradePointListPage.open();
             tradePointListPage.clickFirstTradePointName();
         } catch (Exception e) {
