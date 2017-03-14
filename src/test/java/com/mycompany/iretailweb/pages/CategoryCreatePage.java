@@ -70,7 +70,9 @@ public class CategoryCreatePage extends PageObject {
     public void clickBtnSaveCategory() {
         try {
             waitForLoad();
+            
             btn_save_category.waitUntilVisible();
+            btn_save_category.setWindowFocus();
             btn_save_category.waitUntilClickable();
             btn_save_category.click();
         } catch (Exception e) {
