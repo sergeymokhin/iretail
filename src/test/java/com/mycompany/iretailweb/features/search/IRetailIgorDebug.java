@@ -18,6 +18,7 @@ import org.junit.runner.RunWith;
 import org.openqa.selenium.WebDriver;
 
 import com.mycompany.iretailweb.steps.serenity.EndUserSteps;
+import com.mycompany.iretailweb.utils.Cashier;
 import com.mycompany.iretailweb.utils.Category;
 import com.mycompany.iretailweb.utils.Const;
 import com.mycompany.iretailweb.utils.DataGeneration;
@@ -107,7 +108,7 @@ public class IRetailIgorDebug {
         }
     
     
-    @Test 
+    @Pending @Test 
     @Title("Create new category")
     public void create_new_category() throws InterruptedException, IOException {
         User user = new User();//Заменить на User.createNewUser() когда будут новые клиенты
@@ -161,5 +162,17 @@ public class IRetailIgorDebug {
             Assert.fail("Созданная касса не обнаружена в списке касс выбранной торговой точки");
     }
     }
-}    
+    
+    @Test
+    @Title("Create new cashier")
+    public void create_new_cashier() throws InterruptedException {
+        User user = new User();
+        user.setName(Const.userPhone);
+        user.setPassword(Const.userPassword);
+        steps.Authorization(user);
+        steps.clickBtnOnMainPageAddCashier();
+        Cashier createNewCashier = steps.createNewCashier();
+    }
+    }
+    
     

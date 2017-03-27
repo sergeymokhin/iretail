@@ -1,6 +1,7 @@
 // Здесь различные шаги к тестам, а также последовательности шагов
 package com.mycompany.iretailweb.steps.serenity;
 
+import com.mycompany.iretailweb.pages.CashierCreatePage;
 import com.mycompany.iretailweb.pages.CategoryCreatePage;
 import com.mycompany.iretailweb.pages.LoginPage;
 import com.mycompany.iretailweb.pages.CreateProfilePage;
@@ -11,6 +12,7 @@ import com.mycompany.iretailweb.pages.OffersPage;
 import com.mycompany.iretailweb.pages.TradePointPage;
 import com.mycompany.iretailweb.pages.TradePointCreatePage;
 import com.mycompany.iretailweb.pages.TradePointUpdatePage;
+import com.mycompany.iretailweb.utils.Cashier;
 import com.mycompany.iretailweb.utils.Category;
 import com.mycompany.iretailweb.utils.Device;
 import com.mycompany.iretailweb.utils.Offer;
@@ -34,6 +36,7 @@ OfferCreatePage createOfferPage;
 OffersPage offerListPage;
 TradePointUpdatePage tradePointUpdatePage;
 DeviceCreatePage createDevicePage;
+CashierCreatePage createCashierPage;
 
 // Степы для авторизации
 @Step("Переходим на страницу авторизации")
@@ -157,6 +160,11 @@ createTradePointPage.open();
 @Step("Нажимаем кнопку Добавить торговую точку") //на main странице
 public void clickBtnOnMainPageAddTradePoint() {
 mainPage.clickBtnAddTradePoint();
+}
+
+@Step("Нажимаем кнопку Добавить сотрудников") //на main странице
+public void clickBtnOnMainPageAddCashier() {
+mainPage.clickBtnAddCashier();
 }
 
 @Step("Выбираем таб Кассы") //в торговой точке
@@ -355,11 +363,27 @@ public Device createNewDevice() throws InterruptedException {
         Assert.fail("Не удалось сохранить кассу " + device.getName()+" "+ e.getMessage());
     }
 return device;
-
-//клик действия кассы или переходим в торговую точку открываем таб кассы
-//клик добавить кассу
-//заполнить поля кассы
-//сохранить кассу и нажать ок
-
 }
+
+@Step("Создание нового сотрудника")
+public Cashier createNewCashier() throws InterruptedException {
+    Cashier cashier = Cashier.createNewCashier();
+    try {
+        createCashierPage.enterCashierLastName(cashier);
+        createCashierPage.enterCashierFirstName(cashier);
+        createCashierPage.clickCashierWorksInAllChannels();
+        createCashierPage.enterCashierEmail(cashier);
+        createCashierPage.enterCashierPhone(cashier);
+        createCashierPage.clickBtnGeneratePin();
+        createCashierPage.clickBtnAddСashier();
+        createCashierPage.clickBtnYes();
+        createCashierPage.clickBtnOk();
+    } catch (Exception e) {
+        Assert.fail("Не удалось");
+    }
+    return cashier;
+}
+
+
+
 }

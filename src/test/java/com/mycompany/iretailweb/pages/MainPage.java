@@ -39,7 +39,10 @@ public class MainPage extends PageObject {
 //* Кнопка "Добавить товары" *
     @FindBy(xpath = "//span[@translate='home.buttonAddOffer']/parent::*")
     private WebElementFacade btn_add_offer;
-//* Кнопка "Добавить сотрудников" *    
+//* Кнопка "Добавить сотрудников" * 
+    @FindBy(xpath = "//span[@translate='home.actionAddEmployees']/parent::*")
+    private WebElementFacade btn_add_cashier;
+    
 //*** Methods ***
     // * Жмем кнопку "Добавить торговую точку" *    
     
@@ -56,6 +59,14 @@ public class MainPage extends PageObject {
         btn_add_category.waitForCondition();
         btn_add_category.waitUntilClickable();
         btn_add_category.click();
+    }
+    
+     // * Жмем кнопку "Добавить сотрудников" *    
+    public void clickBtnAddCashier() {
+        waitForLoad();
+        btn_add_cashier.waitForCondition();
+        btn_add_cashier.waitUntilClickable();
+        btn_add_cashier.click();
     }
 
     // * Жмем кнопку "Добавить товары" *  

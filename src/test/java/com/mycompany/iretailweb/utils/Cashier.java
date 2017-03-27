@@ -66,6 +66,10 @@ public class Cashier {
     
     public  static Cashier createNewCashier(){
         Cashier cashier = new Cashier();
+        cashier.setLast_name(DataGeneration.generateRandomString(10));
+        cashier.setFirst_name(DataGeneration.generateRandomString(10));
+        cashier.setPhone(DataGeneration.generateRandomPhone());
+        cashier.setEmail(DataGeneration.generateRandomEmail());
         return cashier;
     }
 

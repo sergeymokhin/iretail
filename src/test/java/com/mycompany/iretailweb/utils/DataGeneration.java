@@ -13,6 +13,7 @@ import java.math.RoundingMode;
 import java.util.Random;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.RandomStringUtils;
+import static org.apache.commons.lang3.StringUtils.length;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
@@ -30,9 +31,22 @@ public class DataGeneration {
         String key = RandomStringUtils.randomAlphabetic(length);
         return key;
     }
+    
+    public static String generateRandomEmail() 
+    {
+        String key = DataGeneration.generateRandomString(7)+'@'+DataGeneration.generateRandomString(4)+'.'+DataGeneration.generateRandomString(2);
+        return key;
+    }
+    
      public static String generateRandomNumber(int length) 
     {
         String key = RandomStringUtils.randomNumeric(length);
+        return key;
+    }
+      public static String generateRandomPhone() 
+    {
+        String number = DataGeneration.generateRandomNumber(9);
+        String key = "+79"+number;
         return key;
     }
      
