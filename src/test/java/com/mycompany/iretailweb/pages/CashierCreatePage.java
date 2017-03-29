@@ -55,7 +55,7 @@ public class CashierCreatePage extends PageObject{
     private WebElementFacade btn_generate_pin;
 
 // Кнопка "Создать"
-    @FindBy(xpath = "//button[@type='submit'][not(@disabled)]")
+    @FindBy(xpath = "//buttons-employee[@class='ng-isolate-scope']//button")
     private WebElementFacade btn_add_cashier;
     
 // Кнопка "Да" модального окна "Вы уверены, что хотите создать торговую точку"
@@ -63,7 +63,7 @@ public class CashierCreatePage extends PageObject{
     private WebElementFacade btn_yes;
     
 //* Кнопка "Ok" модального окна "Торговая точка успешно создана"
-    @FindBy (xpath = "//div[@class='jBox-Confirm-button jBox-Confirm-button-submit']")
+    @FindBy (xpath = "//div[contains(@style,'display: block')]//div[contains(@class,'submit')]")
     private WebElementFacade btn_ok;
     
     @FindBy(xpath = "//div[@ng-if='vm.showLoader()']")// пытаемся отловить лоадер 
@@ -87,7 +87,6 @@ public class CashierCreatePage extends PageObject{
 // Вводим имя сотрудника
     public void enterCashierFirstName(Cashier cashier) {
         try { 
-            waitForLoad();
             input_cashier_first_name.waitForCondition();
             input_cashier_first_name.type(cashier.getFirst_name());
         } catch (Exception e) {
@@ -98,7 +97,6 @@ public class CashierCreatePage extends PageObject{
     //Отмечаем что сотрудник работает во всей компании
     public void clickCashierWorksInAllChannels() {
         try { 
-            waitForLoad();
             input_cashier_work_all_channels.waitForCondition();
             input_cashier_work_all_channels.click();
         } catch (Exception e) {
@@ -108,7 +106,6 @@ public class CashierCreatePage extends PageObject{
     // Вводим почту сотрудника
     public void enterCashierEmail(Cashier cashier) {
         try { 
-            waitForLoad();
             input_cashier_email.waitForCondition();
             input_cashier_email.type(cashier.getEmail());
         } catch (Exception e) {
@@ -119,7 +116,6 @@ public class CashierCreatePage extends PageObject{
         // Вводим телефон сотрудника
     public void enterCashierPhone(Cashier cashier) {
         try { 
-            waitForLoad();
             input_cashier_phone.waitForCondition();
             input_cashier_phone.type(cashier.getPhone());
         } catch (Exception e) {
@@ -166,7 +162,6 @@ public class CashierCreatePage extends PageObject{
     public void clickBtnOk() throws InterruptedException {
         try {
             waitForLoad();
-            btn_ok.waitForCondition();
             btn_ok.click();
         } catch (Exception e) {
             System.out.println("Не найдена кнопка Ok модального окна Сотрудник добавлен");

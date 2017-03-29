@@ -2,6 +2,7 @@
 package com.mycompany.iretailweb.steps.serenity;
 
 import com.mycompany.iretailweb.pages.CashierCreatePage;
+import com.mycompany.iretailweb.pages.CashierPage;
 import com.mycompany.iretailweb.pages.CategoryCreatePage;
 import com.mycompany.iretailweb.pages.LoginPage;
 import com.mycompany.iretailweb.pages.CreateProfilePage;
@@ -37,6 +38,7 @@ OffersPage offerListPage;
 TradePointUpdatePage tradePointUpdatePage;
 DeviceCreatePage createDevicePage;
 CashierCreatePage createCashierPage;
+CashierPage cashierPage;
 
 // Степы для авторизации
 @Step("Переходим на страницу авторизации")
@@ -365,25 +367,53 @@ public Device createNewDevice() throws InterruptedException {
 return device;
 }
 
-@Step("Создание нового сотрудника")
-public Cashier createNewCashier() throws InterruptedException {
-    Cashier cashier = Cashier.createNewCashier();
-    try {
-        createCashierPage.enterCashierLastName(cashier);
-        createCashierPage.enterCashierFirstName(cashier);
-        createCashierPage.clickCashierWorksInAllChannels();
-        createCashierPage.enterCashierEmail(cashier);
-        createCashierPage.enterCashierPhone(cashier);
-        createCashierPage.clickBtnGeneratePin();
-        createCashierPage.clickBtnAddСashier();
-        createCashierPage.clickBtnYes();
-        createCashierPage.clickBtnOk();
-    } catch (Exception e) {
-        Assert.fail("Не удалось");
+    @Step("Создание нового сотрудника")
+    public Cashier createNewCashier() throws InterruptedException {
+        Cashier cashier = Cashier.createNewCashier();
+        try {
+            fillNewCashier(cashier,cashier.getLast_name());
+            saveNewCashier();
+        } catch (Exception e) {
+            Assert.fail("Не удалось создать сотрудника");
+        }
+        return cashier;
     }
-    return cashier;
-}
 
+    @Step("Заполнение данных нового сотрудника с фамилией {1}")
+    public Cashier fillNewCashier(Cashier cashier,String reportName) throws InterruptedException {
+        try {
+            createCashierPage.enterCashierLastName(cashier);
+            createCashierPage.enterCashierFirstName(cashier);
+            createCashierPage.clickCashierWorksInAllChannels();
+            createCashierPage.enterCashierEmail(cashier);
+            createCashierPage.enterCashierPhone(cashier);
+            createCashierPage.clickBtnGeneratePin();
+        } catch (Exception e) {
+            Assert.fail("Не удалось заполнить данные нового сотрудника");
+        }
+        return cashier;
+    }
+
+    @Step("Сохранение нового сотрудника")
+    public void saveNewCashier() throws InterruptedException {
+        try {
+            createCashierPage.clickBtnAddСashier();
+            createCashierPage.clickBtnYes();
+            createCashierPage.clickBtnOk();
+        } catch (Exception e) {
+            Assert.fail("Не удалось сохранить сотрудника");
+        }
+    }
+    
+    @Step("Поиск сотрудника по фамилии {1}")
+    public void searchCashierByLastName(Cashier cashier,String reportName) throws InterruptedException {
+        try {
+            cashierPage.enterCashierName(cashier);
+            cashierPage.clickBtnSearch();
+        } catch (Exception e) {
+            Assert.fail("Не удалось выполнить поиск сотрудника");
+        }
+    }
 
 
 }

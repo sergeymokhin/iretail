@@ -70,6 +70,7 @@ public class Cashier {
         cashier.setFirst_name(DataGeneration.generateRandomString(10));
         cashier.setPhone(DataGeneration.generateRandomPhone());
         cashier.setEmail(DataGeneration.generateRandomEmail());
+       
         return cashier;
     }
 
