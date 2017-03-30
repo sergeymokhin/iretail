@@ -40,10 +40,10 @@ public class CashierPage extends PageObject{
     public void enterCashierName(Cashier cashier) {
         try { 
             waitForLoad();
-            input_cashier_name.waitForCondition();
+            input_cashier_name.waitForCondition();//!!! опять не понятно чего ждем
             input_cashier_name.type(cashier.getLast_name());
         } catch (Exception e) {
-            System.err.println("Не удалось ввести фамилию сотрудника " +e.getMessage());
+            System.err.println("Не удалось ввести фамилию сотрудника в поиск" +e.getMessage());
         }
     }
 

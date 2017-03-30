@@ -376,12 +376,12 @@ return device;
         } catch (Exception e) {
             Assert.fail("Не удалось создать сотрудника");
         }
-        return cashier;
+        return cashier; 
     }
 
     @Step("Заполнение данных нового сотрудника с фамилией {1}")
     public Cashier fillNewCashier(Cashier cashier,String reportName) throws InterruptedException {
-        try {
+        try { 
             createCashierPage.enterCashierLastName(cashier);
             createCashierPage.enterCashierFirstName(cashier);
             createCashierPage.clickCashierWorksInAllChannels();
@@ -389,6 +389,7 @@ return device;
             createCashierPage.enterCashierPhone(cashier);
             createCashierPage.clickBtnGeneratePin();
         } catch (Exception e) {
+            //!!! давай по всем важным кэтчам будем привыкать скринить экран. или уже сделать общий универсальный метод заваливания
             Assert.fail("Не удалось заполнить данные нового сотрудника");
         }
         return cashier;

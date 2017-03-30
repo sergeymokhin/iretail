@@ -169,7 +169,7 @@ public class IRetailIgorDebug {
         user.setName(Const.userPhone);
         user.setPassword(Const.userPassword);
         steps.Authorization(user);
-        steps.clickBtnOnMainPageAddCashier();
+        steps.clickBtnOnMainPageAddCashier();//!!!опять? ЧтоГде строим. нажать кнопку на главной странице добавить сотрудника
         Cashier cashier = steps.createNewCashier();
         steps.searchCashierByLastName(cashier,cashier.getLast_name());
         try {

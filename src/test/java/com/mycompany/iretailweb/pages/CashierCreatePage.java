@@ -150,7 +150,7 @@ public class CashierCreatePage extends PageObject{
     public void clickBtnYes() throws InterruptedException {
         try {
             waitForLoad();
-            btn_yes.waitForCondition();
+            btn_yes.waitForCondition();//!!!чего ждем?
             btn_yes.click();
         } catch (Exception e) {
             System.err.println("Не удалось подтвердить сохранение сотрудника " +e.getMessage());
