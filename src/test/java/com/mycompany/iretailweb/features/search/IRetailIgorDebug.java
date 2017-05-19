@@ -169,13 +169,13 @@ public class IRetailIgorDebug {
         user.setName(Const.userPhone);
         user.setPassword(Const.userPassword);
         steps.Authorization(user);
-        steps.clickBtnOnMainPageAddCashier();//!!!опять? ЧтоГде строим. нажать кнопку на главной странице добавить сотрудника
+        steps.clickBtnAddCashierOnMainPage();
         Cashier cashier = steps.createNewCashier();
         steps.searchCashierByLastName(cashier,cashier.getLast_name());
         try {
             webdriver.findElement(By.linkText(cashier.getLast_name()+' '+cashier.getFirst_name())).click();
         } catch (Exception e) {
-            Assert.fail("Созданный сотрудник не нашёлся чёт");
+            Assert.fail("Созданный сотрудник не найден в списке сотрудников");
         }
     }
     }

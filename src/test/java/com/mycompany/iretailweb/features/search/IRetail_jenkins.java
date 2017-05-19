@@ -18,6 +18,7 @@ import org.junit.runner.RunWith;
 import org.openqa.selenium.WebDriver;
 
 import com.mycompany.iretailweb.steps.serenity.EndUserSteps;
+import com.mycompany.iretailweb.utils.Cashier;
 import com.mycompany.iretailweb.utils.Category;
 import com.mycompany.iretailweb.utils.Const;
 import com.mycompany.iretailweb.utils.DataGeneration;
@@ -202,6 +203,25 @@ public class IRetail_jenkins {
             Assert.fail("Созданная касса не обнаружена в списке касс выбранной торговой точки");
             
     }
+    }
+    
+    @Test
+    @Title("Create new cashier")
+    public void create_new_cashier() throws InterruptedException, IOException {
+        User user = new User();
+        user.setName(Const.userPhone);
+        user.setPassword(Const.userPassword);
+        steps.Authorization(user);
+        steps.clickBtnAddCashierOnMainPage();
+        Cashier cashier = steps.createNewCashier();
+        steps.searchCashierByLastName(cashier,cashier.getLast_name());
+        try {
+            webdriver.findElement(By.linkText(cashier.getLast_name()+' '+cashier.getFirst_name())).click();
+            DataGeneration.TakeScreen(webdriver, "Сотрудник "+System.currentTimeMillis());
+        } catch (Exception e) {
+            DataGeneration.TakeScreen(webdriver, "Сотрудник "+System.currentTimeMillis());
+            Assert.fail("Созданный сотрудник не найден в списке сотрудников");
+        }
     }
 }    
     
