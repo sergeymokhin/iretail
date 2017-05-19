@@ -165,7 +165,7 @@ mainPage.clickBtnAddTradePoint();
 }
 
 @Step("Нажимаем кнопку Добавить сотрудников") //на main странице
-public void clickBtnOnMainPageAddCashier() {
+public void clickBtnAddCashierOnMainPage() {
 mainPage.clickBtnAddCashier();
 }
 
